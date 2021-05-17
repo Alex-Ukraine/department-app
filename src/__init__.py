@@ -13,6 +13,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://b3c78ba57ebdd1:4db201e9@eu-cdbr
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
+
+db.create_all()
+
 api = Api(app)
 
 migrate = Migrate(app, db)

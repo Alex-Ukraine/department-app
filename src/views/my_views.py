@@ -69,7 +69,7 @@ def departments():
     all_data = db.session.query(Employee.department_id, Department.name,
                                 func.avg(Employee.salary).label('avg')).group_by(Employee.department_id).join(
         Department)
-    print(all_data)
+    #print(all_data)
 
     return render_template("departments.html", departments=all_data)
 
