@@ -1,8 +1,9 @@
 from flask import render_template, request, flash, url_for, redirect
 from sqlalchemy import func
 
-from models.my_models import Employee, Department
-from wsgi import app, db
+from src import db, app, api
+from src.models.my_models import Employee, Department
+from src.rest.empl import EmployeeListApi
 
 
 @app.route('/')
@@ -71,3 +72,6 @@ def departments():
     print(all_data)
 
     return render_template("departments.html", departments=all_data)
+
+
+api.add_resource(EmployeeListApi, '/employees', '/employees/<uuid>', strict_slashes=False)
