@@ -14,10 +14,10 @@ import urllib.request
 def index():
     if request.args.get('date_picker1') and request.args.get('date_picker2'):
         my_data = dict(date1=request.args.get('date_picker1'), date2=request.args.get('date_picker2'))
-        url = request.host_url + '/json/employees'
+        url = request.host_url + 'json/employees'
         all_employees = requests.get(url, params=my_data, verify=False).json()
     else:
-        all_employees = urllib.request.urlopen(request.host_url+'/json/employees').read()
+        all_employees = urllib.request.urlopen(request.host_url+'json/employees').read()
         all_employees = json.loads(all_employees)
     return render_template("index.html", employee=all_employees)
 
@@ -32,7 +32,7 @@ def insert():
         my_data = json.dumps(dict(name=name, birthday=birthday, salary=salary, dep=dep))
 
         headers = {'Content-type': 'application/json'}
-        url = request.host_url + '/json/employees'
+        url = request.host_url + 'json/employees'
         rq = requests.post(url, headers=headers, data=my_data, verify=False)
         if rq.status_code == 201:
             flash("Employee Inserted Successfully")
@@ -50,7 +50,7 @@ def update(id):
         my_data = json.dumps(dict(id=id, name=name, birthday=birthday, salary=salary, dep=dep))
 
         headers = {'Content-type': 'application/json'}
-        url = request.host_url+'/json/employees'+str(id)
+        url = request.host_url+'json/employees/'+str(id)
         rq = requests.patch(url, headers=headers, data=my_data, verify=False)
         if rq.status_code == 200:
             flash("Employee Updated Successfully")
@@ -60,7 +60,7 @@ def update(id):
 
 @app.route('/delete/<int:id>', methods=['GET', 'POST'])
 def delete(id):
-    url = request.host_url+'/json/employees'+str(id)
+    url = request.host_url+'json/employees/'+str(id)
     rq = requests.delete(url, verify=False)
 
     if rq.status_code == 200:
@@ -88,7 +88,7 @@ def department_insert():
         my_data = json.dumps(dict(name=name))
 
         headers = {'Content-type': 'application/json'}
-        url = request.host_url+'/json/departments'
+        url = request.host_url+'json/departments'
         rq = requests.post(url, headers=headers, data=my_data, verify=False)
         if rq.status_code == 201:
             flash("Department Inserted Successfully")
@@ -104,7 +104,7 @@ def department_update(id):
         my_data = json.dumps(dict(id=id, name=name))
 
         headers = {'Content-type': 'application/json'}
-        url = request.host_url+'/json/departments'+str(id)
+        url = request.host_url+'json/departments/'+str(id)
         rq = requests.patch(url, headers=headers, data=my_data, verify=False)
 
         if rq.status_code == 200:
@@ -115,7 +115,7 @@ def department_update(id):
 
 @app.route('/departments/delete/<int:id>', methods=['GET', 'POST'])
 def department_delete(id):
-    url = request.host_url+'/json/departments'+str(id)
+    url = request.host_url+'json/departments/'+str(id)
     rq = requests.delete(url)
     if rq.status_code == 200:
         flash("Department Deleted Successfully")
