@@ -103,7 +103,6 @@ class DepartmentListApi(Resource):
         if not id:
             departments = DepartmentService.fetch_all_departments_with_avg_salary(db.session).all()
             departments_with_none_salary = DepartmentService.fetch_all_departments(db.session).all()
-            print(departments, '*'*50,  departments_with_none_salary)
             return self.department_schema_with_avg.dump(departments, many=True), 200
 
         department = DepartmentService.fetch_department_by_id(db.session, id)
@@ -146,16 +145,13 @@ class DepartmentListApi(Resource):
         return self.department_schema.dump(department), 200
 
     def delete(self, id):
-        print('heloo')
         employees = EmployeeService.fetch_all_employees_by_dep(db.session, id).all()
-        print(employees, type(employees))
         if employees:
             for x in employees:
                 db.session.delete(x)
             db.session.commit()
 
         department = DepartmentService.fetch_department_by_id(db.session, id)
-        print(department)
         if not department:
             return '', 404
         db.session.delete(department)
