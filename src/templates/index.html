@@ -9,8 +9,20 @@
 <div class="container">
     <div class="col md-12">
         <div class="jumbotron p-3">
-            <h2><b>Employees </b> <button class="btn btn-success float-end" data-bs-target="#mymodal"
-                                                 data-bs-toggle="modal" type="button">Add New Employees</button></h2>
+            <h6>
+                <b>Table Employees</b> <br><br>
+                <form action="{{url_for('index')}}" method="GET">
+                <label for="start1">Date from:</label>
+                <input type="date" id="start1" name="date_picker1" value="1991-07-22">
+                <label for="start2">to:</label>
+                <input type="date" id="start2" name="date_picker2" value="1992-07-22">
+                <button type="submit" class="btn btn-primary mb-6">Choose</button>
+                <button class="btn btn-success float-end" data-bs-target="#mymodal"
+                        data-bs-toggle="modal" type="button">Add New Employees
+                </button>
+                </form>
+
+            </h6>
 
             {% with messages = get_flashed_messages() %}
                  {% if messages %}
@@ -25,6 +37,7 @@
                  {% endif %}
             {% endwith %}
 
+            <br>
             <table class="table table-striped table-hover">
                 <tr>
                     <th>ID</th>
@@ -36,11 +49,13 @@
                 </tr>
                 {% for row in employee %}
                 <tr>
-                    <td>{{row.id}}</td>
-                    <td>{{row.name}}</td>
-                    <td>{{row.birthday}}</td>
-                    <td>{{row.salary}}</td>
-                    <td>{{row.dep.name}}</td>
+                    <td>{{row['id']}}</td>
+                    <td>{{row['name']}}</td>
+                    <td>{{row['birthday']}}</td>
+                    <td>{{row['salary']}}</td>
+
+                    <td>{{ row['dep'] }}</td>
+
                     <td>
                         <a href="/update/{{row.id}}" class="btn btn-warning vtn-xs" data-bs-toggle="modal" data-bs-target="#modaledit{{row.id}}">Edit</a>
                         <a href="/delete/{{row.id}}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete?')">Delete</a>
@@ -55,7 +70,7 @@
              <h4 class="modal-title">Update Information</h4>
           </div>
           <div class="modal-body">
-             <form action="{{url_for('update')}}" method="POST">
+             <form action="{{url_for('update', id=row.id)}}" method="POST">
                 <div class="form-group">
                    <label>Name:</label>
                    <input type="hidden"  name="id" value="{{row.id}}">
@@ -71,7 +86,8 @@
                 </div>
                 <div class="form-group">
                    <label>Department:</label>
-                  <input type="text" class="form-control" name="department" value="{{row.dep.name}}">
+                    <input type="hidden"  name="department_id" value="{{row.department_id}}">
+                  <input type="text" class="form-control" name="dep" value="{{row.dep}}">
                 </div>
                 <div class="form-group">
                    <button class="btn btn-primary" type="submit">Update</button>
@@ -117,7 +133,7 @@
                             <div class="form-group">
 
                                 <label>Department:</label>
-                                <input type="text" class="form-control" name="department" required="1">
+                                <input type="text" class="form-control" name="dep" required="1">
 
                             </div>
 

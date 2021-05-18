@@ -1,77 +1,122 @@
+import json
+from datetime import datetime
+
+import requests
+
 from flask import render_template, request, flash, url_for, redirect
-from sqlalchemy import func
 
-from src import db, app, api
-from src.models.my_models import Employee, Department
-from src.rest.empl import EmployeeListApi
+from src import app
+import urllib.request
 
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def index():
-    all_data = Employee.query.all()
-
-    return render_template("index.html", employee=all_data)
+    if request.args.get('date_picker1') and request.args.get('date_picker2'):
+        my_data = dict(date1=request.args.get('date_picker1'), date2=request.args.get('date_picker2'))
+        url = "http://127.0.0.1:5000/json/employees"
+        all_employees = requests.get(url, params=my_data, verify=False).json()
+    else:
+        all_employees = urllib.request.urlopen('http://127.0.0.1:5000/json/employees').read()
+        all_employees = json.loads(all_employees)
+    return render_template("index.html", employee=all_employees)
 
 
 @app.route('/insert', methods=['POST'])
 def insert():
     if request.method == 'POST':
         name = request.form['name']
+        birthday = str(datetime.strptime(request.form['birthday'], '%d.%m.%Y').date())
+        salary = request.form['salary']
+        dep = request.form['dep']
+        my_data = json.dumps(dict(name=name, birthday=birthday, salary=salary, dep=dep))
+
+        headers = {'Content-type': 'application/json'}
+        url = "http://127.0.0.1:5000/json/employees"
+        rq = requests.post(url, headers=headers, data=my_data, verify=False)
+        if rq.status_code == 201:
+            flash("Employee Inserted Successfully")
+        return redirect(url_for('index'))
+
+
+@app.route('/update/<int:id>', methods=['GET', 'POST'])
+def update(id):
+    if request.method == 'POST':
+        name = request.form['name']
         birthday = request.form['birthday']
         salary = request.form['salary']
+        dep = request.form['dep']
 
-        if not Department.query.filter_by(name=request.form['department']).first():
-            db.session.add(Department(name=request.form['department']))
-            db.session.commit()
+        my_data = json.dumps(dict(id=id, name=name, birthday=birthday, salary=salary, dep=dep))
 
-        my_data = Employee(name=name, birthday=birthday, salary=salary,
-                           dep=Department.query.filter_by(name=request.form['department']).first())
-        db.session.add(my_data)
-        db.session.commit()
-
-        flash("Employee Inserted Successfully")
+        headers = {'Content-type': 'application/json'}
+        url = f"http://127.0.0.1:5000/json/employees/{id}"
+        rq = requests.patch(url, headers=headers, data=my_data, verify=False)
+        if rq.status_code == 200:
+            flash("Employee Updated Successfully")
 
         return redirect(url_for('index'))
 
 
-@app.route('/update', methods=['GET', 'POST'])
-def update():
-    if request.method == 'POST':
-        my_data = Employee.query.get(request.form.get('id'))
-
-        my_data.name = request.form['name']
-        my_data.birthday = request.form['birthday']
-        my_data.salary = request.form['salary']
-
-        if not Department.query.filter_by(name=request.form['department']).first():
-            db.session.add(Department(name=request.form['department']))
-            db.session.commit()
-        my_data.dep = Department.query.filter_by(name=request.form['department']).first()
-
-        db.session.commit()
-        flash("Employee Updated Successfully")
-
-        return redirect(url_for('index'))
-
-
-@app.route('/delete/<id>', methods=['GET', 'POST'])
+@app.route('/delete/<int:id>', methods=['GET', 'POST'])
 def delete(id):
-    my_data = Employee.query.get(id)
-    db.session.delete(my_data)
-    db.session.commit()
-    flash("Employee Deleted Successfully")
+    url = f"http://127.0.0.1:5000/json/employees/{id}"
+    rq = requests.delete(url, verify=False)
+
+    if rq.status_code == 200:
+        flash("Employee Deleted Successfully")
 
     return redirect(url_for('index'))
 
 
 @app.route('/departments')
 def departments():
-    all_data = db.session.query(Employee.department_id, Department.name,
-                                func.avg(Employee.salary).label('avg')).group_by(Employee.department_id).join(
-        Department)
-    #print(all_data)
+    headers = {'Content-type': 'application/json'}
+    url = "http://127.0.0.1:5000/json/departments"
+    rq = requests.get(url, headers=headers, verify=False)
 
-    return render_template("departments.html", departments=all_data)
+    return render_template("departments.html", departments=rq.json())
 
 
-api.add_resource(EmployeeListApi, '/employees', '/employees/<uuid>', strict_slashes=False)
+@app.route('/departments/insert', methods=['POST'])
+def department_insert():
+    if request.method == 'POST':
+        name = request.form['name']
+
+        my_data = json.dumps(dict(name=name))
+
+        headers = {'Content-type': 'application/json'}
+        url = "http://127.0.0.1:5000/json/departments"
+        rq = requests.post(url, headers=headers, data=my_data, verify=False)
+        if rq.status_code == 201:
+            flash("Department Inserted Successfully")
+        return redirect(url_for('departments'))
+
+
+@app.route('/department/update/<int:id>', methods=['GET', 'POST'])
+def department_update(id):
+    if request.method == 'POST':
+        name = request.form['name']
+        id = request.form['id']
+
+        my_data = json.dumps(dict(id=id, name=name))
+
+        headers = {'Content-type': 'application/json'}
+        url = f"http://127.0.0.1:5000/json/departments/{id}"
+        rq = requests.patch(url, headers=headers, data=my_data, verify=False)
+
+        if rq.status_code == 200:
+            flash("Department Updated Successfully")
+
+        return redirect(url_for('departments'))
+
+
+@app.route('/departments/delete/<int:id>', methods=['GET', 'POST'])
+def department_delete(id):
+    url = f"http://127.0.0.1:5000/json/departments/{id}"
+    rq = requests.delete(url)
+    if rq.status_code == 200:
+        flash("Department Deleted Successfully")
+    if rq.status_code == 404:
+        flash("""Cannot delete""")
+
+    return redirect(url_for('departments'))

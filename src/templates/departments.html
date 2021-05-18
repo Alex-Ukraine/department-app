@@ -9,20 +9,25 @@
 <div class="container">
     <div class="col md-12">
         <div class="jumbotron p-3">
-            <h2><b>Departments </b> <button class="btn btn-success float-end" data-bs-target="#mymodal"
-                                                 data-bs-toggle="modal" type="button">Add New Department</button></h2>
-
+            <h6><b>Table Departments</b>
+                <button class="btn btn-success float-end" data-bs-target="#mymodal"
+                        data-bs-toggle="modal" type="button">Add New Employees
+                </button>
+            </h6>
+            <br>
             {% with messages = get_flashed_messages() %}
-                 {% if messages %}
-                 {% for message in messages %}
-                 <div class="alert alert-success alert-dismissible fade show" role="alert">
-                     <button type="button" class="btn-close" data-bs-dismiss="alert">
-                         <span aria-hidden="true"></span>
-                     </button>
-                 {{message}}
-                 </div>
-                 {% endfor %}
-                 {% endif %}
+            {% if messages %}
+            {% for message in messages %}
+            <br>
+            <br>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert">
+                    <span aria-hidden="true"></span>
+                </button>
+                {{message}}
+            </div>
+            {% endfor %}
+            {% endif %}
             {% endwith %}
 
             <table class="table table-striped table-hover">
@@ -34,44 +39,46 @@
                 </tr>
                 {% for row in departments %}
                 <tr>
-                    <td>{{row.department_id}}</td>
+                    <td>{{row.id}}</td>
                     <td>{{row.name}}</td>
                     <td>{{row.avg}}</td>
                     <td>
-                        <a href="/departments/update/{{row.id}}" class="btn btn-warning vtn-xs" data-bs-toggle="modal" data-bs-target="#modaledit{{row.id}}">Edit</a>
-                        <a href="/departments/delete/{{row.id}}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete?')">Delete</a>
+                        <a href="/departments/update/{{row.id}}" class="btn btn-warning vtn-xs" data-bs-toggle="modal"
+                           data-bs-target="#modaledit{{row.id}}">Edit</a>
+                        <a href="/departments/delete/{{row.id}}" class="btn btn-danger btn-xs"
+                           onclick="return confirm('Are You Sure To Delete department and all related employees?')">Delete</a>
                     </td>
                 </tr>
 
-                    <!-- Modal Edit Employee-->
-<div id="modaledit{{row.id}}" class="modal fade" role="dialog">
-   <div class="modal-dialog">
-       <div class="modal-content">
-          <div class="modal-header">
-             <h4 class="modal-title">Update Information</h4>
-          </div>
-          <div class="modal-body">
-             <form action="{{url_for('update')}}" method="POST">
-                <div class="form-group">
-                   <label>Name:</label>
-                   <input type="hidden"  name="id" value="{{row.id}}">
-                   <input type="text" class="form-control" name="name" value="{{row.name}}">
-                </div>
+                <!-- Modal Edit Employee-->
+                <div id="modaledit{{row.id}}" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Update Information</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{url_for('department_update', id=row.id)}}" method="POST">
+                                    <div class="form-group">
+                                        <label>Name:</label>
+                                        <input type="hidden" name="id" value="{{row.id}}">
+                                        <input type="text" class="form-control" name="name" value="{{row.name}}">
+                                    </div>
 
-                <div class="form-group">
-                   <button class="btn btn-primary" type="submit">Update</button>
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" type="submit">Update</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-             </form>
-          </div>
-           <div class="modal-footer">
-             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          </div>
-       </div>
-    </div>
-</div>
                 {% endfor %}
-                </table>
-             </div>
+            </table>
+        </div>
 
         <div id="mymodal" class="modal fade" role="dialog">
             <div class="modal-dialog">
@@ -80,7 +87,7 @@
                         <h4 class="modal-title">Add Employee</h4>
                     </div>
                     <div class="modal-body">
-                        <form action="{{url_for('insert')}}" method="POST">
+                        <form action="{{url_for('department_insert')}}" method="POST">
                             <div class="form-group">
 
                                 <label>Name:</label>

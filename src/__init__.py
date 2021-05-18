@@ -14,8 +14,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
-db.create_all()
-
 api = Api(app)
 
 migrate = Migrate(app, db)
@@ -29,3 +27,6 @@ flask db upgrade
 
 from src.models import my_models
 from src.views import my_views
+from src.rest import empl, schemas
+
+db.create_all()
