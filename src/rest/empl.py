@@ -1,11 +1,10 @@
-import json
-
 from flask import request
 from flask_restful import Resource
 from marshmallow import ValidationError
 
 from src import db, api
-from src.rest.schemas import EmployeeSchema, DepartmentSchema, DepartmentSchema_Without_Id, DepartmentSchemaWithAVG, EmployeeSchemaWithDep
+from src.rest.schemas import EmployeeSchema, DepartmentSchema, DepartmentSchema_Without_Id, \
+    DepartmentSchemaWithAVG, EmployeeSchemaWithDep
 from src.service.service import EmployeeService, DepartmentService
 
 
@@ -20,7 +19,8 @@ class EmployeeListApi(Resource):
             if rq:
                 date1 = rq.get('date1')
                 date2 = rq.get('date2')
-                employees = EmployeeService.fetch_all_employees_with_dep_between_dates(db.session, date1=date1, date2=date2).all()
+                employees = EmployeeService.fetch_all_employees_with_dep_between_dates(db.session, date1=date1,
+                                                                                       date2=date2).all()
             else:
                 employees = EmployeeService.fetch_all_employees_with_dep(db.session).all()
             return self.employee_schema_with_dep.dump(employees, many=True), 200
@@ -28,7 +28,7 @@ class EmployeeListApi(Resource):
         employee = EmployeeService.fetch_employee_by_id(db.session, id)
         if not employee:
             return '', 404
-        return self.employee_schema(employee), 200
+        return self.employee_schema.dump(employee), 200
 
     def post(self):
         rq = request.json
@@ -55,6 +55,15 @@ class EmployeeListApi(Resource):
         employee = EmployeeService.fetch_employee_by_id(db.session, id)
         if not employee:
             return "", 404
+        rq = request.json
+        dep = rq['dep']
+        department = DepartmentService.fetch_department_by_name(db.session, name=dep)
+        if not department:
+            department = self.department_schema_without_id.load(dict(name=dep), session=db.session)
+            db.session.add(department)
+            db.session.commit()
+        rq['department_id'] = department.id
+        del rq['dep']
         try:
             employee = self.employee_schema.load(request.json, instance=employee, session=db.session)
         except ValidationError as e:
@@ -67,7 +76,6 @@ class EmployeeListApi(Resource):
         employee = EmployeeService.fetch_employee_by_id(db.session, id)
         if not employee:
             return '', 404
-
         rq = request.json
         dep = rq['dep']
         department = DepartmentService.fetch_department_by_name(db.session, name=dep)
@@ -102,13 +110,12 @@ class DepartmentListApi(Resource):
     def get(self, id=None):
         if not id:
             departments = DepartmentService.fetch_all_departments_with_avg_salary(db.session).all()
-            departments_with_none_salary = DepartmentService.fetch_all_departments(db.session).all()
             return self.department_schema_with_avg.dump(departments, many=True), 200
 
         department = DepartmentService.fetch_department_by_id(db.session, id)
         if not department:
             return '', 404
-        return self.department_schema(department), 200
+        return self.department_schema.dump(department), 200
 
     def post(self):
         try:
@@ -120,7 +127,7 @@ class DepartmentListApi(Resource):
         return self.department_schema.dump(department), 201
 
     def put(self, id):
-        department = EmployeeService.fetch_department_by_id(db.session, id)
+        department = DepartmentService.fetch_department_by_id(db.session, id)
         if not department:
             return "", 404
         try:
@@ -156,7 +163,7 @@ class DepartmentListApi(Resource):
             return '', 404
         db.session.delete(department)
         db.session.commit()
-        return '', 200
+        return '', 204
 
 
 api.add_resource(EmployeeListApi, '/json/employees', '/json/employees/<id>', strict_slashes=False)

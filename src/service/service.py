@@ -43,9 +43,7 @@ class DepartmentService:
 
     @classmethod
     def fetch_department_by_id(cls, session, id):
-        return cls.fetch_all_departments(session).filter_by(
-            id=id
-        ).first()
+        return cls.fetch_all_departments(session).filter_by(id=id).first()
 
     @classmethod
     def fetch_department_by_name(cls, session, name):

@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
-{% include 'header.html' %}
+
 
 {% block title %} Employees {% endblock %}
 
 
 {% block body %}
+{% include 'header.html' %}
 <br>
 <div class="container">
     <div class="col md-12">
@@ -13,9 +14,9 @@
                 <b>Table Employees</b> <br><br>
                 <form action="{{url_for('index')}}" method="GET">
                 <label for="start1">Date from:</label>
-                <input type="date" id="start1" name="date_picker1" value="1991-07-22">
+                <input type="date" id="start1" name="date_picker1" value="1987-07-22">
                 <label for="start2">to:</label>
-                <input type="date" id="start2" name="date_picker2" value="1992-07-22">
+                <input type="date" id="start2" name="date_picker2" value="1995-07-22">
                 <button type="submit" class="btn btn-primary mb-6">Choose</button>
                 <button class="btn btn-success float-end" data-bs-target="#mymodal"
                         data-bs-toggle="modal" type="button">Add New Employees

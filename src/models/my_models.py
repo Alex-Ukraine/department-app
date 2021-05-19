@@ -10,8 +10,8 @@ class Employee(db.Model):
     salary = db.Column(db.Integer)
     department_id = db.Column(db.Integer, db.ForeignKey('department.id'))
 
-    def __repr__(self):
-        return f'Employee({self.id}, {self.name}, {self.birthday}, {self.salary}, {self.department_id})'
+    #def __repr__(self):
+    #    return f'Employee({self.id}, {self.name}, {self.birthday}, {self.salary}, {self.department_id})'
 
 
 class Department(db.Model):
@@ -20,6 +20,6 @@ class Department(db.Model):
 
     child = db.relationship('Employee', backref='dep')
 
-    def __repr__(self):
-        return f'Department({self.id}, {self.name}, {self.child})'
+    #def __repr__(self):
+    #    return f'Department({self.id}, {self.name}, {self.child})'
 
