@@ -154,8 +154,9 @@ def populate_db(id):
         return {"message": f"DB successfully populated by {id} records"}, 200
 
 
-@app.route('/drop_all', methods=['GET'])
-def populate_db():
+@app.route('/drop-all', methods=['GET'])
+def drop_db():
     if request.method == 'GET':
         db.drop_all()
+        db.create_all()
     return {"message": "DB successfully dropped"}, 200
