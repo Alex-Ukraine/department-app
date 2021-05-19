@@ -152,3 +152,10 @@ def populate_db(id):
         db.session.commit()
 
         return {"message": f"DB successfully populated by {id} records"}, 200
+
+
+@app.route('/drop_all', methods=['GET'])
+def populate_db():
+    if request.method == 'GET':
+        db.drop_all()
+    return {"message": "DB successfully dropped"}, 200
