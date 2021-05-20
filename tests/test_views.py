@@ -41,7 +41,7 @@ class TestViews:
             url = request.url_root
             resp = client.get(url)
         # test this
-        assert url == 'localhost'
+        assert url == 'http://localhost/'
         assert resp.status_code == http.HTTPStatus.OK
 
     def test_get_view_employees_with_db_between_dates(self):
