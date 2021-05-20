@@ -45,7 +45,7 @@ class TestViews:
 
     def test_get_view(self):
         with app.test_client() as client:
-            resp = client.get('/')
+            resp = client.get('/', verify=False)
 
         assert resp.status_code == http.HTTPStatus.OK
 
