@@ -9,8 +9,8 @@ app = Flask(__name__)
 app.secret_key = "Secret Key"
 
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:''@localhost/finalproject2'
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:''@localhost/finalproject'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://bbdd61c5c0e309:14359da5@eu-cdbr-west-01.cleardb.com/heroku_49c300e9821f2bb'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:''@localhost/finalproject'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://bbdd61c5c0e309:14359da5@eu-cdbr-west-01.cleardb.com/heroku_49c300e9821f2bb'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
