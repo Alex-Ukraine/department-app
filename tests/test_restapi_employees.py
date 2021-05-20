@@ -1,6 +1,5 @@
 import http
 import json
-import random
 from dataclasses import dataclass
 from unittest.mock import patch
 
@@ -18,6 +17,10 @@ class FakeEmployee:
 
 class TestRestEmployees:
     id = []
+
+    def test_populate_db(self):
+        client = app.test_client()
+        client.get('/populate/20')
 
     def test_get_employees_with_db(self):
         client = app.test_client()
@@ -65,7 +68,7 @@ class TestRestEmployees:
             "name": "Fake Employee",
             "birthday": "1990-03-05",
             "salary": 1000,
-            "dep": str(id(random.randint(1000, 2000)))
+            "dep": 'some super mega strange name department'
         }
         resp = client.post('/json/employees', data=json.dumps(data), content_type='application/json')
         assert resp.status_code == http.HTTPStatus.CREATED
@@ -187,7 +190,7 @@ class TestRestEmployees:
             "name": "Update Name",
             "salary": 780,
             "birthday": "2010-04-02",
-            "dep": str(id(random.randint(0, 2000)))
+            "dep": 'some department with freaky name'
         }
         resp = client.put(url, data=json.dumps(data), content_type='application/json')
         assert resp.status_code == http.HTTPStatus.OK
@@ -199,8 +202,8 @@ class TestRestEmployees:
         data = {
             "name": "Update Name",
             "salary": 780,
-            "birthday": "2010-04-02",
-            "dep": str(id(random.randint(0, 2000)))
+            "birthday": "2010-04-01",
+            "dep": 'some awesome new department'
         }
         resp = client.patch(url, data=json.dumps(data), content_type='application/json')
         assert resp.status_code == http.HTTPStatus.OK

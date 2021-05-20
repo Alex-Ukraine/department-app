@@ -1,5 +1,4 @@
 import json
-import os
 import random
 from datetime import datetime
 from faker import Faker
@@ -9,10 +8,8 @@ import requests
 from flask import render_template, request, flash, url_for, redirect
 
 from src import app, db
-import urllib.request
 
 from src.models.my_models import Department, Employee
-from src.rest.schemas import EmployeeSchema, DepartmentSchema_Without_Id
 from src.service.service import DepartmentService
 
 
@@ -31,7 +28,7 @@ def index():
 def insert():
     if request.method == 'POST':
         name = request.form['name']
-        birthday = str(datetime.strptime(request.form['birthday'], '%d.%m.%Y').date())
+        birthday = str(datetime.strptime(request.form['birthday'], '%Y-%m-%d').date())
         salary = request.form['salary']
         dep = request.form['dep']
         my_data = json.dumps(dict(name=name, birthday=birthday, salary=salary, dep=dep))
@@ -129,6 +126,10 @@ def department_delete(id):
 @app.route('/populate/<int:id>', methods=['GET'])
 def populate_db(id):
     if request.method == 'GET':
+        if id > 1000:
+            flash(f"DB not populated by {id} records, please request less 1000 records")
+            return redirect(url_for('index'))
+
         fake = Faker()
         for _ in range(id):
             data = {
@@ -150,8 +151,8 @@ def populate_db(id):
                                 salary=data["salary"], department_id=department.id)
             db.session.add(employee)
         db.session.commit()
-
-        return {"message": f"DB successfully populated by {id} records"}, 200
+        flash(f"DB successfully populated by {id} records")
+        return redirect(url_for('index'))
 
 
 @app.route('/drop-all', methods=['GET'])
@@ -159,4 +160,5 @@ def drop_db():
     if request.method == 'GET':
         db.drop_all()
         db.create_all()
-    return {"message": "DB successfully dropped"}, 200
+        flash('DB successfully dropped')
+    return redirect(url_for('index'))

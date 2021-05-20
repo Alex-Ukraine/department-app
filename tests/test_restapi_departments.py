@@ -15,6 +15,10 @@ class FakeDepartment:
 class TestRestDepartments:
     id = []
 
+    def test_populate_db(self):
+        client = app.test_client()
+        client.get('/populate/20')
+
     def test_get_departments_with_db(self):
         client = app.test_client()
         resp = client.get('/json/departments')
