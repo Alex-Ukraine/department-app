@@ -15,7 +15,7 @@ class TestViews:
         with app.test_request_context('/'), \
                 app.test_client() as client:
             url = request.host_url[:-1] + ':5000/' + f'populate/{id}'
-            resp = client.get(f'/populate/{id}', follow_redirects=True)
+            resp = client.get(url, follow_redirects=True)
             message = get_flashed_messages()
 
         assert message[0] == f"DB successfully populated by {id} records"
@@ -28,7 +28,6 @@ class TestViews:
         with app.test_request_context('/'), \
                 app.test_client() as client:
             url = request.host_url[:-1] + ':5000/' + f'populate/{id}'
-            print('*' * 50, url)
             resp = client.get(url, follow_redirects=True)
             message = get_flashed_messages()
 
@@ -40,7 +39,7 @@ class TestViews:
                 app.test_client() as client:
             url = request.host_url[:-1] + ':5000/'
             resp = client.get(url)
-
+        assert url == 'http://localhost:5000/'
         assert resp.status_code == http.HTTPStatus.OK
 
     def test_get_view_employees_with_db_between_dates(self):
