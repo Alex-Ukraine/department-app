@@ -1,5 +1,6 @@
 import http
 
+import requests
 from flask import request, get_flashed_messages
 
 from src import app, db
@@ -41,15 +42,17 @@ class TestViews:
             resp = client.get(url)
         assert resp.status_code == http.HTTPStatus.OK
 
-# *********************************************
+    # *********************************************
 
     def test_get_view(self):
-        with app.test_client() as client:
-            resp = client.get('/')
+        with app.test_request_context('/'), \
+                app.test_client():
+            url = request.host_url
+            resp = requests.get(url, verify=False)
 
         assert resp.status_code == http.HTTPStatus.OK
 
-# *********************************************
+    # *********************************************
 
     def test_get_view_employees_with_db_between_dates(self):
         with app.test_request_context('/'), \
