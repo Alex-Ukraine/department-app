@@ -37,12 +37,19 @@ class TestViews:
     def test_get_view_employees_with_db(self):
         with app.test_request_context('/'), \
                 app.test_client() as client:
-            #url = request.host_url[:-1] + ':5000/'
-            url = request.url_root
+            url = request.host_url[:-1] + ':5000/'
             resp = client.get(url)
-        # test this
-        assert url == 'http://localhost/'
         assert resp.status_code == http.HTTPStatus.OK
+
+# *********************************************
+
+    def test_get_view(self):
+        with app.test_client() as client:
+            resp = client.get('/')
+
+        assert resp.status_code == http.HTTPStatus.OK
+
+# *********************************************
 
     def test_get_view_employees_with_db_between_dates(self):
         with app.test_request_context('/'), \
