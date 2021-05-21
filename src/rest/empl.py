@@ -1,5 +1,3 @@
-import logging
-
 from flask import request
 from flask_restful import Resource
 from marshmallow import ValidationError
@@ -16,6 +14,8 @@ class EmployeeListApi(Resource):
     department_schema_without_id = DepartmentSchema_Without_Id()
 
     def get(self, id=None):
+        """send get request with data(id, date1, date2) or not and return json data, and if answer to request
+        to db not empty json will have fields 'dep', 'department_id','name', 'salary', 'id','birthday'"""
         if not id:
             rq = request.args
             if rq:
@@ -33,6 +33,9 @@ class EmployeeListApi(Resource):
         return self.employee_schema.dump(employee), 200
 
     def post(self):
+        """send post request to db with json(fields: 'dep','name', 'salary', 'birthday') and return
+        json data(fields: 'dep', 'department_id','name', 'salary', 'id','birthday'.
+        If department not exist algorithm creates new department in db"""
         rq = request.json
         dep = rq['dep']
         department = DepartmentService.fetch_department_by_name(db.session, name=dep)
@@ -55,6 +58,10 @@ class EmployeeListApi(Resource):
         return self.employee_schema.dump(employee), 201
 
     def put(self, id):
+        """send put request with json(fields: 'department_id','name', 'salary', 'birthday') and return
+        json data(fields: 'dep', 'department_id','name', 'salary', 'id','birthday'.
+        If department not exist algorithm creates new department in db.
+        Every field must be filled"""
         employee = EmployeeService.fetch_employee_by_id(db.session, id)
         if not employee:
             return "", 404
@@ -77,6 +84,9 @@ class EmployeeListApi(Resource):
         return self.employee_schema.dump(employee), 200
 
     def patch(self, id):
+        """send patch request with json(fields: 'department_id','name', 'salary', 'birthday') and return
+                json data(fields: 'dep', 'department_id','name', 'salary', 'id','birthday'.
+                If department not exist algorithm creates new department in db."""
         employee = EmployeeService.fetch_employee_by_id(db.session, id)
         if not employee:
             return '', 404
@@ -100,6 +110,8 @@ class EmployeeListApi(Resource):
         return self.employee_schema.dump(employee), 200
 
     def delete(self, id):
+        """send delete request to db(table 'employee') with json(fields: 'department_id','name',
+        'salary', 'birthday') and return status code 204 or 404"""
         employee = EmployeeService.fetch_employee_by_id(db.session, id)
         if not employee:
             return '', 404
@@ -113,6 +125,9 @@ class DepartmentListApi(Resource):
     department_schema_with_avg = DepartmentSchemaWithAVG()
 
     def get(self, id=None):
+        """send get request with id or no to db(joined query between tables employee and department)
+        and return json data, and if answer to request to db not empty json will have fields 'department_id',
+        'name', 'avg'. It is not json with list of all departments, only departments which binded with employees"""
         if not id:
             departments = DepartmentService.fetch_all_departments_with_avg_salary(db.session).all()
             return self.department_schema_with_avg.dump(departments, many=True), 200
@@ -123,16 +138,23 @@ class DepartmentListApi(Resource):
         return self.department_schema.dump(department), 200
 
     def post(self):
+        """send post request to db(joined query between tables employee and department) json(fields: 'dep')
+        and return json data(fields: 'id','name'). If department not exist algorithm creates new department in db"""
         try:
             department = self.department_schema.load(request.json, session=db.session)
         except ValidationError as e:
             logger.debug(f"Validation error in post Department by Api is {e}")
             return {'message': str(e)}, 400
+        if DepartmentService.fetch_department_by_name(db.session, department.name):
+            logger.debug('Department not unique, already exists')
+            return {'message': 'Department not unique, already exists'}, 400
         db.session.add(department)
         db.session.commit()
+
         return self.department_schema.dump(department), 201
 
     def put(self, id):
+        """send put request with json(fields: 'id','name') and return json data(fields: 'name', 'id')."""
         department = DepartmentService.fetch_department_by_id(db.session, id)
         if not department:
             return "", 404
@@ -146,6 +168,7 @@ class DepartmentListApi(Resource):
         return self.department_schema.dump(department), 200
 
     def patch(self, id):
+        """send patch request with json(fields: 'id','name') and return json data(fields: 'name', 'id')."""
         department = DepartmentService.fetch_department_by_id(db.session, id)
         if not department:
             return '', 404
@@ -160,6 +183,8 @@ class DepartmentListApi(Resource):
         return self.department_schema.dump(department), 200
 
     def delete(self, id):
+        """send delete request to db(table 'department') with json(fields: 'id','name')
+        and return status code 204 or 404"""
         employees = EmployeeService.fetch_all_employees_by_dep(db.session, id).all()
         if employees:
             for x in employees:

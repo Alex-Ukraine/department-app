@@ -59,6 +59,14 @@ class TestRestDepartments:
         resp = client.post('/json/departments', data=json.dumps(data), content_type='application/json')
         assert resp.status_code == http.HTTPStatus.BAD_REQUEST
 
+    def test_create_department_with_db_error_not_unique_400(self):
+        client = app.test_client()
+        data = {
+            "name": "Fake Department"
+        }
+        resp = client.post('/json/departments', data=json.dumps(data), content_type='application/json')
+        assert resp.status_code == http.HTTPStatus.BAD_REQUEST
+
     def test_get_department_by_id_with_db(self):
         client = app.test_client()
         resp = client.get(f'/json/departments/{self.id[0]}')

@@ -6,19 +6,27 @@ from src.models.my_models import Employee, Department
 class EmployeeService:
     @staticmethod
     def fetch_all_employees(session):
+        """make a query to db table 'employee' and fetch all records"""
         return session.query(Employee)
 
     @staticmethod
     def fetch_all_employees_by_dep(session, id):
+        """make a query to db table 'employee' and fetch records who satisfies condition
+        'Employee.department_id == id'"""
         return session.query(Employee).filter(Employee.department_id == id)
 
     @staticmethod
     def fetch_all_employees_with_dep(session):
+        """make a query to db table 'employee' and 'department', fetch all records + add new field 'dep',
+         filled with values from table 'department'"""
         return session.query(Employee.id, Employee.name, Employee.birthday, Employee.salary,
                              Employee.department_id, Department.name.label('dep')).join(Department)
 
     @staticmethod
     def fetch_all_employees_with_dep_between_dates(session, date1, date2):
+        """make a query to db(table 'employee' and 'department') with parameters date1 and date2, fetch all records,
+         who satisfies condition 'Employee.birthday > date1, Employee.birthday < date2'
+         + add new field 'dep', filled with values from table 'department'"""
         return session.query(Employee.id, Employee.name, Employee.birthday, Employee.salary,
                              Employee.department_id, Department.name.label('dep')). \
             join(Department).filter(and_(
@@ -28,18 +36,21 @@ class EmployeeService:
 
     @classmethod
     def fetch_employee_by_id(cls, session, id):
+        """make a query to db table 'employee' and fetch records who satisfies condition
+                'Employee.id == id'"""
         return cls.fetch_all_employees(session).filter_by(id=id).first()
 
 
 class DepartmentService:
     @staticmethod
     def fetch_all_departments(session):
+        """make a query to db table 'department' and fetch all records"""
         return session.query(Department)
 
     @staticmethod
     def fetch_all_departments_with_avg_salary(session):
         return session.query(Department.id, Department.name,
-                             func.avg(Employee.salary).label('avg')).group_by(Department.id).join(Department)
+                             func.avg(Employee.salary).label('avg')).group_by(Department.id).join(Employee)
 
     @classmethod
     def fetch_department_by_id(cls, session, id):

@@ -15,10 +15,12 @@ from src.service.service import DepartmentService
 
 @app.route('/', methods=['GET'])
 def index():
+    """If User goes address '/' program will give him list of all employees.
+    If User on page '/' pick dates and click choose he will see employees """
     if request.args.get('date_picker1') and request.args.get('date_picker2'):
         try:
-            date1 = datetime.strptime(request.args.get('date_picker1'), '%Y-%m-%d')
-            date2 = datetime.strptime(request.args.get('date_picker2'), '%Y-%m-%d')
+            date1 = datetime.strptime(request.args.get('date_picker1'), '%Y-%m-%d').date()
+            date2 = datetime.strptime(request.args.get('date_picker2'), '%Y-%m-%d').date()
         except ValueError as e:
             logger.debug(f"Value error for search Employees between dates is {e}")
             flash(f"{e}")
@@ -26,14 +28,18 @@ def index():
 
         my_data = dict(date1=date1, date2=date2)
         url = request.host_url + 'json/employees'
-        all_employees = requests.get(url, params=my_data, verify=False).json()
+        all_employees = requests.get(url, params=my_data, verify=False)
+        if all_employees.status_code == 200:
+            flash(f"Employees successfully searched between dates {date1} and {date2}")
     else:
-        all_employees = requests.get(request.host_url + 'json/employees').json()
-    return render_template("index.html", employee=all_employees)
+        all_employees = requests.get(request.host_url + 'json/employees')
+    return render_template("index.html", employee=all_employees.json(), verify=False)
 
 
 @app.route('/insert', methods=['POST'])
 def insert():
+    """After click button 'Add New Employee' on page '/' user will see modal form with
+    fields which need to fill. After click 'Add Employee' the record will be tried to post and user will see a message"""
     if request.method == 'POST':
         name = request.form['name']
         try:
@@ -63,6 +69,8 @@ def insert():
 
 @app.route('/update/<int:id>', methods=['GET', 'POST'])
 def update(id):
+    """After click button 'edit' on page 'employees' user will see modal form with fields specified record .
+    After click update the record will try to update and user will be redirected to page '/' and will see a message"""
     if request.method == 'POST':
         name = request.form['name']
         try:
@@ -94,6 +102,8 @@ def update(id):
 
 @app.route('/delete/<int:id>', methods=['GET', 'POST'])
 def delete(id):
+    """After click button delete on page 'employees'
+    the specified record will try to delete and user will see a message"""
     url = request.host_url + 'json/employees/' + str(id)
     rq = requests.delete(url, verify=False)
 
@@ -105,6 +115,7 @@ def delete(id):
 
 @app.route('/departments')
 def departments():
+    """If User goes address '/departments' program will give him list of departments with which Employees were binded"""
     headers = {'Content-type': 'application/json'}
 
     url = request.host_url + 'json/departments'
@@ -115,6 +126,8 @@ def departments():
 
 @app.route('/departments/insert', methods=['POST'])
 def department_insert():
+    """After click button 'Add New Department' on page 'departments' user will see modal form with
+    fields which need to fill. After click 'Add Department' the record will be tried to post and user will see a message"""
     if request.method == 'POST':
         name = request.form['name']
         if not name:
@@ -126,6 +139,8 @@ def department_insert():
         headers = {'Content-type': 'application/json'}
         url = request.host_url + 'json/departments'
         rq = requests.post(url, headers=headers, data=my_data, verify=False)
+        if rq.status_code == 400:
+            flash(rq.json()['message'], 'danger')
         if rq.status_code == 201:
             flash("Department Inserted Successfully")
         return redirect(url_for('departments'))
@@ -133,6 +148,8 @@ def department_insert():
 
 @app.route('/departments/update/<int:id>', methods=['GET', 'POST'])
 def department_update(id):
+    """After click button edit on page 'departments' user will see modal form with specified record fields.
+    After click update the record will be tried to update and user will see a message"""
     if request.method == 'POST':
         name = request.form['name']
         if not name:
@@ -144,15 +161,15 @@ def department_update(id):
         headers = {'Content-type': 'application/json'}
         url = request.host_url + 'json/departments/' + str(id)
         rq = requests.patch(url, headers=headers, data=my_data, verify=False)
-
         if rq.status_code == 200:
             flash("Department Updated Successfully")
-
         return redirect(url_for('departments'))
 
 
 @app.route('/departments/delete/<int:id>', methods=['GET', 'POST'])
 def department_delete(id):
+    """After click button delete on page 'departments'
+    the specified record will be tried to delete and user will see a message"""
     url = request.host_url + 'json/departments/' + str(id)
     rq = requests.delete(url)
     if rq.status_code == 204:
@@ -163,6 +180,8 @@ def department_delete(id):
 
 @app.route('/populate/<int:id>', methods=['GET'])
 def populate_db(id):
+    """User can get address like /populate/23, where 23 is arbitrary number of new fake Employees.
+    After this request DB will be updated with new records"""
     if request.method == 'GET':
         if id > 1000:
             flash(f"DB not populated by {id} records, please request less 1000 records")
@@ -195,6 +214,7 @@ def populate_db(id):
 
 @app.route('/drop-all', methods=['GET'])
 def drop_db():
+    """After get address /drop-all DB will be erased from data"""
     if request.method == 'GET':
         db.drop_all()
         db.create_all()

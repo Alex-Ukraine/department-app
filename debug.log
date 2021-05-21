@@ -286,3 +286,221 @@
 2021-05-21 05:00:33,872 - DEBUG - app_logger - Validation error, fields name or department are empty
 2021-05-21 05:00:33,998 - DEBUG - app_logger - Validation error, field name must not be empty
 2021-05-21 05:00:34,108 - DEBUG - app_logger - Validation error, field name must not be empty
+2021-05-21 11:42:34,782 - DEBUG - app_logger - Validation error in post Department by Api is {'mood': ['Unknown field.']}
+2021-05-21 11:42:34,829 - DEBUG - app_logger - Validation error in put Department by Api is {'mood': ['Unknown field.']}
+2021-05-21 11:42:35,070 - DEBUG - app_logger - Validation error in post Employee by Api is {'mood': ['Unknown field.']}
+2021-05-21 11:42:35,120 - DEBUG - app_logger - Validation error in put Employee by Api is {'mood': ['Unknown field.']}
+2021-05-21 11:42:35,127 - DEBUG - app_logger - Validation error in patch Employee by Api is {'mood': ['Unknown field.']}
+2021-05-21 11:42:35,529 - DEBUG - app_logger - Value error for search Employees between dates is time data '19850722' does not match format '%Y-%m-%d'
+2021-05-21 11:42:35,658 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '1990.11.11' does not match format '%Y-%m-%d'
+2021-05-21 11:42:35,678 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '1990.11.11' does not match format '%Y-%m-%d'
+2021-05-21 11:42:35,702 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-21 11:42:35,742 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-21 11:42:35,780 - DEBUG - app_logger - Value error for insert Employee in field salary
+2021-05-21 11:42:35,800 - DEBUG - app_logger - Value error for insert Employee in field salary
+2021-05-21 11:42:35,861 - DEBUG - app_logger - Value error for update Employee in field birthday is time data '1989.06.10' does not match format '%Y-%m-%d'
+2021-05-21 11:42:35,884 - DEBUG - app_logger - Value error for update Employee in field salary
+2021-05-21 11:42:35,908 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-21 11:42:36,029 - DEBUG - app_logger - Validation error, field name must not be empty
+2021-05-21 11:42:36,352 - DEBUG - app_logger - Validation error, field name must not be empty
+2021-05-21 11:45:30,211 - DEBUG - app_logger - Validation error in post Department by Api is {'mood': ['Unknown field.']}
+2021-05-21 11:45:30,258 - DEBUG - app_logger - Validation error in put Department by Api is {'mood': ['Unknown field.']}
+2021-05-21 11:45:30,498 - DEBUG - app_logger - Validation error in post Employee by Api is {'mood': ['Unknown field.']}
+2021-05-21 11:45:30,550 - DEBUG - app_logger - Validation error in put Employee by Api is {'mood': ['Unknown field.']}
+2021-05-21 11:45:30,557 - DEBUG - app_logger - Validation error in patch Employee by Api is {'mood': ['Unknown field.']}
+2021-05-21 11:45:31,121 - DEBUG - app_logger - Value error for search Employees between dates is time data '19850722' does not match format '%Y-%m-%d'
+2021-05-21 11:45:31,247 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '1990.11.11' does not match format '%Y-%m-%d'
+2021-05-21 11:45:31,268 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '1990.11.11' does not match format '%Y-%m-%d'
+2021-05-21 11:45:31,292 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-21 11:45:31,328 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-21 11:45:31,370 - DEBUG - app_logger - Value error for insert Employee in field salary
+2021-05-21 11:45:31,391 - DEBUG - app_logger - Value error for insert Employee in field salary
+2021-05-21 11:45:31,453 - DEBUG - app_logger - Value error for update Employee in field birthday is time data '1989.06.10' does not match format '%Y-%m-%d'
+2021-05-21 11:45:31,478 - DEBUG - app_logger - Value error for update Employee in field salary
+2021-05-21 11:45:31,505 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-21 11:45:31,633 - DEBUG - app_logger - Validation error, field name must not be empty
+2021-05-21 11:45:31,741 - DEBUG - app_logger - Validation error, field name must not be empty
+2021-05-21 11:46:22,889 - DEBUG - app_logger - Validation error in post Department by Api is {'mood': ['Unknown field.']}
+2021-05-21 11:46:22,937 - DEBUG - app_logger - Validation error in put Department by Api is {'mood': ['Unknown field.']}
+2021-05-21 11:46:23,193 - DEBUG - app_logger - Validation error in post Employee by Api is {'mood': ['Unknown field.']}
+2021-05-21 11:46:23,246 - DEBUG - app_logger - Validation error in put Employee by Api is {'mood': ['Unknown field.']}
+2021-05-21 11:46:23,253 - DEBUG - app_logger - Validation error in patch Employee by Api is {'mood': ['Unknown field.']}
+2021-05-21 11:46:23,601 - DEBUG - app_logger - Value error for search Employees between dates is time data '19850722' does not match format '%Y-%m-%d'
+2021-05-21 11:46:23,731 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '1990.11.11' does not match format '%Y-%m-%d'
+2021-05-21 11:46:23,752 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '1990.11.11' does not match format '%Y-%m-%d'
+2021-05-21 11:46:23,775 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-21 11:46:23,809 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-21 11:46:23,846 - DEBUG - app_logger - Value error for insert Employee in field salary
+2021-05-21 11:46:23,869 - DEBUG - app_logger - Value error for insert Employee in field salary
+2021-05-21 11:46:23,928 - DEBUG - app_logger - Value error for update Employee in field birthday is time data '1989.06.10' does not match format '%Y-%m-%d'
+2021-05-21 11:46:23,952 - DEBUG - app_logger - Value error for update Employee in field salary
+2021-05-21 11:46:23,982 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-21 11:46:24,108 - DEBUG - app_logger - Validation error, field name must not be empty
+2021-05-21 11:46:24,228 - DEBUG - app_logger - Validation error, field name must not be empty
+2021-05-21 13:58:07,790 - DEBUG - app_logger - Validation error in post Department by Api is {'mood': ['Unknown field.']}
+2021-05-21 13:58:07,834 - DEBUG - app_logger - Validation error in put Department by Api is {'mood': ['Unknown field.']}
+2021-05-21 13:58:08,064 - DEBUG - app_logger - Validation error in post Employee by Api is {'mood': ['Unknown field.']}
+2021-05-21 13:58:08,115 - DEBUG - app_logger - Validation error in put Employee by Api is {'mood': ['Unknown field.']}
+2021-05-21 13:58:08,122 - DEBUG - app_logger - Validation error in patch Employee by Api is {'mood': ['Unknown field.']}
+2021-05-21 13:58:08,500 - DEBUG - app_logger - Value error for search Employees between dates is time data '19850722' does not match format '%Y-%m-%d'
+2021-05-21 13:58:08,630 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '1990.11.11' does not match format '%Y-%m-%d'
+2021-05-21 13:58:08,650 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '1990.11.11' does not match format '%Y-%m-%d'
+2021-05-21 13:58:08,673 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-21 13:58:08,709 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-21 13:58:08,743 - DEBUG - app_logger - Value error for insert Employee in field salary
+2021-05-21 13:58:08,763 - DEBUG - app_logger - Value error for insert Employee in field salary
+2021-05-21 13:58:08,824 - DEBUG - app_logger - Value error for update Employee in field birthday is time data '1989.06.10' does not match format '%Y-%m-%d'
+2021-05-21 13:58:08,847 - DEBUG - app_logger - Value error for update Employee in field salary
+2021-05-21 13:58:08,871 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-21 13:58:08,995 - DEBUG - app_logger - Validation error, field name must not be empty
+2021-05-21 13:58:09,329 - DEBUG - app_logger - Validation error, field name must not be empty
+2021-05-21 16:42:12,823 - DEBUG - app_logger - Validation error in post Department by Api is {'mood': ['Unknown field.']}
+2021-05-21 16:42:12,875 - DEBUG - app_logger - Validation error in put Department by Api is {'mood': ['Unknown field.']}
+2021-05-21 16:42:13,133 - DEBUG - app_logger - Validation error in post Employee by Api is {'mood': ['Unknown field.']}
+2021-05-21 16:42:13,188 - DEBUG - app_logger - Validation error in put Employee by Api is {'mood': ['Unknown field.']}
+2021-05-21 16:42:13,196 - DEBUG - app_logger - Validation error in patch Employee by Api is {'mood': ['Unknown field.']}
+2021-05-21 16:42:13,629 - DEBUG - app_logger - Value error for search Employees between dates is time data '19850722' does not match format '%Y-%m-%d'
+2021-05-21 16:42:13,773 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '1990.11.11' does not match format '%Y-%m-%d'
+2021-05-21 16:42:13,796 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '1990.11.11' does not match format '%Y-%m-%d'
+2021-05-21 16:42:13,822 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-21 16:42:13,863 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-21 16:42:13,903 - DEBUG - app_logger - Value error for insert Employee in field salary
+2021-05-21 16:42:13,927 - DEBUG - app_logger - Value error for insert Employee in field salary
+2021-05-21 16:42:13,993 - DEBUG - app_logger - Value error for update Employee in field birthday is time data '1989.06.10' does not match format '%Y-%m-%d'
+2021-05-21 16:42:14,020 - DEBUG - app_logger - Value error for update Employee in field salary
+2021-05-21 16:42:14,047 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-21 16:42:14,183 - DEBUG - app_logger - Validation error, field name must not be empty
+2021-05-21 16:42:14,530 - DEBUG - app_logger - Validation error, field name must not be empty
+2021-05-21 16:42:41,887 - DEBUG - app_logger - Validation error in post Department by Api is {'mood': ['Unknown field.']}
+2021-05-21 16:42:41,933 - DEBUG - app_logger - Validation error in put Department by Api is {'mood': ['Unknown field.']}
+2021-05-21 16:42:42,181 - DEBUG - app_logger - Validation error in post Employee by Api is {'mood': ['Unknown field.']}
+2021-05-21 16:42:42,236 - DEBUG - app_logger - Validation error in put Employee by Api is {'mood': ['Unknown field.']}
+2021-05-21 16:42:42,244 - DEBUG - app_logger - Validation error in patch Employee by Api is {'mood': ['Unknown field.']}
+2021-05-21 16:42:42,623 - DEBUG - app_logger - Value error for search Employees between dates is time data '19850722' does not match format '%Y-%m-%d'
+2021-05-21 16:42:42,755 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '1990.11.11' does not match format '%Y-%m-%d'
+2021-05-21 16:42:42,776 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '1990.11.11' does not match format '%Y-%m-%d'
+2021-05-21 16:42:42,799 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-21 16:42:42,836 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-21 16:42:42,874 - DEBUG - app_logger - Value error for insert Employee in field salary
+2021-05-21 16:42:42,895 - DEBUG - app_logger - Value error for insert Employee in field salary
+2021-05-21 16:42:42,956 - DEBUG - app_logger - Value error for update Employee in field birthday is time data '1989.06.10' does not match format '%Y-%m-%d'
+2021-05-21 16:42:42,981 - DEBUG - app_logger - Value error for update Employee in field salary
+2021-05-21 16:42:43,006 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-21 16:42:43,131 - DEBUG - app_logger - Validation error, field name must not be empty
+2021-05-21 16:42:43,473 - DEBUG - app_logger - Validation error, field name must not be empty
+2021-05-21 16:43:15,343 - DEBUG - app_logger - Validation error in post Department by Api is {'mood': ['Unknown field.']}
+2021-05-21 16:43:15,391 - DEBUG - app_logger - Validation error in put Department by Api is {'mood': ['Unknown field.']}
+2021-05-21 16:43:15,626 - DEBUG - app_logger - Validation error in post Employee by Api is {'mood': ['Unknown field.']}
+2021-05-21 16:43:15,676 - DEBUG - app_logger - Validation error in put Employee by Api is {'mood': ['Unknown field.']}
+2021-05-21 16:43:15,684 - DEBUG - app_logger - Validation error in patch Employee by Api is {'mood': ['Unknown field.']}
+2021-05-21 16:43:16,066 - DEBUG - app_logger - Value error for search Employees between dates is time data '19850722' does not match format '%Y-%m-%d'
+2021-05-21 16:43:16,196 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '1990.11.11' does not match format '%Y-%m-%d'
+2021-05-21 16:43:16,219 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '1990.11.11' does not match format '%Y-%m-%d'
+2021-05-21 16:43:16,244 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-21 16:43:16,281 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-21 16:43:16,318 - DEBUG - app_logger - Value error for insert Employee in field salary
+2021-05-21 16:43:16,339 - DEBUG - app_logger - Value error for insert Employee in field salary
+2021-05-21 16:43:16,399 - DEBUG - app_logger - Value error for update Employee in field birthday is time data '1989.06.10' does not match format '%Y-%m-%d'
+2021-05-21 16:43:16,422 - DEBUG - app_logger - Value error for update Employee in field salary
+2021-05-21 16:43:16,445 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-21 16:43:16,567 - DEBUG - app_logger - Validation error, field name must not be empty
+2021-05-21 16:43:16,894 - DEBUG - app_logger - Validation error, field name must not be empty
+2021-05-21 17:05:16,575 - DEBUG - app_logger - Validation error in post Department by Api is {'mood': ['Unknown field.']}
+2021-05-21 17:05:16,620 - DEBUG - app_logger - Validation error in put Department by Api is {'mood': ['Unknown field.']}
+2021-05-21 17:05:16,857 - DEBUG - app_logger - Validation error in post Employee by Api is {'mood': ['Unknown field.']}
+2021-05-21 17:05:16,908 - DEBUG - app_logger - Validation error in put Employee by Api is {'mood': ['Unknown field.']}
+2021-05-21 17:05:16,917 - DEBUG - app_logger - Validation error in patch Employee by Api is {'mood': ['Unknown field.']}
+2021-05-21 17:05:17,288 - DEBUG - app_logger - Value error for search Employees between dates is time data '19850722' does not match format '%Y-%m-%d'
+2021-05-21 17:05:17,425 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '1990.11.11' does not match format '%Y-%m-%d'
+2021-05-21 17:05:17,445 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '1990.11.11' does not match format '%Y-%m-%d'
+2021-05-21 17:05:17,469 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-21 17:05:17,503 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-21 17:05:17,539 - DEBUG - app_logger - Value error for insert Employee in field salary
+2021-05-21 17:05:17,559 - DEBUG - app_logger - Value error for insert Employee in field salary
+2021-05-21 17:05:17,621 - DEBUG - app_logger - Value error for update Employee in field birthday is time data '1989.06.10' does not match format '%Y-%m-%d'
+2021-05-21 17:05:17,645 - DEBUG - app_logger - Value error for update Employee in field salary
+2021-05-21 17:05:17,668 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-21 17:05:17,792 - DEBUG - app_logger - Validation error, field name must not be empty
+2021-05-21 17:05:17,800 - DEBUG - app_logger - (MySQLdb._exceptions.IntegrityError) (1062, "Duplicate entry '' for key 'name'")
+[SQL: INSERT INTO department (name) VALUES (%s)]
+[parameters: ('',)]
+(Background on this error at: http://sqlalche.me/e/14/gkpj)
+2021-05-21 17:05:17,848 - DEBUG - app_logger - Validation error, field name must not be empty
+2021-05-21 17:15:24,079 - DEBUG - app_logger - (MySQLdb._exceptions.IntegrityError) (1062, "Duplicate entry 'marketing' for key 'name'")
+[SQL: INSERT INTO department (name) VALUES (%s)]
+[parameters: ('marketing',)]
+(Background on this error at: http://sqlalche.me/e/14/gkpj)
+2021-05-21 17:17:58,343 - DEBUG - app_logger - (MySQLdb._exceptions.IntegrityError) (1062, "Duplicate entry 'marketing' for key 'name'")
+[SQL: INSERT INTO department (name) VALUES (%s)]
+[parameters: ('marketing',)]
+(Background on this error at: http://sqlalche.me/e/14/gkpj)
+2021-05-21 17:19:08,496 - DEBUG - app_logger - (MySQLdb._exceptions.IntegrityError) (1062, "Duplicate entry 'marketing' for key 'name'")
+[SQL: INSERT INTO department (name) VALUES (%s)]
+[parameters: ('marketing',)]
+(Background on this error at: http://sqlalche.me/e/14/gkpj)
+2021-05-21 17:28:33,902 - DEBUG - app_logger - Department not unique, already exists
+2021-05-21 17:29:00,480 - DEBUG - app_logger - Department not unique, already exists
+2021-05-21 17:29:23,138 - DEBUG - app_logger - Department not unique, already exists
+2021-05-21 17:30:06,819 - DEBUG - app_logger - Department not unique, already exists
+2021-05-21 17:36:53,878 - DEBUG - app_logger - Department not unique, already exists
+2021-05-21 17:37:35,084 - DEBUG - app_logger - Department not unique, already exists
+2021-05-21 17:38:36,626 - DEBUG - app_logger - Department not unique, already exists
+2021-05-21 17:40:25,889 - DEBUG - app_logger - Department not unique, already exists
+2021-05-21 17:40:49,337 - DEBUG - app_logger - Department not unique, already exists
+2021-05-21 17:42:28,617 - DEBUG - app_logger - Department not unique, already exists
+2021-05-21 17:48:23,762 - DEBUG - app_logger - Validation error in post Department by Api is {'mood': ['Unknown field.']}
+2021-05-21 17:48:23,815 - DEBUG - app_logger - Validation error in put Department by Api is {'mood': ['Unknown field.']}
+2021-05-21 17:48:24,060 - DEBUG - app_logger - Validation error in post Employee by Api is {'mood': ['Unknown field.']}
+2021-05-21 17:48:24,111 - DEBUG - app_logger - Validation error in put Employee by Api is {'mood': ['Unknown field.']}
+2021-05-21 17:48:24,118 - DEBUG - app_logger - Validation error in patch Employee by Api is {'mood': ['Unknown field.']}
+2021-05-21 17:48:24,490 - DEBUG - app_logger - Value error for search Employees between dates is time data '19850722' does not match format '%Y-%m-%d'
+2021-05-21 17:48:24,640 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '1990.11.11' does not match format '%Y-%m-%d'
+2021-05-21 17:48:24,660 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '1990.11.11' does not match format '%Y-%m-%d'
+2021-05-21 17:48:24,684 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-21 17:48:24,720 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-21 17:48:24,756 - DEBUG - app_logger - Value error for insert Employee in field salary
+2021-05-21 17:48:24,776 - DEBUG - app_logger - Value error for insert Employee in field salary
+2021-05-21 17:48:24,839 - DEBUG - app_logger - Value error for update Employee in field birthday is time data '1989.06.10' does not match format '%Y-%m-%d'
+2021-05-21 17:48:24,863 - DEBUG - app_logger - Value error for update Employee in field salary
+2021-05-21 17:48:24,886 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-21 17:48:25,011 - DEBUG - app_logger - Validation error, field name must not be empty
+2021-05-21 17:48:25,017 - DEBUG - app_logger - Department not unique, already exists
+2021-05-21 17:48:25,072 - DEBUG - app_logger - Validation error, field name must not be empty
+2021-05-21 17:56:55,018 - DEBUG - app_logger - Validation error in post Department by Api is {'mood': ['Unknown field.']}
+2021-05-21 17:56:55,025 - DEBUG - app_logger - Department not unique, already exists
+2021-05-21 17:56:55,109 - DEBUG - app_logger - Validation error in put Department by Api is {'mood': ['Unknown field.']}
+2021-05-21 17:56:55,351 - DEBUG - app_logger - Validation error in post Employee by Api is {'mood': ['Unknown field.']}
+2021-05-21 17:56:55,406 - DEBUG - app_logger - Validation error in put Employee by Api is {'mood': ['Unknown field.']}
+2021-05-21 17:56:55,413 - DEBUG - app_logger - Validation error in patch Employee by Api is {'mood': ['Unknown field.']}
+2021-05-21 17:56:55,756 - DEBUG - app_logger - Value error for search Employees between dates is time data '19850722' does not match format '%Y-%m-%d'
+2021-05-21 17:56:55,885 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '1990.11.11' does not match format '%Y-%m-%d'
+2021-05-21 17:56:55,906 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '1990.11.11' does not match format '%Y-%m-%d'
+2021-05-21 17:56:55,931 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-21 17:56:55,967 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-21 17:56:56,003 - DEBUG - app_logger - Value error for insert Employee in field salary
+2021-05-21 17:56:56,025 - DEBUG - app_logger - Value error for insert Employee in field salary
+2021-05-21 17:56:56,086 - DEBUG - app_logger - Value error for update Employee in field birthday is time data '1989.06.10' does not match format '%Y-%m-%d'
+2021-05-21 17:56:56,111 - DEBUG - app_logger - Value error for update Employee in field salary
+2021-05-21 17:56:56,135 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-21 17:56:56,260 - DEBUG - app_logger - Validation error, field name must not be empty
+2021-05-21 17:56:56,267 - DEBUG - app_logger - Department not unique, already exists
+2021-05-21 17:56:56,314 - DEBUG - app_logger - Validation error, field name must not be empty
+2021-05-21 22:31:46,296 - DEBUG - app_logger - Validation error in post Department by Api is {'mood': ['Unknown field.']}
+2021-05-21 22:31:46,302 - DEBUG - app_logger - Department not unique, already exists
+2021-05-21 22:31:46,354 - DEBUG - app_logger - Validation error in put Department by Api is {'mood': ['Unknown field.']}
+2021-05-21 22:31:46,740 - DEBUG - app_logger - Validation error in post Employee by Api is {'mood': ['Unknown field.']}
+2021-05-21 22:31:46,802 - DEBUG - app_logger - Validation error in put Employee by Api is {'mood': ['Unknown field.']}
+2021-05-21 22:31:46,810 - DEBUG - app_logger - Validation error in patch Employee by Api is {'mood': ['Unknown field.']}
+2021-05-21 22:31:47,692 - DEBUG - app_logger - Value error for search Employees between dates is time data '19850722' does not match format '%Y-%m-%d'
+2021-05-21 22:31:48,285 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '1990.11.11' does not match format '%Y-%m-%d'
+2021-05-21 22:31:48,417 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '1990.11.11' does not match format '%Y-%m-%d'
+2021-05-21 22:31:48,559 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-21 22:31:48,711 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-21 22:31:48,859 - DEBUG - app_logger - Value error for insert Employee in field salary
+2021-05-21 22:31:48,992 - DEBUG - app_logger - Value error for insert Employee in field salary
+2021-05-21 22:31:49,281 - DEBUG - app_logger - Value error for update Employee in field birthday is time data '1989.06.10' does not match format '%Y-%m-%d'
+2021-05-21 22:31:49,418 - DEBUG - app_logger - Value error for update Employee in field salary
+2021-05-21 22:31:49,560 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-21 22:31:49,908 - DEBUG - app_logger - Validation error, field name must not be empty
+2021-05-21 22:31:49,915 - DEBUG - app_logger - Department not unique, already exists
+2021-05-21 22:31:49,966 - DEBUG - app_logger - Validation error, field name must not be empty
