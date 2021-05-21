@@ -7,7 +7,7 @@ import requests
 
 from flask import render_template, request, flash, url_for, redirect
 
-from src import app, db
+from src import app, db, logger
 
 from src.models.my_models import Department, Employee
 from src.service.service import DepartmentService
@@ -16,7 +16,15 @@ from src.service.service import DepartmentService
 @app.route('/', methods=['GET'])
 def index():
     if request.args.get('date_picker1') and request.args.get('date_picker2'):
-        my_data = dict(date1=request.args.get('date_picker1'), date2=request.args.get('date_picker2'))
+        try:
+            date1 = datetime.strptime(request.args.get('date_picker1'), '%Y-%m-%d')
+            date2 = datetime.strptime(request.args.get('date_picker2'), '%Y-%m-%d')
+        except ValueError as e:
+            logger.debug(f"Value error for search Employees between dates is {e}")
+            flash(f"{e}")
+            return redirect(url_for('index'))
+
+        my_data = dict(date1=date1, date2=date2)
         url = request.host_url + 'json/employees'
         all_employees = requests.get(url, params=my_data, verify=False).json()
     else:
@@ -28,9 +36,21 @@ def index():
 def insert():
     if request.method == 'POST':
         name = request.form['name']
-        birthday = str(datetime.strptime(request.form['birthday'], '%Y-%m-%d').date())
+        try:
+            birthday = str(datetime.strptime(request.form['birthday'], '%Y-%m-%d').date())
+        except ValueError as e:
+            logger.debug(f"Value error for insert Employee in field birthday is {e}")
+            flash(f"{e}")
+            return redirect(url_for('index'))
         salary = request.form['salary']
+        if not salary.isdigit():
+            logger.debug("Value error for insert Employee in field salary")
+            flash("Value error for insert Employee in field salary")
+            return redirect(url_for('index'))
         dep = request.form['dep']
+        if not all([name, dep]):
+            logger.debug("Validation error, fields name or department are empty")
+            flash("Validation error, fields name or department are empty")
         my_data = json.dumps(dict(name=name, birthday=birthday, salary=salary, dep=dep))
 
         headers = {'Content-type': 'application/json'}
@@ -45,9 +65,21 @@ def insert():
 def update(id):
     if request.method == 'POST':
         name = request.form['name']
-        birthday = request.form['birthday']
+        try:
+            birthday = str(datetime.strptime(request.form['birthday'], '%Y-%m-%d').date())
+        except ValueError as e:
+            logger.debug(f"Value error for update Employee in field birthday is {e}")
+            flash(f"{e}")
+            return redirect(url_for('index'))
         salary = request.form['salary']
+        if not salary.isdigit():
+            logger.debug("Value error for update Employee in field salary")
+            flash("Value error for update Employee in field salary")
+            return redirect(url_for('index'))
         dep = request.form['dep']
+        if not all([name, dep]):
+            logger.debug("Validation error, fields name or department are empty")
+            flash("Validation error, fields name or department are empty")
 
         my_data = json.dumps(dict(id=id, name=name, birthday=birthday, salary=salary, dep=dep))
 
@@ -85,6 +117,9 @@ def departments():
 def department_insert():
     if request.method == 'POST':
         name = request.form['name']
+        if not name:
+            logger.debug("Validation error, field name must not be empty")
+            flash("Validation error, field name must not be empty")
 
         my_data = json.dumps(dict(name=name))
 
@@ -100,6 +135,9 @@ def department_insert():
 def department_update(id):
     if request.method == 'POST':
         name = request.form['name']
+        if not name:
+            logger.debug("Validation error, field name must not be empty")
+            flash("Validation error, field name must not be empty")
 
         my_data = json.dumps(dict(id=id, name=name))
 

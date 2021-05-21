@@ -8,7 +8,7 @@
         <div class="jumbotron p-3">
             <h6><b>Table Departments</b>
                 <button class="btn btn-success float-end" data-bs-target="#mymodal"
-                        data-bs-toggle="modal" type="button">Add New Employees
+                        data-bs-toggle="modal" type="button">Add New Department
                 </button>
             </h6>
             <br>
@@ -59,7 +59,7 @@
                                     <div class="form-group">
                                         <label>Name:</label>
                                         <input type="hidden" name="id" value="{{row.id}}">
-                                        <input type="text" class="form-control" name="name" value="{{row.name}}">
+                                        <input type="text" class="form-control" name="name" value="{{row.name}}" required="1">
                                     </div>
 
                                     <div class="form-group">

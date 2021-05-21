@@ -1,8 +1,10 @@
+import logging
+
 from flask import request
 from flask_restful import Resource
 from marshmallow import ValidationError
 
-from src import db, api
+from src import db, api, app, logger
 from src.rest.schemas import EmployeeSchema, DepartmentSchema, DepartmentSchema_Without_Id, \
     DepartmentSchemaWithAVG, EmployeeSchemaWithDep
 from src.service.service import EmployeeService, DepartmentService
@@ -45,6 +47,7 @@ class EmployeeListApi(Resource):
         try:
             employee = self.employee_schema.load(rq, session=db.session)
         except ValidationError as e:
+            logger.debug(f"Validation error in post Employee by Api is {e}")
             return {'message': str(e)}, 400
 
         db.session.add(employee)
@@ -67,6 +70,7 @@ class EmployeeListApi(Resource):
         try:
             employee = self.employee_schema.load(request.json, instance=employee, session=db.session)
         except ValidationError as e:
+            logger.debug(f"Validation error in put Employee by Api is {e}")
             return {'message': str(e)}, 400
         db.session.add(employee)
         db.session.commit()
@@ -89,6 +93,7 @@ class EmployeeListApi(Resource):
             employee = self.employee_schema.load(rq, instance=employee, session=db.session,
                                                  partial=True)
         except ValidationError as e:
+            logger.debug(f"Validation error in patch Employee by Api is {e}")
             return {'Message': f'error: {e}'}, 400
         db.session.add(employee)
         db.session.commit()
@@ -121,6 +126,7 @@ class DepartmentListApi(Resource):
         try:
             department = self.department_schema.load(request.json, session=db.session)
         except ValidationError as e:
+            logger.debug(f"Validation error in post Department by Api is {e}")
             return {'message': str(e)}, 400
         db.session.add(department)
         db.session.commit()
@@ -133,6 +139,7 @@ class DepartmentListApi(Resource):
         try:
             department = self.department_schema.load(request.json, instance=department, session=db.session)
         except ValidationError as e:
+            logger.debug(f"Validation error in put Department by Api is {e}")
             return {'message': str(e)}, 400
         db.session.add(department)
         db.session.commit()
@@ -146,6 +153,7 @@ class DepartmentListApi(Resource):
             department = self.department_schema.load(request.json, instance=department, session=db.session,
                                                      partial=True)
         except ValidationError as e:
+            app.logger.debug(f"Validation error in patch Department by Api is {e}")
             return {'Message': f'error: {e}'}, 400
         db.session.add(department)
         db.session.commit()

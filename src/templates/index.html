@@ -19,7 +19,7 @@
                 <input type="date" id="start2" name="date_picker2" value="1995-07-22">
                 <button type="submit" class="btn btn-primary mb-6">Choose</button>
                 <button class="btn btn-success float-end" data-bs-target="#mymodal"
-                        data-bs-toggle="modal" type="button">Add New Employees
+                        data-bs-toggle="modal" type="button">Add New Employee
                 </button>
                 </form>
 
@@ -75,20 +75,20 @@
                 <div class="form-group">
                    <label>Name:</label>
                    <input type="hidden"  name="id" value="{{row.id}}">
-                   <input type="text" class="form-control" name="name" value="{{row.name}}">
+                   <input type="text" class="form-control" name="name" value="{{row.name}}" required="1">
                 </div>
                  <div class="form-group">
                    <label>Birthday:</label>
-                   <input type="text" class="form-control" name="birthday" value="{{row.birthday}}">
+                   <input type="date" class="form-control" name="birthday" value="{{row.birthday}}">
                 </div>
                 <div class="form-group">
                    <label>Salary:</label>
-                   <input type="text" class="form-control" name="salary" value="{{row.salary}}">
+                   <input type="number" pattern="^[0-9]+$" min="0" placeholder="Please enter positive number" class="form-control" name="salary" value="{{row.salary}}" required="1">
                 </div>
                 <div class="form-group">
                    <label>Department:</label>
                     <input type="hidden"  name="department_id" value="{{row.department_id}}">
-                  <input type="text" class="form-control" name="dep" value="{{row.dep}}">
+                  <input type="text" class="form-control" name="dep" value="{{row.dep}}" required="1">
                 </div>
                 <div class="form-group">
                    <button class="btn btn-primary" type="submit">Update</button>
@@ -122,13 +122,13 @@
                             <div class="form-group">
 
                                 <label>Birthday:</label>
-                                <input type="text" class="form-control" name="birthday" required="1">
+                                <input type="date" class="form-control" name="birthday" required="1">
 
                             </div>
                             <div class="form-group">
 
                                 <label>Salary:</label>
-                                <input type="text" class="form-control" name="salary" required="1">
+                                <input type="number" value="0" pattern="^[0-9]+$" min="0" placeholder="Please enter positive number" class="form-control" name="salary" required="1">
 
                             </div>
                             <div class="form-group">

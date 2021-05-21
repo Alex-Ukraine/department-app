@@ -59,8 +59,19 @@ class TestViews:
                 app.test_client() as client:
             params = '?date_picker1=1985-07-22&date_picker2=1992-07-22'
             url = request.host_url[:-1] + ':5000/' + params
-            resp = client.get(url)
+            resp = client.get(url, follow_redirects=True)
 
+        assert resp.status_code == http.HTTPStatus.OK
+
+    def test_get_view_employees_with_db_between_dates_bad_data(self):
+        with app.test_request_context('/'), \
+                app.test_client() as client:
+            params = '?date_picker1=19850722&date_picker2=19920722'
+            url = request.host_url[:-1] + ':5000/' + params
+            resp = client.get(url, follow_redirects=True)
+            message = get_flashed_messages()
+
+        assert message[0] == "time data '19850722' does not match format '%Y-%m-%d'"
         assert resp.status_code == http.HTTPStatus.OK
 
     def test_post_view_employee_with_db(self):
@@ -81,6 +92,57 @@ class TestViews:
         assert message[0] == "Employee Inserted Successfully"
         assert resp.status_code == http.HTTPStatus.OK
 
+    def test_post_view_employee_with_db_data_not_valid(self):
+        data = {
+            "name": "Fake Employee",
+            "birthday": "1990.11.11",
+            "salary": 789,
+            "dep": "some_department"
+        }
+        with app.test_request_context('/'), \
+                app.test_client() as client:
+            url = request.host_url[:-1] + ':5000/' + 'insert'
+            client.post(url, data=data, follow_redirects=True)
+            resp = client.post(url, data=data, follow_redirects=True)
+            message = get_flashed_messages()
+
+        assert message[0] == "time data '1990.11.11' does not match format '%Y-%m-%d'"
+        assert resp.status_code == http.HTTPStatus.OK
+
+    def test_post_view_employee_with_db_fields_empty(self):
+        data = {
+            "name": "",
+            "birthday": "1990-11-11",
+            "salary": 789,
+            "dep": " "
+        }
+        with app.test_request_context('/'), \
+                app.test_client() as client:
+            url = request.host_url[:-1] + ':5000/' + 'insert'
+            client.post(url, data=data, follow_redirects=True)
+            resp = client.post(url, data=data, follow_redirects=True)
+            message = get_flashed_messages()
+
+        assert message[0] == "Validation error, fields name or department are empty"
+        assert resp.status_code == http.HTTPStatus.OK
+
+    def test_post_view_employee_with_db_salary_not_valid(self):
+        data = {
+            "name": "Fake Employee",
+            "birthday": "1990-11-11",
+            "salary": "wer122",
+            "dep": "some_department"
+        }
+        with app.test_request_context('/'), \
+                app.test_client() as client:
+            url = request.host_url[:-1] + ':5000/' + 'insert'
+            client.post(url, data=data, follow_redirects=True)
+            resp = client.post(url, data=data, follow_redirects=True)
+            message = get_flashed_messages()
+
+        assert message[0] == "Value error for insert Employee in field salary"
+        assert resp.status_code == http.HTTPStatus.OK
+
     def test_patch_view_employee_with_db(self):
         data = {
             "name": "Fake Employee",
@@ -96,6 +158,57 @@ class TestViews:
             message = get_flashed_messages()
 
         assert message[0] == "Employee Updated Successfully"
+        assert resp.status_code == http.HTTPStatus.OK
+
+    def test_patch_view_employee_with_db_date_no_valid(self):
+        data = {
+            "name": "Fake Employee",
+            "birthday": "1989.06.10",
+            "salary": 785,
+            "dep": "some_department"
+        }
+        with app.test_request_context('/'), \
+                app.test_client() as client:
+            url = request.host_url[:-1] + ':5000/' + f'update/{TestViews.temp_id_emp}'
+
+            resp = client.post(url, data=data, follow_redirects=True)
+            message = get_flashed_messages()
+
+        assert message[0] == "time data '1989.06.10' does not match format '%Y-%m-%d'"
+        assert resp.status_code == http.HTTPStatus.OK
+
+    def test_patch_view_employee_with_db_salary_not_valid(self):
+        data = {
+            "name": "Fake Employee",
+            "birthday": "1989-06-10",
+            "salary": 'ert',
+            "dep": "some_department"
+        }
+        with app.test_request_context('/'), \
+                app.test_client() as client:
+            url = request.host_url[:-1] + ':5000/' + f'update/{TestViews.temp_id_emp}'
+
+            resp = client.post(url, data=data, follow_redirects=True)
+            message = get_flashed_messages()
+
+        assert message[0] == "Value error for update Employee in field salary"
+        assert resp.status_code == http.HTTPStatus.OK
+
+    def test_patch_view_employee_with_db_fields_are_empty(self):
+        data = {
+            "name": " ",
+            "birthday": "1989-06-10",
+            "salary": '123',
+            "dep": ""
+        }
+        with app.test_request_context('/'), \
+                app.test_client() as client:
+            url = request.host_url[:-1] + ':5000/' + f'update/{TestViews.temp_id_emp}'
+
+            resp = client.post(url, data=data, follow_redirects=True)
+            message = get_flashed_messages()
+
+        assert message[0] == "Validation error, fields name or department are empty"
         assert resp.status_code == http.HTTPStatus.OK
 
     def test_delete_view_employee_with_db(self):
@@ -129,6 +242,19 @@ class TestViews:
         assert message[0] == "Department Inserted Successfully"
         assert resp.status_code == http.HTTPStatus.OK
 
+    def test_post_view_department_with_db_empty_field(self):
+        data = {
+            "name": ""
+        }
+        with app.test_request_context('/'), \
+                app.test_client() as client:
+            url = request.host_url[:-1] + ':5000/' + 'departments/' + 'insert'
+            resp = client.post(url, data=data, follow_redirects=True)
+            message = get_flashed_messages()
+
+        assert message[0] == "Validation error, field name must not be empty"
+        assert resp.status_code == http.HTTPStatus.OK
+
     def test_patch_view_department_with_db(self):
         data = {
             "name": "New Department"
@@ -141,6 +267,20 @@ class TestViews:
             message = get_flashed_messages()
 
         assert message[0] == "Department Updated Successfully"
+        assert resp.status_code == http.HTTPStatus.OK
+
+    def test_patch_view_department_with_db_empty_field(self):
+        data = {
+            "name": ""
+        }
+        with app.test_request_context('/'), \
+                app.test_client() as client:
+            url = request.host_url[:-1] + ':5000/' + 'departments/' + f'update/{TestViews.temp_id_dep}'
+
+            resp = client.post(url, data=data, follow_redirects=True)
+            message = get_flashed_messages()
+
+        assert message[0] == "Validation error, field name must not be empty"
         assert resp.status_code == http.HTTPStatus.OK
 
     def test_delete_view_department_with_db(self):
