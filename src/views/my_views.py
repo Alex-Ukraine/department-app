@@ -86,8 +86,8 @@ def update(id):
             return redirect(url_for('index'))
         dep = request.form['dep']
         if not all([name, dep]):
-            logger.debug("Validation error, fields name or department are empty", "danger")
-            flash("Validation error, fields name or department are empty")
+            logger.debug("Validation error, fields name or department are empty")
+            flash("Validation error, fields name or department are empty", "danger")
 
         my_data = json.dumps(dict(id=id, name=name, birthday=birthday, salary=salary, dep=dep))
 
