@@ -147,7 +147,7 @@ class DepartmentListApi(Resource):
             return {'message': str(e)}, 400
         if DepartmentService.fetch_department_by_name(db.session, department.name):
             logger.debug('Department not unique, already exists')
-            return {'message': 'Department not unique, already exists'}, 400
+            return {'message': 'Department not unique, already exists'}, 409
         db.session.add(department)
         db.session.commit()
 

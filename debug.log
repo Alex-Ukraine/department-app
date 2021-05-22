@@ -504,3 +504,18 @@
 2021-05-21 22:31:49,908 - DEBUG - app_logger - Validation error, field name must not be empty
 2021-05-21 22:31:49,915 - DEBUG - app_logger - Department not unique, already exists
 2021-05-21 22:31:49,966 - DEBUG - app_logger - Validation error, field name must not be empty
+2021-05-22 19:42:44,548 - DEBUG - app_logger - Value error for search Employees between dates is time data '191911-07-22' does not match format '%Y-%m-%d'
+2021-05-22 19:42:54,906 - DEBUG - app_logger - Value error for search Employees between dates is time data '222222-02-22' does not match format '%Y-%m-%d'
+2021-05-22 19:43:11,610 - DEBUG - app_logger - Value error for search Employees between dates is time data '222222-07-22' does not match format '%Y-%m-%d'
+2021-05-22 19:43:25,953 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '222222-02-22' does not match format '%Y-%m-%d'
+2021-05-22 19:43:51,041 - DEBUG - app_logger - Value error for search Employees between dates is time data '275760-07-22' does not match format '%Y-%m-%d'
+2021-05-22 19:44:08,002 - DEBUG - app_logger - Value error for search Employees between dates is time data '275760-07-22' does not match format '%Y-%m-%d'
+2021-05-22 19:56:47,147 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '111111-11-11' does not match format '%Y-%m-%d'
+2021-05-22 19:57:26,300 - DEBUG - app_logger - Value error for update Employee in field birthday is time data '111111-07-31' does not match format '%Y-%m-%d'
+2021-05-22 19:57:34,394 - DEBUG - app_logger - Value error for update Employee in field birthday is time data '111111-05-25' does not match format '%Y-%m-%d'
+2021-05-22 20:06:05,289 - DEBUG - app_logger - Value error for update Employee in field birthday is time data '111111-05-25' does not match format '%Y-%m-%d'
+2021-05-22 20:07:29,635 - DEBUG - app_logger - Value error for update Employee in field birthday is time data '111111-05-25' does not match format '%Y-%m-%d'
+2021-05-22 20:07:37,598 - DEBUG - app_logger - Value error for search Employees between dates is time data '111111-07-22' does not match format '%Y-%m-%d'
+2021-05-22 20:08:30,990 - DEBUG - app_logger - Department not unique, already exists
+2021-05-22 20:11:20,753 - DEBUG - app_logger - Department not unique, already exists
+2021-05-22 20:17:03,041 - DEBUG - app_logger - Value error for search Employees between dates is time data '275760-07-22' does not match format '%Y-%m-%d'

@@ -23,14 +23,14 @@ def index():
             date2 = datetime.strptime(request.args.get('date_picker2'), '%Y-%m-%d').date()
         except ValueError as e:
             logger.debug(f"Value error for search Employees between dates is {e}")
-            flash(f"{e}")
+            flash(f"{e}", "danger")
             return redirect(url_for('index'))
 
         my_data = dict(date1=date1, date2=date2)
         url = request.host_url + 'json/employees'
         all_employees = requests.get(url, params=my_data, verify=False)
         if all_employees.status_code == 200:
-            flash(f"Employees successfully searched between dates {date1} and {date2}")
+            flash(f"Employees successfully searched between dates {date1} and {date2}", "success")
     else:
         all_employees = requests.get(request.host_url + 'json/employees')
     return render_template("index.html", employee=all_employees.json(), verify=False)
@@ -46,24 +46,24 @@ def insert():
             birthday = str(datetime.strptime(request.form['birthday'], '%Y-%m-%d').date())
         except ValueError as e:
             logger.debug(f"Value error for insert Employee in field birthday is {e}")
-            flash(f"{e}")
+            flash(f"{e}", "danger")
             return redirect(url_for('index'))
         salary = request.form['salary']
         if not salary.isdigit():
             logger.debug("Value error for insert Employee in field salary")
-            flash("Value error for insert Employee in field salary")
+            flash("Value error for insert Employee in field salary", "danger")
             return redirect(url_for('index'))
         dep = request.form['dep']
         if not all([name, dep]):
             logger.debug("Validation error, fields name or department are empty")
-            flash("Validation error, fields name or department are empty")
+            flash("Validation error, fields name or department are empty", "danger")
         my_data = json.dumps(dict(name=name, birthday=birthday, salary=salary, dep=dep))
 
         headers = {'Content-type': 'application/json'}
         url = request.host_url + 'json/employees'
         rq = requests.post(url, headers=headers, data=my_data, verify=False)
         if rq.status_code == 201:
-            flash("Employee Inserted Successfully")
+            flash("Employee Inserted Successfully", "success")
         return redirect(url_for('index'))
 
 
@@ -77,16 +77,16 @@ def update(id):
             birthday = str(datetime.strptime(request.form['birthday'], '%Y-%m-%d').date())
         except ValueError as e:
             logger.debug(f"Value error for update Employee in field birthday is {e}")
-            flash(f"{e}")
+            flash(f"{e}", "danger")
             return redirect(url_for('index'))
         salary = request.form['salary']
         if not salary.isdigit():
             logger.debug("Value error for update Employee in field salary")
-            flash("Value error for update Employee in field salary")
+            flash("Value error for update Employee in field salary", "danger")
             return redirect(url_for('index'))
         dep = request.form['dep']
         if not all([name, dep]):
-            logger.debug("Validation error, fields name or department are empty")
+            logger.debug("Validation error, fields name or department are empty", "danger")
             flash("Validation error, fields name or department are empty")
 
         my_data = json.dumps(dict(id=id, name=name, birthday=birthday, salary=salary, dep=dep))
@@ -95,7 +95,7 @@ def update(id):
         url = request.host_url + 'json/employees/' + str(id)
         rq = requests.patch(url, headers=headers, data=my_data, verify=False)
         if rq.status_code == 200:
-            flash("Employee Updated Successfully")
+            flash("Employee Updated Successfully", "success")
 
         return redirect(url_for('index'))
 
@@ -108,7 +108,7 @@ def delete(id):
     rq = requests.delete(url, verify=False)
 
     if rq.status_code == 204:
-        flash("Employee Deleted Successfully")
+        flash("Employee Deleted Successfully", "success")
 
     return redirect(url_for('index'))
 
@@ -132,17 +132,17 @@ def department_insert():
         name = request.form['name']
         if not name:
             logger.debug("Validation error, field name must not be empty")
-            flash("Validation error, field name must not be empty")
+            flash("Validation error, field name must not be empty", "danger")
 
         my_data = json.dumps(dict(name=name))
 
         headers = {'Content-type': 'application/json'}
         url = request.host_url + 'json/departments'
         rq = requests.post(url, headers=headers, data=my_data, verify=False)
-        if rq.status_code == 400:
+        if rq.status_code == 409:
             flash(rq.json()['message'], 'danger')
         if rq.status_code == 201:
-            flash("Department Inserted Successfully")
+            flash("Department Inserted Successfully", "success")
         return redirect(url_for('departments'))
 
 
@@ -154,7 +154,7 @@ def department_update(id):
         name = request.form['name']
         if not name:
             logger.debug("Validation error, field name must not be empty")
-            flash("Validation error, field name must not be empty")
+            flash("Validation error, field name must not be empty", "danger")
 
         my_data = json.dumps(dict(id=id, name=name))
 
@@ -162,7 +162,7 @@ def department_update(id):
         url = request.host_url + 'json/departments/' + str(id)
         rq = requests.patch(url, headers=headers, data=my_data, verify=False)
         if rq.status_code == 200:
-            flash("Department Updated Successfully")
+            flash("Department Updated Successfully", "success")
         return redirect(url_for('departments'))
 
 
@@ -173,7 +173,7 @@ def department_delete(id):
     url = request.host_url + 'json/departments/' + str(id)
     rq = requests.delete(url)
     if rq.status_code == 204:
-        flash("Department Deleted Successfully")
+        flash("Department Deleted Successfully", "success")
 
     return redirect(url_for('departments'))
 
@@ -184,7 +184,7 @@ def populate_db(id):
     After this request DB will be updated with new records"""
     if request.method == 'GET':
         if id > 1000:
-            flash(f"DB not populated by {id} records, please request less 1000 records")
+            flash(f"DB not populated by {id} records, please request less 1000 records", "danger")
             return redirect(url_for('index'))
 
         fake = Faker()
@@ -208,7 +208,7 @@ def populate_db(id):
                                 salary=data["salary"], department_id=department.id)
             db.session.add(employee)
         db.session.commit()
-        flash(f"DB successfully populated by {id} records")
+        flash(f"DB successfully populated by {id} records", "success")
         return redirect(url_for('index'))
 
 
@@ -218,5 +218,5 @@ def drop_db():
     if request.method == 'GET':
         db.drop_all()
         db.create_all()
-        flash('DB successfully dropped')
+        flash('DB successfully dropped', "success")
     return redirect(url_for('index'))
