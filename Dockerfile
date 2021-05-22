@@ -1,7 +1,7 @@
 FROM python:3.8
 
 RUN useradd --create-home wincity18
-WORKDIR /itvdn_flask_app
+WORKDIR /department-app
 
 COPY requirements.txt .
 RUN pip install -r requirements.txt
