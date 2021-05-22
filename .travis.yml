@@ -10,3 +10,4 @@ before_install:
 script:
   - python -m pytest tests/
   - coverage run --source="src/" -m pytest
+  - pycodestyle src/ --ignore=E722,E501,E402
