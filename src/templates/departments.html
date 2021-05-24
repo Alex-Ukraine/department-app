@@ -32,13 +32,15 @@
                     <th>ID</th>
                     <th>Name</th>
                     <th>Average Salary</th>
+                    <th>Number of employees</th>
                     <th>Action</th>
                 </tr>
                 {% for row in departments %}
                 <tr>
                     <td>{{row.id}}</td>
                     <td>{{row.name}}</td>
-                    <td>{{row.avg}}</td>
+                    <td>{{row.avg|round(2, 'common')}}</td>
+                    <td>{{row.count|int}}</td>
                     <td>
                         <a href="/departments/update/{{row.id}}" class="btn btn-warning vtn-xs" data-bs-toggle="modal"
                            data-bs-target="#modaledit{{row.id}}">Edit</a>

@@ -42,9 +42,10 @@ Activate this enviroment:
 >> env/Scripts/activate
 
 Install all dependencies:
+> for ubuntu: sudo apt-get install python3-dev default-libmysqlclient-dev build-essential
 > pip install -r requirements.txt
 
-Than you need assing you app to Flask with command:
+Then you need set your app to Flask with command:
 
 >On Linux/Mac
 >> set FLASK_APP=wsgi.py
@@ -52,7 +53,7 @@ Than you need assing you app to Flask with command:
 >On Windows
 >> set FLASK_APP=wsgi.py
 
-Than run migrations:
+Then run migrations:
 
 > flask db upgrade
 
