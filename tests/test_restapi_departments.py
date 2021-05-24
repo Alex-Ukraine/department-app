@@ -85,16 +85,6 @@ class TestRestDepartments:
             mock_session_add.assert_called_once()
             mock_session_commit.assert_called_once()
 
-    def test_update_department_with_db(self):
-        client = app.test_client()
-        url = f"/json/departments/{self.id[0]}"
-        data = {
-            "name": "Update Name"
-        }
-        resp = client.put(url, data=json.dumps(data), content_type='application/json')
-        assert resp.status_code == http.HTTPStatus.OK
-        assert resp.json["name"] == 'Update Name'
-
     def test_put_department_with_db(self):
         client = app.test_client()
         url = f"/json/departments/{self.id[0]}"
