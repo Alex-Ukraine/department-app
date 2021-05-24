@@ -20,7 +20,7 @@ class TestRestEmployees:
 
     def test_populate_db(self):
         client = app.test_client()
-        client.get('/populate/20')
+        client.get('/populate2/20')
 
     def test_get_employees_with_db(self):
         client = app.test_client()

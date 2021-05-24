@@ -18,7 +18,8 @@ logger_config = {
             'class': 'logging.FileHandler',
             'level': 'DEBUG',
             'formatter': 'std_format',
-            'filename': 'debug.log'
+            'filename': 'debug.log',
+            'mode': 'w'
         }
     },
     'loggers': {

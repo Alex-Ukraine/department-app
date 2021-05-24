@@ -1,8 +1,10 @@
 from flask import request
 from flask_restful import Resource
 from marshmallow import ValidationError
+from sqlalchemy.orm import selectinload
 
 from src import db, api, app, logger
+from src.models.my_models import Department
 from src.rest.schemas import EmployeeSchema, DepartmentSchema
 from src.service.service import EmployeeService, DepartmentService
 
@@ -176,9 +178,9 @@ class DepartmentListApi(Resource):
                     x.department_id = department2.id
                     logger.debug(x)
                     db.session.add(x)
-                db.session.delete(department)
-                db.session.commit()
-                return self.department_schema.dump(department2), 200
+            db.session.delete(department)
+            db.session.commit()
+            return self.department_schema.dump(department2), 200
         try:
             department = self.department_schema.load(request.json, instance=department, session=db.session)
         except ValidationError as e:
