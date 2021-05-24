@@ -10,13 +10,6 @@ class EmployeeSchema(SQLAlchemyAutoSchema):
         load_instance = True
         include_fk = True
 
-
-class EmployeeSchemaWithDep(SQLAlchemyAutoSchema):
-    class Meta:
-        model = Employee
-        load_instance = True
-        include_fk = True
-
     dep = fields.String(required=False)
 
 
@@ -26,19 +19,5 @@ class DepartmentSchema(SQLAlchemyAutoSchema):
         load_instance = True
         include_fk = True
 
-
-class DepartmentSchema_Without_Id(SQLAlchemyAutoSchema):
-    class Meta:
-        model = Department
-        load_instance = True
-        include_fk = True
-        exclude = ['id']
-
-
-class DepartmentSchemaWithAVG(SQLAlchemyAutoSchema):
-    class Meta:
-        model = Department
-        load_instance = True
-        include_fk = True
-
     avg = fields.Float(required=True, default=0)
+    count = fields.Float(required=True, default=0)

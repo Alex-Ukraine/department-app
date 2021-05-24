@@ -4,7 +4,8 @@ from dataclasses import dataclass
 import random
 from unittest.mock import patch
 
-from src import app
+from src import app, db
+from src.models.my_models import Department
 
 
 @dataclass
@@ -90,7 +91,7 @@ class TestRestDepartments:
         data = {
             "name": "Update Name"
         }
-        resp = client.patch(url, data=json.dumps(data), content_type='application/json')
+        resp = client.put(url, data=json.dumps(data), content_type='application/json')
         assert resp.status_code == http.HTTPStatus.OK
         assert resp.json["name"] == 'Update Name'
 
@@ -101,6 +102,26 @@ class TestRestDepartments:
             "name": "Update Name"
         }
         resp = client.put(url, data=json.dumps(data), content_type='application/json')
+        assert resp.status_code == http.HTTPStatus.OK
+        assert resp.json["name"] == 'Update Name'
+
+    def test_put_department_with_db_name_already_exists(self):
+        client = app.test_client()
+
+        data1 = {
+            "name": "Fake Employee",
+            "birthday": "1990-03-05",
+            "salary": 1000,
+            "dep": "frontend123"
+        }
+        client.post('/json/employees', data=json.dumps(data1), content_type='application/json')
+        client.post('/json/employees', data=json.dumps(data1), content_type='application/json')
+
+        url = f"/json/departments/{db.session.query(Department).all()[-1].id}"
+        data2 = {
+            "name": "Update Name"
+        }
+        resp = client.put(url, data=json.dumps(data2), content_type='application/json')
         assert resp.status_code == http.HTTPStatus.OK
         assert resp.json["name"] == 'Update Name'
 
@@ -119,7 +140,7 @@ class TestRestDepartments:
         data = {
             "name": "Update Name"
         }
-        resp = client.patch(url, data=json.dumps(data), content_type='application/json')
+        resp = client.put(url, data=json.dumps(data), content_type='application/json')
         assert resp.status_code == http.HTTPStatus.NOT_FOUND
 
     def test_put_department_with_db_validation_error_400(self):
@@ -139,7 +160,7 @@ class TestRestDepartments:
             "name": "Update Name",
             "mood": "uneasy"
         }
-        resp = client.patch(url, data=json.dumps(data), content_type='application/json')
+        resp = client.put(url, data=json.dumps(data), content_type='application/json')
         assert resp.status_code == http.HTTPStatus.BAD_REQUEST
 
     def test_update_department_with_mock_db(self):
@@ -152,7 +173,7 @@ class TestRestDepartments:
             data = {
                 "name": "Update Name"
             }
-            resp = client.patch(url, data=json.dumps(data), content_type='application/json')
+            resp = client.put(url, data=json.dumps(data), content_type='application/json')
             mock_session_add.assert_called_once()
             mock_session_commit.assert_called_once()
 

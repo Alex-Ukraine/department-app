@@ -3,15 +3,14 @@ from flask_restful import Resource
 from marshmallow import ValidationError
 
 from src import db, api, app, logger
-from src.rest.schemas import EmployeeSchema, DepartmentSchema, DepartmentSchema_Without_Id, \
-    DepartmentSchemaWithAVG, EmployeeSchemaWithDep
+from src.rest.schemas import EmployeeSchema, DepartmentSchema
 from src.service.service import EmployeeService, DepartmentService
 
 
 class EmployeeListApi(Resource):
-    employee_schema = EmployeeSchema()
-    employee_schema_with_dep = EmployeeSchemaWithDep()
-    department_schema_without_id = DepartmentSchema_Without_Id()
+    employee_schema = EmployeeSchema(only=("id", "name", "birthday", "salary", "department_id",))
+    employee_schema_with_dep = EmployeeSchema()
+    department_schema_without_id = DepartmentSchema(only=("name",))
 
     def get(self, id=None):
         """send get request with data(id, date1, date2) or not and return json data, and if answer to request
@@ -36,24 +35,31 @@ class EmployeeListApi(Resource):
         """send post request to db with json(fields: 'dep','name', 'salary', 'birthday') and return
         json data(fields: 'dep', 'department_id','name', 'salary', 'id','birthday'.
         If department not exist algorithm creates new department in db"""
+        rq_args = request.args
         rq = request.json
-        dep = rq['dep']
-        department = DepartmentService.fetch_department_by_name(db.session, name=dep)
+        if not rq_args.get('populate'):
+            rq = [rq]
+        logger.debug(rq)
+        for one in rq:
+            logger.debug(one)
+            dep = one['dep']
+            department = DepartmentService.fetch_department_by_name(db.session, name=dep)
 
-        if not department:
-            department = self.department_schema_without_id.load(dict(name=dep), session=db.session)
-            db.session.add(department)
-            db.session.commit()
+            if not department:
+                department = self.department_schema_without_id.load(dict(name=dep), session=db.session)
+                db.session.add(department)
+                db.session.commit()
 
-        rq['department_id'] = department.id
-        del rq['dep']
-        try:
-            employee = self.employee_schema.load(rq, session=db.session)
-        except ValidationError as e:
-            logger.debug(f"Validation error in post Employee by Api is {e}")
-            return {'message': str(e)}, 400
-
-        db.session.add(employee)
+            one['department_id'] = department.id
+            del one['dep']
+            logger.debug(one)
+            try:
+                employee = self.employee_schema.load(one, session=db.session)
+            except ValidationError as e:
+                logger.debug(f"Validation error in post Employee by Api is {e}")
+                return {'message': str(e)}, 400
+            logger.debug(employee)
+            db.session.add(employee)
         db.session.commit()
         return self.employee_schema.dump(employee), 201
 
@@ -121,8 +127,10 @@ class EmployeeListApi(Resource):
 
 
 class DepartmentListApi(Resource):
-    department_schema = DepartmentSchema()
-    department_schema_with_avg = DepartmentSchemaWithAVG()
+    department_schema = DepartmentSchema(only=("id", "name"))
+    department_schema_with_avg = DepartmentSchema(only=("id", "name", "avg", "count"))
+    """department_schema = DepartmentSchema()
+    department_schema_with_avg = DepartmentSchemaWithAVG()"""
 
     def get(self, id=None):
         """send get request with id or no to db(joined query between tables employee and department)
@@ -135,7 +143,7 @@ class DepartmentListApi(Resource):
         department = DepartmentService.fetch_department_by_id(db.session, id)
         if not department:
             return '', 404
-        return self.department_schema.dump(department), 200
+        return self.department_schema_with_avg.dump(department), 200
 
     def post(self):
         """send post request to db(joined query between tables employee and department) json(fields: 'dep')
@@ -158,26 +166,24 @@ class DepartmentListApi(Resource):
         department = DepartmentService.fetch_department_by_id(db.session, id)
         if not department:
             return "", 404
+
+        # update employees department_id into new department_id and delete updated department
+        department2 = DepartmentService.fetch_department_by_name(db.session, request.json['name'])
+        if department2:
+            employees = EmployeeService.fetch_all_employees_by_dep(db.session, id).all()
+            if employees:
+                for x in employees:
+                    x.department_id = department2.id
+                    logger.debug(x)
+                    db.session.add(x)
+                db.session.delete(department)
+                db.session.commit()
+                return self.department_schema.dump(department2), 200
         try:
             department = self.department_schema.load(request.json, instance=department, session=db.session)
         except ValidationError as e:
             logger.debug(f"Validation error in put Department by Api is {e}")
             return {'message': str(e)}, 400
-        db.session.add(department)
-        db.session.commit()
-        return self.department_schema.dump(department), 200
-
-    def patch(self, id):
-        """send patch request with json(fields: 'id','name') and return json data(fields: 'name', 'id')."""
-        department = DepartmentService.fetch_department_by_id(db.session, id)
-        if not department:
-            return '', 404
-        try:
-            department = self.department_schema.load(request.json, instance=department, session=db.session,
-                                                     partial=True)
-        except ValidationError as e:
-            app.logger.debug(f"Validation error in patch Department by Api is {e}")
-            return {'Message': f'error: {e}'}, 400
         db.session.add(department)
         db.session.commit()
         return self.department_schema.dump(department), 200

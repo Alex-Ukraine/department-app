@@ -40,31 +40,30 @@ def index():
 def insert():
     """After click button 'Add New Employee' on page '/' user will see modal form with
     fields which need to fill. After click 'Add Employee' the record will be tried to post and user will see a message"""
-    if request.method == 'POST':
-        name = request.form['name']
-        try:
-            birthday = str(datetime.strptime(request.form['birthday'], '%Y-%m-%d').date())
-        except ValueError as e:
-            logger.debug(f"Value error for insert Employee in field birthday is {e}")
-            flash(f"{e}", "danger")
-            return redirect(url_for('index'))
-        salary = request.form['salary']
-        if not salary.isdigit():
-            logger.debug("Value error for insert Employee in field salary")
-            flash("Value error for insert Employee in field salary", "danger")
-            return redirect(url_for('index'))
-        dep = request.form['dep']
-        if not all([name, dep]):
-            logger.debug("Validation error, fields name or department are empty")
-            flash("Validation error, fields name or department are empty", "danger")
-        my_data = json.dumps(dict(name=name, birthday=birthday, salary=salary, dep=dep))
-
-        headers = {'Content-type': 'application/json'}
-        url = request.host_url + 'json/employees'
-        rq = requests.post(url, headers=headers, data=my_data, verify=False)
-        if rq.status_code == 201:
-            flash("Employee Inserted Successfully", "success")
+    name = request.form['name']
+    try:
+        birthday = str(datetime.strptime(request.form['birthday'], '%Y-%m-%d').date())
+    except ValueError as e:
+        logger.debug(f"Value error for insert Employee in field birthday is {e}")
+        flash(f"{e}", "danger")
         return redirect(url_for('index'))
+    salary = request.form['salary']
+    if not salary.isdigit():
+        logger.debug("Value error for insert Employee in field salary")
+        flash("Value error for insert Employee in field salary", "danger")
+        return redirect(url_for('index'))
+    dep = request.form['dep']
+    if not all([name, dep]):
+        logger.debug("Validation error, fields name or department are empty")
+        flash("Validation error, fields name or department are empty", "danger")
+    my_data = json.dumps(dict(name=name, birthday=birthday, salary=salary, dep=dep))
+
+    headers = {'Content-type': 'application/json'}
+    url = request.host_url + 'json/employees'
+    rq = requests.post(url, headers=headers, data=my_data, verify=False)
+    if rq.status_code == 201:
+        flash("Employee Inserted Successfully", "success")
+    return redirect(url_for('index'))
 
 
 @app.route('/update/<int:id>', methods=['GET', 'POST'])
@@ -100,7 +99,7 @@ def update(id):
         return redirect(url_for('index'))
 
 
-@app.route('/delete/<int:id>', methods=['GET', 'POST'])
+@app.route('/delete/<int:id>', methods=['GET'])
 def delete(id):
     """After click button delete on page 'employees'
     the specified record will try to delete and user will see a message"""
@@ -128,45 +127,43 @@ def departments():
 def department_insert():
     """After click button 'Add New Department' on page 'departments' user will see modal form with
     fields which need to fill. After click 'Add Department' the record will be tried to post and user will see a message"""
-    if request.method == 'POST':
-        name = request.form['name']
-        if not name:
-            logger.debug("Validation error, field name must not be empty")
-            flash("Validation error, field name must not be empty", "danger")
+    name = request.form['name']
+    if not name:
+        logger.debug("Validation error, field name must not be empty")
+        flash("Validation error, field name must not be empty", "danger")
 
-        my_data = json.dumps(dict(name=name))
+    my_data = json.dumps(dict(name=name))
 
-        headers = {'Content-type': 'application/json'}
-        url = request.host_url + 'json/departments'
-        rq = requests.post(url, headers=headers, data=my_data, verify=False)
-        if rq.status_code == 409:
-            flash(rq.json()['message'], 'danger')
-        if rq.status_code == 201:
-            flash("Department Inserted Successfully", "success")
-        return redirect(url_for('departments'))
+    headers = {'Content-type': 'application/json'}
+    url = request.host_url + 'json/departments'
+    rq = requests.post(url, headers=headers, data=my_data, verify=False)
+    if rq.status_code == 409:
+        flash(rq.json()['message'], 'danger')
+    if rq.status_code == 201:
+        flash("Department Inserted Successfully", "success")
+    return redirect(url_for('departments'))
 
 
-@app.route('/departments/update/<int:id>', methods=['GET', 'POST'])
+@app.route('/departments/update/<int:id>', methods=['POST'])
 def department_update(id):
     """After click button edit on page 'departments' user will see modal form with specified record fields.
     After click update the record will be tried to update and user will see a message"""
-    if request.method == 'POST':
-        name = request.form['name']
-        if not name:
-            logger.debug("Validation error, field name must not be empty")
-            flash("Validation error, field name must not be empty", "danger")
+    name = request.form['name']
+    if not name:
+        logger.debug("Validation error, field name must not be empty")
+        flash("Validation error, field name must not be empty", "danger")
 
-        my_data = json.dumps(dict(id=id, name=name))
+    my_data = json.dumps(dict(id=id, name=name))
 
-        headers = {'Content-type': 'application/json'}
-        url = request.host_url + 'json/departments/' + str(id)
-        rq = requests.patch(url, headers=headers, data=my_data, verify=False)
-        if rq.status_code == 200:
-            flash("Department Updated Successfully", "success")
-        return redirect(url_for('departments'))
+    headers = {'Content-type': 'application/json'}
+    url = request.host_url + 'json/departments/' + str(id)
+    rq = requests.put(url, headers=headers, data=my_data, verify=False)
+    if rq.status_code == 200:
+        flash("Department Updated Successfully", "success")
+    return redirect(url_for('departments'))
 
 
-@app.route('/departments/delete/<int:id>', methods=['GET', 'POST'])
+@app.route('/departments/delete/<int:id>', methods=['GET'])
 def department_delete(id):
     """After click button delete on page 'departments'
     the specified record will be tried to delete and user will see a message"""
@@ -182,32 +179,62 @@ def department_delete(id):
 def populate_db(id):
     """User can get address like /populate/23, where 23 is arbitrary number of new fake Employees.
     After this request DB will be updated with new records"""
-    if request.method == 'GET':
-        if id > 1000:
-            flash(f"DB not populated by {id} records, please request less 1000 records", "danger")
-            return redirect(url_for('index'))
+    if id > 1000:
+        flash(f"DB not populated by {id} records, please request less 1000 records", "danger")
+        return redirect(url_for('index'))
 
-        fake = Faker()
-        for _ in range(id):
-            data = {
-                "name": fake.first_name(),
-                "birthday": str(fake.date_between_dates(date_start=datetime(1985, 1, 1),
-                                                        date_end=datetime(2000, 1, 1))),
-                "salary": random.randrange(100, 5000, 100),
-                "dep": random.choice(['web', 'frontend', 'backend', 'simulations',
-                                      'graphic', 'android', 'iOS', 'ml', 'ds', 'marketing'])
-            }
-            department = DepartmentService.fetch_department_by_name(db.session, name=data["dep"])
+    fake = Faker()
+    for _ in range(id):
+        data = {
+            "name": fake.name(),
+            "birthday": str(fake.date_between_dates(date_start=datetime(1985, 1, 1),
+                                                    date_end=datetime(2000, 1, 1))),
+            "salary": random.randrange(100, 5000, 100),
+            "dep": random.choice(['web', 'frontend', 'backend', 'simulations',
+                                  'graphic', 'android', 'iOS', 'ml', 'ds', 'marketing'])
+        }
+        department = DepartmentService.fetch_department_by_name(db.session, name=data["dep"])
 
-            if not department:
-                department = Department(name=data["dep"])
-                db.session.add(department)
-                db.session.commit()
+        if not department:
+            department = Department(name=data["dep"])
+            db.session.add(department)
+            db.session.commit()
 
-            employee = Employee(name=data["name"], birthday=data["birthday"],
-                                salary=data["salary"], department_id=department.id)
-            db.session.add(employee)
-        db.session.commit()
+        employee = Employee(name=data["name"], birthday=data["birthday"],
+                            salary=data["salary"], department_id=department.id)
+        db.session.add(employee)
+    db.session.commit()
+    flash(f"DB successfully populated by {id} records", "success")
+    return redirect(url_for('index'))
+
+
+@app.route('/populate2/<int:id>', methods=['GET'])
+def populate_db2(id):
+    """User can get address like /populate2/4, where 4 is arbitrary number of new fake Employees.
+    After this request DB will be updated with new records.
+    But instead of populate_db version 1 this algorithm uses rest web-services 'post',
+    not directly getting access with DB"""
+    if id > 1000:
+        flash(f"DB not populated by {id} records, please request less 1000 records", "danger")
+        return redirect(url_for('index'))
+
+    fake = Faker()
+    all_dicts = []
+    for _ in range(id):
+        new_dict = {
+            "name": fake.name(),
+            "birthday": str(fake.date_between_dates(date_start=datetime(1985, 1, 1),
+                                                    date_end=datetime(2000, 1, 1))),
+            "salary": random.randrange(100, 5000, 100),
+            "dep": random.choice(['web', 'frontend', 'backend', 'simulations',
+                                  'graphic', 'android', 'iOS', 'ml', 'ds', 'marketing'])
+        }
+        all_dicts.append(new_dict)
+    my_data = json.dumps(all_dicts)
+    headers = {'Content-type': 'application/json'}
+    url = request.host_url + 'json/employees'
+    rq = requests.post(url, headers=headers, params={"populate": True}, data=my_data, verify=False)
+    if rq.status_code == 201:
         flash(f"DB successfully populated by {id} records", "success")
         return redirect(url_for('index'))
 

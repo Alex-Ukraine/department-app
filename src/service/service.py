@@ -26,7 +26,11 @@ class EmployeeService:
     def fetch_all_employees_with_dep_between_dates(session, date1, date2):
         """make a query to db(table 'employee' and 'department') with parameters date1 and date2, fetch all records,
          who satisfies condition 'Employee.birthday > date1, Employee.birthday < date2'
-         + add new field 'dep', filled with values from table 'department'"""
+         + add new field 'dep', filled with values from table 'department'.
+
+         SELECT Employee.id, Employee.name, Employee.birthday, Employee.salary, Employee.department_id,
+         Department.name AS 'dep' FROM employee LEFT JOIN department on
+         employee.department_id = department.id WHERE Employee.birthday BETWEEN '1985-01-01' AND '1991-01-01';"""
         return session.query(Employee.id, Employee.name, Employee.birthday, Employee.salary,
                              Employee.department_id, Department.name.label('dep')). \
             join(Department).filter(and_(
@@ -49,8 +53,13 @@ class DepartmentService:
 
     @staticmethod
     def fetch_all_departments_with_avg_salary(session):
+        """SELECT department.name, AVG(employee.salary), COUNT(employee.id) FROM employee
+        RIGHT JOIN department on employee.department_id = department.id
+        GROUP BY department.id;"""
         return session.query(Department.id, Department.name,
-                             func.avg(Employee.salary).label('avg')).group_by(Department.id).join(Employee)
+                             func.coalesce(func.avg(Employee.salary), 0).label('avg'),
+                             func.count(Employee.id).label('count')).group_by(Department.id).join(Employee,
+                                                                                                  isouter=True)
 
     @classmethod
     def fetch_department_by_id(cls, session, id):
