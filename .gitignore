@@ -1,2 +1,4 @@
 /tests/test_views.py
+.coverage
+debug.log
 Dockerfile

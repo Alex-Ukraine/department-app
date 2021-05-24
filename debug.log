@@ -16922,3 +16922,78 @@
 2021-05-24 18:06:31,638 - DEBUG - app_logger - <Employee 325>
 2021-05-24 18:06:31,639 - DEBUG - app_logger - <Employee 355>
 2021-05-24 18:06:31,639 - DEBUG - app_logger - <Employee 405>
+2021-05-24 20:01:59,705 - DEBUG - app_logger - [{'name': 'Cindy Arroyo', 'birthday': '1988-03-26', 'salary': 1100, 'dep': 'android'}, {'name': 'Taylor Shelton', 'birthday': '1998-12-24', 'salary': 1000, 'dep': 'marketing'}, {'name': 'Angela Savage', 'birthday': '1985-02-05', 'salary': 1800, 'dep': 'ml'}]
+2021-05-24 20:01:59,705 - DEBUG - app_logger - {'name': 'Cindy Arroyo', 'birthday': '1988-03-26', 'salary': 1100, 'dep': 'android'}
+2021-05-24 20:01:59,992 - DEBUG - app_logger - {'name': 'Cindy Arroyo', 'birthday': '1988-03-26', 'salary': 1100, 'department_id': 5}
+2021-05-24 20:01:59,993 - DEBUG - app_logger - <Employee (transient 1699188771136)>
+2021-05-24 20:01:59,993 - DEBUG - app_logger - {'name': 'Taylor Shelton', 'birthday': '1998-12-24', 'salary': 1000, 'dep': 'marketing'}
+2021-05-24 20:02:00,330 - DEBUG - app_logger - {'name': 'Taylor Shelton', 'birthday': '1998-12-24', 'salary': 1000, 'department_id': 15}
+2021-05-24 20:02:00,330 - DEBUG - app_logger - <Employee (transient 1699188770656)>
+2021-05-24 20:02:00,331 - DEBUG - app_logger - {'name': 'Angela Savage', 'birthday': '1985-02-05', 'salary': 1800, 'dep': 'ml'}
+2021-05-24 20:02:00,665 - DEBUG - app_logger - {'name': 'Angela Savage', 'birthday': '1985-02-05', 'salary': 1800, 'department_id': 25}
+2021-05-24 20:02:00,666 - DEBUG - app_logger - <Employee (transient 1699188772528)>
+2021-05-24 20:02:01,193 - DEBUG - app_logger - [{'name': 'Jeffrey Harper', 'birthday': '1990-06-11', 'salary': 3100, 'dep': 'simulations'}, {'name': 'Lauren Dalton', 'birthday': '1992-12-27', 'salary': 800, 'dep': 'frontend'}]
+2021-05-24 20:02:01,193 - DEBUG - app_logger - {'name': 'Jeffrey Harper', 'birthday': '1990-06-11', 'salary': 3100, 'dep': 'simulations'}
+2021-05-24 20:02:01,476 - DEBUG - app_logger - {'name': 'Jeffrey Harper', 'birthday': '1990-06-11', 'salary': 3100, 'department_id': 35}
+2021-05-24 20:02:01,476 - DEBUG - app_logger - <Employee (transient 1699187107008)>
+2021-05-24 20:02:01,476 - DEBUG - app_logger - {'name': 'Lauren Dalton', 'birthday': '1992-12-27', 'salary': 800, 'dep': 'frontend'}
+2021-05-24 20:02:01,813 - DEBUG - app_logger - {'name': 'Lauren Dalton', 'birthday': '1992-12-27', 'salary': 800, 'department_id': 45}
+2021-05-24 20:02:01,814 - DEBUG - app_logger - <Employee (transient 1699187849392)>
+2021-05-24 20:02:02,544 - DEBUG - app_logger - [{'name': 'Scott Sawyer', 'birthday': '1987-05-06', 'salary': 4200, 'dep': 'marketing'}, {'name': 'Gregory Hammond', 'birthday': '1987-09-04', 'salary': 4400, 'dep': 'ml'}]
+2021-05-24 20:02:02,544 - DEBUG - app_logger - {'name': 'Scott Sawyer', 'birthday': '1987-05-06', 'salary': 4200, 'dep': 'marketing'}
+2021-05-24 20:02:02,600 - DEBUG - app_logger - {'name': 'Scott Sawyer', 'birthday': '1987-05-06', 'salary': 4200, 'department_id': 15}
+2021-05-24 20:02:02,601 - DEBUG - app_logger - <Employee (transient 1699188772144)>
+2021-05-24 20:02:02,601 - DEBUG - app_logger - {'name': 'Gregory Hammond', 'birthday': '1987-09-04', 'salary': 4400, 'dep': 'ml'}
+2021-05-24 20:02:02,711 - DEBUG - app_logger - {'name': 'Gregory Hammond', 'birthday': '1987-09-04', 'salary': 4400, 'department_id': 25}
+2021-05-24 20:02:02,711 - DEBUG - app_logger - <Employee (transient 1699188922448)>
+2021-05-24 20:07:03,942 - DEBUG - app_logger - Validation error in post Department by Api is {'mood': ['Unknown field.']}
+2021-05-24 20:07:04,003 - DEBUG - app_logger - Department not unique, already exists
+2021-05-24 20:07:04,903 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend123'}]
+2021-05-24 20:07:04,903 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend123'}
+2021-05-24 20:07:04,958 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'department_id': 115}
+2021-05-24 20:07:04,959 - DEBUG - app_logger - <Employee (transient 2251632361088)>
+2021-05-24 20:07:05,295 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend123'}]
+2021-05-24 20:07:05,296 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend123'}
+2021-05-24 20:07:05,351 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'department_id': 115}
+2021-05-24 20:07:05,352 - DEBUG - app_logger - <Employee (transient 2251632359840)>
+2021-05-24 20:07:05,908 - DEBUG - app_logger - <Employee 835>
+2021-05-24 20:07:05,908 - DEBUG - app_logger - <Employee 895>
+2021-05-24 20:07:05,909 - DEBUG - app_logger - <Employee 975>
+2021-05-24 20:07:05,909 - DEBUG - app_logger - <Employee 1035>
+2021-05-24 20:07:05,909 - DEBUG - app_logger - <Employee 1105>
+2021-05-24 20:07:05,910 - DEBUG - app_logger - <Employee 1145>
+2021-05-24 20:07:05,910 - DEBUG - app_logger - <Employee 1155>
+2021-05-24 20:07:07,185 - DEBUG - app_logger - Validation error in put Department by Api is {'mood': ['Unknown field.']}
+2021-05-24 20:07:07,465 - DEBUG - app_logger - Validation error in put Department by Api is {'mood': ['Unknown field.']}
+2021-05-24 20:07:11,553 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend'}]
+2021-05-24 20:07:11,554 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend'}
+2021-05-24 20:07:11,609 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'department_id': 205}
+2021-05-24 20:07:11,610 - DEBUG - app_logger - <Employee (transient 2251632810304)>
+2021-05-24 20:07:11,955 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend'}]
+2021-05-24 20:07:11,955 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend'}
+2021-05-24 20:07:12,011 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'department_id': 205}
+2021-05-24 20:07:12,011 - DEBUG - app_logger - <Employee (transient 2251632811600)>
+2021-05-24 20:07:12,349 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'some super mega strange name department'}]
+2021-05-24 20:07:12,350 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'some super mega strange name department'}
+2021-05-24 20:07:12,406 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'department_id': 145}
+2021-05-24 20:07:12,407 - DEBUG - app_logger - <Employee (transient 2251632810976)>
+2021-05-24 20:07:12,746 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'web', 'mood': 'crazy'}]
+2021-05-24 20:07:12,746 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'web', 'mood': 'crazy'}
+2021-05-24 20:07:12,802 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'mood': 'crazy', 'department_id': 225}
+2021-05-24 20:07:12,803 - DEBUG - app_logger - Validation error in post Employee by Api is {'mood': ['Unknown field.']}
+2021-05-24 20:07:13,086 - DEBUG - app_logger - [{'name': 'Test Employee', 'birthday': '1990-03-05', 'salary': 560, 'dep': 'web'}]
+2021-05-24 20:07:13,087 - DEBUG - app_logger - {'name': 'Test Employee', 'birthday': '1990-03-05', 'salary': 560, 'dep': 'web'}
+2021-05-24 20:07:13,142 - DEBUG - app_logger - {'name': 'Test Employee', 'birthday': '1990-03-05', 'salary': 560, 'department_id': 225}
+2021-05-24 20:07:13,143 - DEBUG - app_logger - <Employee (transient 2251632888176)>
+2021-05-24 20:07:14,543 - DEBUG - app_logger - Validation error in put Employee by Api is {'mood': ['Unknown field.']}
+2021-05-24 20:07:14,769 - DEBUG - app_logger - Validation error in patch Employee by Api is {'mood': ['Unknown field.']}
+2021-05-24 20:08:50,694 - DEBUG - app_logger - [{'name': 'Christina Green', 'birthday': '1993-03-24', 'salary': 4500, 'dep': 'backend'}, {'name': 'Katherine Reeves', 'birthday': '1994-12-06', 'salary': 4300, 'dep': 'ds'}, {'name': 'Ashley Jenkins', 'birthday': '1985-11-12', 'salary': 2000, 'dep': 'web'}]
+2021-05-24 20:08:50,695 - DEBUG - app_logger - {'name': 'Christina Green', 'birthday': '1993-03-24', 'salary': 4500, 'dep': 'backend'}
+2021-05-24 20:08:50,753 - DEBUG - app_logger - {'name': 'Christina Green', 'birthday': '1993-03-24', 'salary': 4500, 'department_id': 85}
+2021-05-24 20:08:50,754 - DEBUG - app_logger - <Employee (transient 1699189106480)>
+2021-05-24 20:08:50,754 - DEBUG - app_logger - {'name': 'Katherine Reeves', 'birthday': '1994-12-06', 'salary': 4300, 'dep': 'ds'}
+2021-05-24 20:08:50,866 - DEBUG - app_logger - {'name': 'Katherine Reeves', 'birthday': '1994-12-06', 'salary': 4300, 'department_id': 95}
+2021-05-24 20:08:50,866 - DEBUG - app_logger - <Employee (transient 1699189105808)>
+2021-05-24 20:08:50,866 - DEBUG - app_logger - {'name': 'Ashley Jenkins', 'birthday': '1985-11-12', 'salary': 2000, 'dep': 'web'}
+2021-05-24 20:08:50,978 - DEBUG - app_logger - {'name': 'Ashley Jenkins', 'birthday': '1985-11-12', 'salary': 2000, 'department_id': 225}
+2021-05-24 20:08:50,979 - DEBUG - app_logger - <Employee (transient 1699189108352)>
