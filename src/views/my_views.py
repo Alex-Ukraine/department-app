@@ -5,7 +5,7 @@ from faker import Faker
 
 import requests
 
-from flask import render_template, request, flash, url_for, redirect
+from flask import render_template, request, flash, url_for, redirect, jsonify
 
 from src import app, db, logger
 

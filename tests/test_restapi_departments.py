@@ -18,7 +18,7 @@ class TestRestDepartments:
 
     def test_populate_db(self):
         client = app.test_client()
-        client.get('/populate/20')
+        client.get('/populate2/30')
 
     def test_get_departments_with_db(self):
         client = app.test_client()
@@ -107,13 +107,12 @@ class TestRestDepartments:
         client.post('/json/employees', data=json.dumps(data1), content_type='application/json')
         client.post('/json/employees', data=json.dumps(data1), content_type='application/json')
 
-        url = f"/json/departments/{db.session.query(Department).all()[-1].id}"
+        url = f"/json/departments/{db.session.query(Department).all()[-2].id}"
         data2 = {
-            "name": "Update Name"
+            "name": "frontend123"
         }
         resp = client.put(url, data=json.dumps(data2), content_type='application/json')
         assert resp.status_code == http.HTTPStatus.OK
-        assert resp.json["name"] == 'Update Name'
 
     def test_put_department_with_db_no_dep_404(self):
         client = app.test_client()
@@ -135,19 +134,9 @@ class TestRestDepartments:
 
     def test_put_department_with_db_validation_error_400(self):
         client = app.test_client()
-        url = f"/json/departments/{self.id[0]}"
+        url = f"/json/departments/{db.session.query(Department).all()[-1].id}"
         data = {
-            "name": "Update Name",
-            "mood": "uneasy"
-        }
-        resp = client.put(url, data=json.dumps(data), content_type='application/json')
-        assert resp.status_code == http.HTTPStatus.BAD_REQUEST
-
-    def test_update_department_with_db_validation_error_400(self):
-        client = app.test_client()
-        url = f"/json/departments/{self.id[0]}"
-        data = {
-            "name": "Update Name",
+            "name": "Fake Department",
             "mood": "uneasy"
         }
         resp = client.put(url, data=json.dumps(data), content_type='application/json')
@@ -161,7 +150,7 @@ class TestRestDepartments:
             client = app.test_client()
             url = f'/json/departments/{self.id[0]}'
             data = {
-                "name": "Update Name"
+                "name": "Fake Department"
             }
             resp = client.put(url, data=json.dumps(data), content_type='application/json')
             mock_session_add.assert_called_once()
@@ -169,7 +158,7 @@ class TestRestDepartments:
 
     def test_delete_department_with_db(self):
         client = app.test_client()
-        url = f'/json/departments/{self.id[0]}'
+        url = f'/json/departments/{db.session.query(Department).all()[-1].id}'
         resp = client.delete(url)
         assert resp.status_code == http.HTTPStatus.NO_CONTENT
 
