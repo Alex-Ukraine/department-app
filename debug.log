@@ -16715,3 +16715,210 @@
 2021-05-24 17:41:24,155 - DEBUG - app_logger - <Employee 32>
 2021-05-24 17:41:24,155 - DEBUG - app_logger - <Employee 36>
 2021-05-24 17:41:24,155 - DEBUG - app_logger - <Employee 66>
+2021-05-24 18:02:19,255 - DEBUG - app_logger - Validation error in post Department by Api is {'mood': ['Unknown field.']}
+2021-05-24 18:02:19,314 - DEBUG - app_logger - Department not unique, already exists
+2021-05-24 18:02:20,195 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend123'}]
+2021-05-24 18:02:20,195 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend123'}
+2021-05-24 18:02:20,470 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'department_id': 105}
+2021-05-24 18:02:20,471 - DEBUG - app_logger - <Employee (transient 2541343481040)>
+2021-05-24 18:02:20,800 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend123'}]
+2021-05-24 18:02:20,800 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend123'}
+2021-05-24 18:02:20,856 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'department_id': 105}
+2021-05-24 18:02:20,857 - DEBUG - app_logger - <Employee (transient 2541343531792)>
+2021-05-24 18:02:21,402 - DEBUG - app_logger - <Employee 5>
+2021-05-24 18:02:21,403 - DEBUG - app_logger - <Employee 155>
+2021-05-24 18:02:21,403 - DEBUG - app_logger - <Employee 165>
+2021-05-24 18:02:22,444 - DEBUG - app_logger - Validation error in put Department by Api is {'mood': ['Unknown field.']}
+2021-05-24 18:02:22,718 - DEBUG - app_logger - Validation error in put Department by Api is {'mood': ['Unknown field.']}
+2021-05-24 18:02:26,935 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend'}]
+2021-05-24 18:02:26,936 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend'}
+2021-05-24 18:02:26,990 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'department_id': 75}
+2021-05-24 18:02:26,991 - DEBUG - app_logger - <Employee (transient 2541343952224)>
+2021-05-24 18:02:27,324 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend'}]
+2021-05-24 18:02:27,324 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend'}
+2021-05-24 18:02:27,378 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'department_id': 75}
+2021-05-24 18:02:27,379 - DEBUG - app_logger - <Employee (transient 2541343950736)>
+2021-05-24 18:02:27,710 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'some super mega strange name department'}]
+2021-05-24 18:02:27,711 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'some super mega strange name department'}
+2021-05-24 18:02:27,985 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'department_id': 135}
+2021-05-24 18:02:27,986 - DEBUG - app_logger - <Employee (transient 2541343951264)>
+2021-05-24 18:02:28,315 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'web', 'mood': 'crazy'}]
+2021-05-24 18:02:28,316 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'web', 'mood': 'crazy'}
+2021-05-24 18:02:28,370 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'mood': 'crazy', 'department_id': 125}
+2021-05-24 18:02:28,371 - DEBUG - app_logger - Validation error in post Employee by Api is {'mood': ['Unknown field.']}
+2021-05-24 18:02:28,649 - DEBUG - app_logger - [{'name': 'Test Employee', 'birthday': '1990-03-05', 'salary': 560, 'dep': 'web'}]
+2021-05-24 18:02:28,650 - DEBUG - app_logger - {'name': 'Test Employee', 'birthday': '1990-03-05', 'salary': 560, 'dep': 'web'}
+2021-05-24 18:02:28,704 - DEBUG - app_logger - {'name': 'Test Employee', 'birthday': '1990-03-05', 'salary': 560, 'department_id': 125}
+2021-05-24 18:02:28,705 - DEBUG - app_logger - <Employee (transient 2541343410880)>
+2021-05-24 18:02:30,101 - DEBUG - app_logger - Validation error in put Employee by Api is {'mood': ['Unknown field.']}
+2021-05-24 18:02:30,322 - DEBUG - app_logger - Validation error in patch Employee by Api is {'mood': ['Unknown field.']}
+2021-05-24 18:03:00,495 - DEBUG - app_logger - Value error for search Employees between dates is time data '19850722' does not match format '%Y-%m-%d'
+2021-05-24 18:03:16,787 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '1990.11.11' does not match format '%Y-%m-%d'
+2021-05-24 18:03:20,853 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '1990.11.11' does not match format '%Y-%m-%d'
+2021-05-24 18:03:24,924 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-24 18:03:29,012 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-24 18:03:33,130 - DEBUG - app_logger - Value error for insert Employee in field salary
+2021-05-24 18:03:37,218 - DEBUG - app_logger - Value error for insert Employee in field salary
+2021-05-24 18:03:45,418 - DEBUG - app_logger - Value error for update Employee in field birthday is time data '1989.06.10' does not match format '%Y-%m-%d'
+2021-05-24 18:03:49,497 - DEBUG - app_logger - Value error for update Employee in field salary
+2021-05-24 18:03:53,565 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-24 18:04:09,812 - DEBUG - app_logger - Validation error, field name must not be empty
+2021-05-24 18:04:17,969 - DEBUG - app_logger - Validation error, field name must not be empty
+2021-05-24 18:05:21,682 - DEBUG - app_logger - Validation error in post Department by Api is {'mood': ['Unknown field.']}
+2021-05-24 18:05:21,740 - DEBUG - app_logger - Department not unique, already exists
+2021-05-24 18:05:22,615 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend123'}]
+2021-05-24 18:05:22,615 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend123'}
+2021-05-24 18:05:22,669 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'department_id': 105}
+2021-05-24 18:05:22,670 - DEBUG - app_logger - <Employee (transient 2814484019376)>
+2021-05-24 18:05:22,995 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend123'}]
+2021-05-24 18:05:22,995 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend123'}
+2021-05-24 18:05:23,051 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'department_id': 105}
+2021-05-24 18:05:23,051 - DEBUG - app_logger - <Employee (transient 2814484043280)>
+2021-05-24 18:05:23,592 - DEBUG - app_logger - <Employee 355>
+2021-05-24 18:05:23,592 - DEBUG - app_logger - <Employee 475>
+2021-05-24 18:05:23,593 - DEBUG - app_logger - <Employee 535>
+2021-05-24 18:05:23,593 - DEBUG - app_logger - <Employee 625>
+2021-05-24 18:05:24,675 - DEBUG - app_logger - Validation error in put Department by Api is {'mood': ['Unknown field.']}
+2021-05-24 18:05:24,946 - DEBUG - app_logger - Validation error in put Department by Api is {'mood': ['Unknown field.']}
+2021-05-24 18:05:28,687 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend'}]
+2021-05-24 18:05:28,687 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend'}
+2021-05-24 18:05:28,741 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'department_id': 165}
+2021-05-24 18:05:28,742 - DEBUG - app_logger - <Employee (transient 2814484491568)>
+2021-05-24 18:05:29,067 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend'}]
+2021-05-24 18:05:29,067 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend'}
+2021-05-24 18:05:29,121 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'department_id': 165}
+2021-05-24 18:05:29,121 - DEBUG - app_logger - <Employee (transient 2814484490080)>
+2021-05-24 18:05:29,447 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'some super mega strange name department'}]
+2021-05-24 18:05:29,448 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'some super mega strange name department'}
+2021-05-24 18:05:29,502 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'department_id': 135}
+2021-05-24 18:05:29,503 - DEBUG - app_logger - <Employee (transient 2814484492048)>
+2021-05-24 18:05:29,830 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'web', 'mood': 'crazy'}]
+2021-05-24 18:05:29,830 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'web', 'mood': 'crazy'}
+2021-05-24 18:05:30,102 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'mood': 'crazy', 'department_id': 185}
+2021-05-24 18:05:30,103 - DEBUG - app_logger - Validation error in post Employee by Api is {'mood': ['Unknown field.']}
+2021-05-24 18:05:30,379 - DEBUG - app_logger - [{'name': 'Test Employee', 'birthday': '1990-03-05', 'salary': 560, 'dep': 'web'}]
+2021-05-24 18:05:30,379 - DEBUG - app_logger - {'name': 'Test Employee', 'birthday': '1990-03-05', 'salary': 560, 'dep': 'web'}
+2021-05-24 18:05:30,433 - DEBUG - app_logger - {'name': 'Test Employee', 'birthday': '1990-03-05', 'salary': 560, 'department_id': 185}
+2021-05-24 18:05:30,433 - DEBUG - app_logger - <Employee (transient 2814484338768)>
+2021-05-24 18:05:31,788 - DEBUG - app_logger - Validation error in put Employee by Api is {'mood': ['Unknown field.']}
+2021-05-24 18:05:32,005 - DEBUG - app_logger - Validation error in patch Employee by Api is {'mood': ['Unknown field.']}
+2021-05-24 18:05:37,763 - DEBUG - app_logger - [{'name': 'Brittany White', 'birthday': '1998-05-30', 'salary': 1300, 'dep': 'graphic'}, {'name': 'Ethan Young', 'birthday': '1989-03-12', 'salary': 4500, 'dep': 'iOS'}]
+2021-05-24 18:05:37,763 - DEBUG - app_logger - {'name': 'Brittany White', 'birthday': '1998-05-30', 'salary': 1300, 'dep': 'graphic'}
+2021-05-24 18:05:37,817 - DEBUG - app_logger - {'name': 'Brittany White', 'birthday': '1998-05-30', 'salary': 1300, 'department_id': 15}
+2021-05-24 18:05:37,817 - DEBUG - app_logger - <Employee (transient 2490812650256)>
+2021-05-24 18:05:37,818 - DEBUG - app_logger - {'name': 'Ethan Young', 'birthday': '1989-03-12', 'salary': 4500, 'dep': 'iOS'}
+2021-05-24 18:05:37,924 - DEBUG - app_logger - {'name': 'Ethan Young', 'birthday': '1989-03-12', 'salary': 4500, 'department_id': 55}
+2021-05-24 18:05:37,925 - DEBUG - app_logger - <Employee (transient 2490812406032)>
+2021-05-24 18:05:38,995 - DEBUG - app_logger - Value error for search Employees between dates is time data '19850722' does not match format '%Y-%m-%d'
+2021-05-24 18:05:39,186 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-11-11', 'salary': '789', 'dep': 'some_department'}]
+2021-05-24 18:05:39,186 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-11-11', 'salary': '789', 'dep': 'some_department'}
+2021-05-24 18:05:39,456 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-11-11', 'salary': '789', 'department_id': 205}
+2021-05-24 18:05:39,457 - DEBUG - app_logger - <Employee (transient 2490812183120)>
+2021-05-24 18:05:39,962 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-11-11', 'salary': '789', 'dep': 'some_department'}]
+2021-05-24 18:05:39,962 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-11-11', 'salary': '789', 'dep': 'some_department'}
+2021-05-24 18:05:40,016 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-11-11', 'salary': '789', 'department_id': 205}
+2021-05-24 18:05:40,016 - DEBUG - app_logger - <Employee (transient 2490812870864)>
+2021-05-24 18:05:40,527 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-11-11', 'salary': '789', 'dep': 'some_department'}]
+2021-05-24 18:05:40,527 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-11-11', 'salary': '789', 'dep': 'some_department'}
+2021-05-24 18:05:40,581 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-11-11', 'salary': '789', 'department_id': 205}
+2021-05-24 18:05:40,581 - DEBUG - app_logger - <Employee (transient 2490812827248)>
+2021-05-24 18:05:41,086 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '1990.11.11' does not match format '%Y-%m-%d'
+2021-05-24 18:05:41,268 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '1990.11.11' does not match format '%Y-%m-%d'
+2021-05-24 18:05:41,454 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-24 18:05:41,460 - DEBUG - app_logger - [{'name': '', 'birthday': '1990-11-11', 'salary': '789', 'dep': ' '}]
+2021-05-24 18:05:41,460 - DEBUG - app_logger - {'name': '', 'birthday': '1990-11-11', 'salary': '789', 'dep': ' '}
+2021-05-24 18:05:41,727 - DEBUG - app_logger - {'name': '', 'birthday': '1990-11-11', 'salary': '789', 'department_id': 215}
+2021-05-24 18:05:41,728 - DEBUG - app_logger - <Employee (transient 2490812954944)>
+2021-05-24 18:05:42,230 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-24 18:05:42,235 - DEBUG - app_logger - [{'name': '', 'birthday': '1990-11-11', 'salary': '789', 'dep': ' '}]
+2021-05-24 18:05:42,235 - DEBUG - app_logger - {'name': '', 'birthday': '1990-11-11', 'salary': '789', 'dep': ' '}
+2021-05-24 18:05:42,289 - DEBUG - app_logger - {'name': '', 'birthday': '1990-11-11', 'salary': '789', 'department_id': 215}
+2021-05-24 18:05:42,289 - DEBUG - app_logger - <Employee (transient 2490812955472)>
+2021-05-24 18:05:42,793 - DEBUG - app_logger - Value error for insert Employee in field salary
+2021-05-24 18:05:42,976 - DEBUG - app_logger - Value error for insert Employee in field salary
+2021-05-24 18:05:43,778 - DEBUG - app_logger - Value error for update Employee in field birthday is time data '1989.06.10' does not match format '%Y-%m-%d'
+2021-05-24 18:05:43,964 - DEBUG - app_logger - Value error for update Employee in field salary
+2021-05-24 18:05:44,150 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-24 18:05:45,906 - DEBUG - app_logger - Validation error, field name must not be empty
+2021-05-24 18:05:45,964 - DEBUG - app_logger - Department not unique, already exists
+2021-05-24 18:05:46,844 - DEBUG - app_logger - Validation error, field name must not be empty
+2021-05-24 18:05:47,009 - DEBUG - app_logger - <Employee 1105>
+2021-05-24 18:05:47,009 - DEBUG - app_logger - <Employee 1155>
+2021-05-24 18:06:05,916 - DEBUG - app_logger - Validation error in post Department by Api is {'mood': ['Unknown field.']}
+2021-05-24 18:06:05,974 - DEBUG - app_logger - Department not unique, already exists
+2021-05-24 18:06:06,854 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend123'}]
+2021-05-24 18:06:06,855 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend123'}
+2021-05-24 18:06:07,129 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'department_id': 115}
+2021-05-24 18:06:07,129 - DEBUG - app_logger - <Employee (transient 2176676396240)>
+2021-05-24 18:06:07,460 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend123'}]
+2021-05-24 18:06:07,460 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend123'}
+2021-05-24 18:06:07,516 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'department_id': 115}
+2021-05-24 18:06:07,516 - DEBUG - app_logger - <Employee (transient 2176676451088)>
+2021-05-24 18:06:08,060 - DEBUG - app_logger - <Employee 85>
+2021-05-24 18:06:08,993 - DEBUG - app_logger - Validation error in put Department by Api is {'mood': ['Unknown field.']}
+2021-05-24 18:06:09,266 - DEBUG - app_logger - Validation error in put Department by Api is {'mood': ['Unknown field.']}
+2021-05-24 18:06:13,256 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend'}]
+2021-05-24 18:06:13,256 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend'}
+2021-05-24 18:06:13,311 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'department_id': 55}
+2021-05-24 18:06:13,312 - DEBUG - app_logger - <Employee (transient 2176676871712)>
+2021-05-24 18:06:13,639 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend'}]
+2021-05-24 18:06:13,639 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend'}
+2021-05-24 18:06:13,694 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'department_id': 55}
+2021-05-24 18:06:13,695 - DEBUG - app_logger - <Employee (transient 2176676881888)>
+2021-05-24 18:06:14,025 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'some super mega strange name department'}]
+2021-05-24 18:06:14,025 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'some super mega strange name department'}
+2021-05-24 18:06:14,300 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'department_id': 135}
+2021-05-24 18:06:14,301 - DEBUG - app_logger - <Employee (transient 2176676881072)>
+2021-05-24 18:06:14,630 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'web', 'mood': 'crazy'}]
+2021-05-24 18:06:14,631 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'web', 'mood': 'crazy'}
+2021-05-24 18:06:14,684 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'mood': 'crazy', 'department_id': 125}
+2021-05-24 18:06:14,685 - DEBUG - app_logger - Validation error in post Employee by Api is {'mood': ['Unknown field.']}
+2021-05-24 18:06:14,963 - DEBUG - app_logger - [{'name': 'Test Employee', 'birthday': '1990-03-05', 'salary': 560, 'dep': 'web'}]
+2021-05-24 18:06:14,964 - DEBUG - app_logger - {'name': 'Test Employee', 'birthday': '1990-03-05', 'salary': 560, 'dep': 'web'}
+2021-05-24 18:06:15,018 - DEBUG - app_logger - {'name': 'Test Employee', 'birthday': '1990-03-05', 'salary': 560, 'department_id': 125}
+2021-05-24 18:06:15,019 - DEBUG - app_logger - <Employee (transient 2176676812832)>
+2021-05-24 18:06:16,384 - DEBUG - app_logger - Validation error in put Employee by Api is {'mood': ['Unknown field.']}
+2021-05-24 18:06:16,603 - DEBUG - app_logger - Validation error in patch Employee by Api is {'mood': ['Unknown field.']}
+2021-05-24 18:06:22,519 - DEBUG - app_logger - [{'name': 'Robert Aguilar', 'birthday': '1986-11-20', 'salary': 1500, 'dep': 'frontend'}, {'name': 'Traci Zimmerman', 'birthday': '1998-02-18', 'salary': 2900, 'dep': 'graphic'}]
+2021-05-24 18:06:22,519 - DEBUG - app_logger - {'name': 'Robert Aguilar', 'birthday': '1986-11-20', 'salary': 1500, 'dep': 'frontend'}
+2021-05-24 18:06:22,572 - DEBUG - app_logger - {'name': 'Robert Aguilar', 'birthday': '1986-11-20', 'salary': 1500, 'department_id': 165}
+2021-05-24 18:06:22,572 - DEBUG - app_logger - <Employee (transient 2490813217760)>
+2021-05-24 18:06:22,572 - DEBUG - app_logger - {'name': 'Traci Zimmerman', 'birthday': '1998-02-18', 'salary': 2900, 'dep': 'graphic'}
+2021-05-24 18:06:22,678 - DEBUG - app_logger - {'name': 'Traci Zimmerman', 'birthday': '1998-02-18', 'salary': 2900, 'department_id': 5}
+2021-05-24 18:06:22,678 - DEBUG - app_logger - <Employee (transient 2490813218432)>
+2021-05-24 18:06:23,725 - DEBUG - app_logger - Value error for search Employees between dates is time data '19850722' does not match format '%Y-%m-%d'
+2021-05-24 18:06:23,910 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-11-11', 'salary': '789', 'dep': 'some_department'}]
+2021-05-24 18:06:23,910 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-11-11', 'salary': '789', 'dep': 'some_department'}
+2021-05-24 18:06:24,177 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-11-11', 'salary': '789', 'department_id': 175}
+2021-05-24 18:06:24,177 - DEBUG - app_logger - <Employee (transient 2490812680368)>
+2021-05-24 18:06:24,676 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-11-11', 'salary': '789', 'dep': 'some_department'}]
+2021-05-24 18:06:24,677 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-11-11', 'salary': '789', 'dep': 'some_department'}
+2021-05-24 18:06:24,730 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-11-11', 'salary': '789', 'department_id': 175}
+2021-05-24 18:06:24,731 - DEBUG - app_logger - <Employee (transient 2490813218432)>
+2021-05-24 18:06:25,231 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-11-11', 'salary': '789', 'dep': 'some_department'}]
+2021-05-24 18:06:25,231 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-11-11', 'salary': '789', 'dep': 'some_department'}
+2021-05-24 18:06:25,284 - DEBUG - app_logger - {'name': 'Fake Employee', 'birthday': '1990-11-11', 'salary': '789', 'department_id': 175}
+2021-05-24 18:06:25,285 - DEBUG - app_logger - <Employee (transient 2490813258144)>
+2021-05-24 18:06:25,783 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '1990.11.11' does not match format '%Y-%m-%d'
+2021-05-24 18:06:25,958 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '1990.11.11' does not match format '%Y-%m-%d'
+2021-05-24 18:06:26,138 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-24 18:06:26,143 - DEBUG - app_logger - [{'name': '', 'birthday': '1990-11-11', 'salary': '789', 'dep': ' '}]
+2021-05-24 18:06:26,143 - DEBUG - app_logger - {'name': '', 'birthday': '1990-11-11', 'salary': '789', 'dep': ' '}
+2021-05-24 18:06:26,411 - DEBUG - app_logger - {'name': '', 'birthday': '1990-11-11', 'salary': '789', 'department_id': 185}
+2021-05-24 18:06:26,411 - DEBUG - app_logger - <Employee (transient 2490812872256)>
+2021-05-24 18:06:26,908 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-24 18:06:26,914 - DEBUG - app_logger - [{'name': '', 'birthday': '1990-11-11', 'salary': '789', 'dep': ' '}]
+2021-05-24 18:06:26,914 - DEBUG - app_logger - {'name': '', 'birthday': '1990-11-11', 'salary': '789', 'dep': ' '}
+2021-05-24 18:06:26,967 - DEBUG - app_logger - {'name': '', 'birthday': '1990-11-11', 'salary': '789', 'department_id': 185}
+2021-05-24 18:06:26,967 - DEBUG - app_logger - <Employee (transient 2490812952688)>
+2021-05-24 18:06:27,465 - DEBUG - app_logger - Value error for insert Employee in field salary
+2021-05-24 18:06:27,641 - DEBUG - app_logger - Value error for insert Employee in field salary
+2021-05-24 18:06:28,431 - DEBUG - app_logger - Value error for update Employee in field birthday is time data '1989.06.10' does not match format '%Y-%m-%d'
+2021-05-24 18:06:28,612 - DEBUG - app_logger - Value error for update Employee in field salary
+2021-05-24 18:06:28,791 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-24 18:06:30,535 - DEBUG - app_logger - Validation error, field name must not be empty
+2021-05-24 18:06:30,594 - DEBUG - app_logger - Department not unique, already exists
+2021-05-24 18:06:31,475 - DEBUG - app_logger - Validation error, field name must not be empty
+2021-05-24 18:06:31,638 - DEBUG - app_logger - <Employee 325>
+2021-05-24 18:06:31,639 - DEBUG - app_logger - <Employee 355>
+2021-05-24 18:06:31,639 - DEBUG - app_logger - <Employee 405>
