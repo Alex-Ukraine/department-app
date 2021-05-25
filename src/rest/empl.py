@@ -19,11 +19,14 @@ class EmployeeListApi(Resource):
         to db not empty json will have fields 'dep', 'department_id','name', 'salary', 'id','birthday'"""
         if not id:
             rq = request.args
-            if rq:
+            if rq.get('date1') and rq.get('date2'):
                 date1 = rq.get('date1')
                 date2 = rq.get('date2')
                 employees = EmployeeService.fetch_all_employees_with_dep_between_dates(db.session, date1=date1,
                                                                                        date2=date2).all()
+            elif rq.get('department_id'):
+                employees = EmployeeService.fetch_all_employees_by_dep_with_names_dep(db.session,
+                                                                                      id=rq.get('department_id')).all()
             else:
                 employees = EmployeeService.fetch_all_employees_with_dep(db.session).all()
             return self.employee_schema_with_dep.dump(employees, many=True), 200
@@ -43,7 +46,6 @@ class EmployeeListApi(Resource):
             rq = [rq]
         logger.debug(rq)
         for one in rq:
-            logger.debug(one)
             dep = one['dep']
             department = DepartmentService.fetch_department_by_name(db.session, name=dep)
 
@@ -54,13 +56,11 @@ class EmployeeListApi(Resource):
 
             one['department_id'] = department.id
             del one['dep']
-            logger.debug(one)
             try:
                 employee = self.employee_schema.load(one, session=db.session)
             except ValidationError as e:
-                logger.debug(f"Validation error in post Employee by Api is {e}")
-                return {'message': str(e)}, 400
-            logger.debug(employee)
+                logger.debug(f"Validation error to post Employee by Api is {e}")
+                return {'message': f'Validation error to post Employee {e}'}, 400
             db.session.add(employee)
         db.session.commit()
         return self.employee_schema.dump(employee), 201

@@ -18,7 +18,7 @@ class TestRestDepartments:
 
     def test_populate_db(self):
         client = app.test_client()
-        client.get('/populate2/30')
+        client.get('/populate/20')
 
     def test_get_departments_with_db(self):
         client = app.test_client()
@@ -107,7 +107,7 @@ class TestRestDepartments:
         client.post('/json/employees', data=json.dumps(data1), content_type='application/json')
         client.post('/json/employees', data=json.dumps(data1), content_type='application/json')
 
-        url = f"/json/departments/{db.session.query(Department).all()[-2].id}"
+        url = f"/json/departments/{db.session.query(Department).all()[-4].id}"
         data2 = {
             "name": "frontend123"
         }

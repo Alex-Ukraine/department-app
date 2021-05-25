@@ -85,6 +85,26 @@ class TestViews:
 
         assert resp.status_code == http.HTTPStatus.OK
 
+    def test_get_view_employees_with_db_selected_department_id(self):
+        with app.test_request_context('/'), \
+                app.test_client() as client:
+            params = '?department_id=1'
+            url = request.host_url[:-1] + ':5000/' + params
+            resp = client.get(url, follow_redirects=True)
+
+        assert resp.status_code == http.HTTPStatus.OK
+
+    def test_get_view_employees_with_db_between_dates_date1_bigger_date2(self):
+        with app.test_request_context('/'), \
+                app.test_client() as client:
+            params = '?date_picker1=1997-07-22&date_picker2=1992-07-22'
+            url = request.host_url[:-1] + ':5000/' + params
+            resp = client.get(url, follow_redirects=True)
+            message = get_flashed_messages()
+
+        assert message[0] == "Value error 'the first date must be less than the second'"
+        assert resp.status_code == http.HTTPStatus.OK
+
     def test_get_view_employees_with_db_between_dates_bad_data(self):
         with app.test_request_context('/'), \
                 app.test_client() as client:
@@ -129,6 +149,40 @@ class TestViews:
             message = get_flashed_messages()
 
         assert message[0] == "time data '1990.11.11' does not match format '%Y-%m-%d'"
+        assert resp.status_code == http.HTTPStatus.OK
+
+    def test_post_view_employee_with_db_data_out_of_range(self):
+        data = {
+            "name": "Fake Employee",
+            "birthday": "1900-11-11",
+            "salary": 789,
+            "dep": "some_department"
+        }
+        with app.test_request_context('/'), \
+                app.test_client() as client:
+            url = request.host_url[:-1] + ':5000/' + 'insert'
+            client.post(url, data=data, follow_redirects=True)
+            resp = client.post(url, data=data, follow_redirects=True)
+            message = get_flashed_messages()
+
+        assert message[0] == "Validation error to post Employee {'birthday': ['birthday must be greater than 1930.']}"
+        assert resp.status_code == http.HTTPStatus.OK
+
+    def test_post_view_employee_with_db_data_out_of_range_on_form(self):
+        data = {
+            "name": "Fake Employee",
+            "birthday": "2016-11-11",
+            "salary": 789,
+            "dep": "some_department"
+        }
+        with app.test_request_context('/'), \
+                app.test_client() as client:
+            url = request.host_url[:-1] + ':5000/' + 'insert'
+            client.post(url, data=data, follow_redirects=True)
+            resp = client.post(url, data=data, follow_redirects=True)
+            message = get_flashed_messages()
+
+        assert message[0] == "date must be in range between dates 1900-01-01 and 2015-01-01"
         assert resp.status_code == http.HTTPStatus.OK
 
     def test_post_view_employee_with_db_fields_empty(self):

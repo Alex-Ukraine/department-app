@@ -16,6 +16,14 @@ class EmployeeService:
         return session.query(Employee).filter(Employee.department_id == id)
 
     @staticmethod
+    def fetch_all_employees_by_dep_with_names_dep(session, id):
+        """make a query to db table 'employee' and fetch records who satisfies condition
+        'Employee.department_id == id'"""
+        return session.query(Employee.id, Employee.name, Employee.birthday, Employee.salary,
+                             Employee.department_id, Department.name.label('dep')).join(Department).filter(
+            Employee.department_id == id)
+
+    @staticmethod
     def fetch_all_employees_with_dep(session):
         """make a query to db table 'employee' and 'department', fetch all records + add new field 'dep',
          filled with values from table 'department'"""

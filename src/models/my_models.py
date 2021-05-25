@@ -1,5 +1,7 @@
 from datetime import datetime
 
+from marshmallow import validates, ValidationError
+
 from src import db
 
 
@@ -18,7 +20,7 @@ class Department(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), unique=True, nullable=False)
 
-    child = db.relationship('Employee', backref='dep')
+    #child = db.relationship('Employee', backref='dep_record')
 
     #def __repr__(self):
     #    return f'Department({self.id}, {self.name}, {self.child})'
