@@ -12,7 +12,7 @@ class EmployeeSchema(SQLAlchemyAutoSchema):
         load_instance = True
         include_fk = True
 
-    name = fields.Str(validate=validate.Regexp(r'[A-Za-zА-Яа-я\s\'`]{0,100}'))
+    name = fields.Str(validate=validate.Regexp(r'^[A-Za-zА-Яа-я\s\'`]{0,100}$'))
     dep = fields.String(required=False)
 
     @validates("birthday")
