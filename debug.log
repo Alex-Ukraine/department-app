@@ -1,0 +1,31 @@
+2021-05-25 14:21:08,165 - DEBUG - app_logger - Validation error in post Department by Api is {'mood': ['Unknown field.']}
+2021-05-25 14:21:08,224 - DEBUG - app_logger - Department not unique, already exists
+2021-05-25 14:21:09,103 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend123'}]
+2021-05-25 14:21:09,713 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend123'}]
+2021-05-25 14:21:10,313 - DEBUG - app_logger - <Employee 45>
+2021-05-25 14:21:11,189 - DEBUG - app_logger - Validation error in put Department by Api is {'mood': ['Unknown field.']}
+2021-05-25 14:21:14,993 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend'}]
+2021-05-25 14:21:15,376 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend'}]
+2021-05-25 14:21:15,764 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'some super mega strange name department'}]
+2021-05-25 14:21:16,368 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'web', 'mood': 'crazy'}]
+2021-05-25 14:21:16,423 - DEBUG - app_logger - Validation error to post Employee by Api is {'mood': ['Unknown field.']}
+2021-05-25 14:21:16,533 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '2020-03-05', 'salary': 1000, 'dep': 'web'}]
+2021-05-25 14:21:16,588 - DEBUG - app_logger - Validation error to post Employee by Api is {'birthday': ['birthday must not be greater than 2015.']}
+2021-05-25 14:21:16,697 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1900-03-05', 'salary': 1000, 'dep': 'web'}]
+2021-05-25 14:21:16,753 - DEBUG - app_logger - Validation error to post Employee by Api is {'birthday': ['birthday must be greater than 1930.']}
+2021-05-25 14:21:17,030 - DEBUG - app_logger - [{'name': 'Test Employee', 'birthday': '1990-03-05', 'salary': 560, 'dep': 'web'}]
+2021-05-25 14:21:18,482 - D2021-05-25 14:21:23,653 - DEBUG - app_logger - [{'name': 'Jacqueline Burke', 'birthday': '1993-09-20', 'salary': 500, 'dep': 'web'}, {'name': 'Christine Cox', 'birthday': '1994-03-21', 'salary': 1200, 'dep': 'backen2021-02021-05-25 14:21:25,459 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-11-11', 'salary': '789', 'dep': 'some_department'}]
+2021-05-25 14:21:26,264 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-11-11', 'salary2021-05-25 14:21:27,417 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '1990.11.11' does not match format '%Y-%m-%d'
+2021-05-25 14:21:27,600 - 2021-05-25 14:21:27,791 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1900-11-11', 'salary': '789', 'dep': 'some_d2021-05-25 14:21:28,498 - DEBUG - app_logger - Value error for insert Employee in field birthday is date must be in range between dates 1900-01-01 and 2015-01-01
+2021-05-25 14:21:28,682 - DEBUG - app_logger - Value error for insert Employee in field birthday is date must be in range between dates 1900-01-01 and 2015-01-01
+2021-05-25 14:21:28,869 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-25 14:21:29,448 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-25 14:21:29,806 - DEBUG - app_logger - Value error for insert Employee in field salary
+2021-05-25 14:21:29,989 - DEBUG - app_logger - Value error for insert Employee in field salary
+2021-05-25 14:21:30,812 - DEBUG - app_logger - Value error for update Employee in field birthday is time data '1989.06.10' does not match format '%Y-%m-%d'
+2021-05-25 14:21:30,999 - DEBUG - app_logger - Value error for update Employee in field salary
+20212021-05-25 14:21:33,066 - DEBUG - app_logger - Department not unique, already exists
+2021-05-25 14:21:34,156 - DEBUG - app_logger - <Employee 335>
+2021-05-25 14:21:34,156 - DEBUG - app_logger - <Employee 345>
+2021-05-25 14:21:34,156 - DEBUG - app_logger - <Employee 655>
+ot be empty
