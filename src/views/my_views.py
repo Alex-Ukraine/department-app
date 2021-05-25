@@ -25,12 +25,23 @@ def index():
             logger.debug(f"Value error for search Employees between dates is {e}")
             flash(f"{e}", "danger")
             return redirect(url_for('index'))
+        if date1 > date2:
+            logger.debug("Value error 'the first date must be less than the second'")
+            flash("Value error 'the first date must be less than the second'", "danger")
+            return redirect(url_for('index'))
 
         my_data = dict(date1=date1, date2=date2)
         url = request.host_url + 'json/employees'
         all_employees = requests.get(url, params=my_data, verify=False)
         if all_employees.status_code == 200:
             flash(f"Employees successfully searched between dates {date1} and {date2}", "success")
+    elif request.args.get('department_id'):
+        department_id = request.args.get('department_id')
+        my_data = dict(department_id=department_id)
+        url = request.host_url + 'json/employees'
+        all_employees = requests.get(url, params=my_data, verify=False)
+        if all_employees.status_code == 200:
+            flash(f"Employees successfully selected by department", "success")
     else:
         all_employees = requests.get(request.host_url + 'json/employees')
     return render_template("index.html", employee=all_employees.json(), verify=False)
@@ -43,6 +54,8 @@ def insert():
     name = request.form['name']
     try:
         birthday = str(datetime.strptime(request.form['birthday'], '%Y-%m-%d').date())
+        if int(birthday[:4]) not in range(1900, 2015):
+            raise ValueError("date must be in range between dates 1900-01-01 and 2015-01-01")
     except ValueError as e:
         logger.debug(f"Value error for insert Employee in field birthday is {e}")
         flash(f"{e}", "danger")
@@ -61,6 +74,8 @@ def insert():
     headers = {'Content-type': 'application/json'}
     url = request.host_url + 'json/employees'
     rq = requests.post(url, headers=headers, data=my_data, verify=False)
+    if rq.status_code == 400:
+        flash(rq.json()['message'], 'danger')
     if rq.status_code == 201:
         flash("Employee Inserted Successfully", "success")
     return redirect(url_for('index'))
@@ -184,6 +199,7 @@ def populate_db(id):
         return redirect(url_for('index'))
 
     fake = Faker()
+    employees_to_create = []
     for _ in range(id):
         data = {
             "name": fake.name(),
@@ -200,9 +216,10 @@ def populate_db(id):
             db.session.add(department)
             db.session.commit()
 
-        employee = Employee(name=data["name"], birthday=data["birthday"],
-                            salary=data["salary"], department_id=department.id)
-        db.session.add(employee)
+        employees_to_create.append(Employee(name=data["name"], birthday=data["birthday"],
+                                            salary=data["salary"], department_id=department.id))
+
+    db.session.bulk_save_objects(employees_to_create)
     db.session.commit()
     flash(f"DB successfully populated by {id} records", "success")
     return redirect(url_for('index'))

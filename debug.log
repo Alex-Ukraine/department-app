@@ -1,0 +1,1 @@
+2021-05-25 13:49:48,379 - DEBUG - app_logger - Value error for insert Employee in field birthday is date must be in range between dates 1900-01-01 and 2015-01-01

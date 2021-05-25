@@ -20,7 +20,7 @@ class TestRestEmployees:
 
     def test_populate_db(self):
         client = app.test_client()
-        client.get('/populate2/20')
+        client.get('/populate/20')
 
     def test_get_employees_with_db(self):
         client = app.test_client()
@@ -37,6 +37,11 @@ class TestRestEmployees:
     def test_get_employees_with_db_between_dates(self):
         client = app.test_client()
         resp = client.get('/json/employees/?date1=1985-07-22&date2=2000-07-22')
+        assert resp.status_code == http.HTTPStatus.OK
+
+    def test_get_employees_with_db_selected_with_department_id(self):
+        client = app.test_client()
+        resp = client.get('/json/employees/?department_id=1')
         assert resp.status_code == http.HTTPStatus.OK
 
     def test_get_employees_mock_db(self):
@@ -83,6 +88,28 @@ class TestRestEmployees:
             "salary": 1000,
             "dep": "web",
             "mood": "crazy"
+        }
+        resp = client.post('/json/employees', data=json.dumps(data), content_type='application/json')
+        assert resp.status_code == http.HTTPStatus.BAD_REQUEST
+
+    def test_create_employee_with_db_error_validation_400_incompatible_date1(self):
+        client = app.test_client()
+        data = {
+            "name": "Fake Employee",
+            "birthday": "2020-03-05",
+            "salary": 1000,
+            "dep": "web"
+        }
+        resp = client.post('/json/employees', data=json.dumps(data), content_type='application/json')
+        assert resp.status_code == http.HTTPStatus.BAD_REQUEST
+
+    def test_create_employee_with_db_error_validation_400_incompatible_date2(self):
+        client = app.test_client()
+        data = {
+            "name": "Fake Employee",
+            "birthday": "1900-03-05",
+            "salary": 1000,
+            "dep": "web"
         }
         resp = client.post('/json/employees', data=json.dumps(data), content_type='application/json')
         assert resp.status_code == http.HTTPStatus.BAD_REQUEST

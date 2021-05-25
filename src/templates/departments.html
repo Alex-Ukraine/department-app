@@ -38,7 +38,7 @@
                 {% for row in departments %}
                 <tr>
                     <td>{{row.id}}</td>
-                    <td>{{row.name}}</td>
+                    <td><a href="/?department_id={{row.id}}">{{row.name}}</a></td>
                     <td>{{row.avg|round(2, 'common')}}</td>
                     <td>{{row.count|int}}</td>
                     <td>
