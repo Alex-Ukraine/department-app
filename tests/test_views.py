@@ -10,7 +10,9 @@ from src.models.my_models import Department, Employee
 class TestViews:
     temp_id_emp = 21
     temp_id_dep = 21
-    port = ':5000'
+    port = ''
+    #port = ':5000'
+
 
     def test_populate_db(self):
         id = 20
