@@ -12,11 +12,7 @@ from src import app, db, logger
 from src.models.my_models import Department, Employee
 from src.service.service import DepartmentService
 
-url_part = 'http://localhost:80/'
-# url_part = request.host_url
 
-
-@app.route('/index', methods=['GET'])
 @app.route('/', methods=['GET'])
 def index():
     """If User goes address '/' program will give him list of all employees.
@@ -35,7 +31,7 @@ def index():
             return redirect(url_for('index'))
 
         my_data = dict(date1=date1, date2=date2)
-        url = 'http://localhost:80/' + 'json/employees'
+        url = request.host_url + 'json/employees'
         logger.debug(request.__dict__)
         all_employees = requests.get(url, params=my_data, verify=False)
         if all_employees.status_code == 200:
@@ -43,12 +39,12 @@ def index():
     elif request.args.get('department_id'):
         department_id = request.args.get('department_id')
         my_data = dict(department_id=department_id)
-        url = 'http://localhost:80/' + 'json/employees'
+        url = request.host_url + 'json/employees'
         all_employees = requests.get(url, params=my_data, verify=False)
         if all_employees.status_code == 200:
             flash(f"Employees successfully selected by department", "success")
     else:
-        all_employees = requests.get('http://localhost:80/' + 'json/employees', verify=False)
+        all_employees = requests.get(request.host_url + 'json/employees', verify=False)
     return render_template("index.html", employee=all_employees.json())
 
 
@@ -77,7 +73,7 @@ def insert():
     my_data = json.dumps(dict(name=name, birthday=birthday, salary=salary, dep=dep))
 
     headers = {'Content-type': 'application/json'}
-    url = 'http://localhost:80/' + 'json/employees'
+    url = request.host_url + 'json/employees'
     rq = requests.post(url, headers=headers, data=my_data, verify=False)
     if rq.status_code == 400:
         flash(rq.json()['message'], 'danger')
@@ -111,7 +107,7 @@ def update(id):
         my_data = json.dumps(dict(id=id, name=name, birthday=birthday, salary=salary, dep=dep))
 
         headers = {'Content-type': 'application/json'}
-        url = 'http://localhost:80/' + 'json/employees/' + str(id)
+        url = request.host_url + 'json/employees/' + str(id)
         rq = requests.patch(url, headers=headers, data=my_data, verify=False)
         if rq.status_code == 200:
             flash("Employee Updated Successfully", "success")
@@ -123,7 +119,7 @@ def update(id):
 def delete(id):
     """After click button delete on page 'employees'
     the specified record will try to delete and user will see a message"""
-    url = 'http://localhost:80/' + 'json/employees/' + str(id)
+    url = request.host_url + 'json/employees/' + str(id)
     rq = requests.delete(url, verify=False)
 
     if rq.status_code == 204:
@@ -137,7 +133,7 @@ def departments():
     """If User goes address '/departments' program will give him list of departments with which Employees were binded"""
     headers = {'Content-type': 'application/json'}
 
-    url = 'http://localhost:80/' + 'json/departments'
+    url = request.host_url + 'json/departments'
     rq = requests.get(url, headers=headers, verify=False)
     return render_template("departments.html", departments=rq.json())
 
@@ -154,7 +150,7 @@ def department_insert():
     my_data = json.dumps(dict(name=name))
 
     headers = {'Content-type': 'application/json'}
-    url = 'http://localhost:80/' + 'json/departments'
+    url = request.host_url + 'json/departments'
     rq = requests.post(url, headers=headers, data=my_data, verify=False)
     if rq.status_code == 409:
         flash(rq.json()['message'], 'danger')
@@ -175,7 +171,7 @@ def department_update(id):
     my_data = json.dumps(dict(id=id, name=name))
 
     headers = {'Content-type': 'application/json'}
-    url = 'http://localhost:80/' + 'json/departments/' + str(id)
+    url = request.host_url + 'json/departments/' + str(id)
     rq = requests.put(url, headers=headers, data=my_data, verify=False)
     if rq.status_code == 200:
         flash("Department Updated Successfully", "success")
@@ -186,7 +182,7 @@ def department_update(id):
 def department_delete(id):
     """After click button delete on page 'departments'
     the specified record will be tried to delete and user will see a message"""
-    url = 'http://localhost:80/' + 'json/departments/' + str(id)
+    url = request.host_url + 'json/departments/' + str(id)
     rq = requests.delete(url, verify=False)
     if rq.status_code == 204:
         flash("Department Deleted Successfully", "success")
@@ -209,7 +205,7 @@ def populate_db(id):
             "name": fake.name(),
             "birthday": str(fake.date_between_dates(date_start=datetime(1985, 1, 1),
                                                     date_end=datetime(2000, 1, 1))),
-            "salary": random.randrange(100, 80, 100),
+            "salary": random.randrange(100, 5000, 100),
             "dep": random.choice(['web', 'frontend', 'backend', 'simulations',
                                   'graphic', 'android', 'iOS', 'ml', 'ds', 'marketing'])
         }
@@ -246,14 +242,14 @@ def populate_db2(id):
             "name": fake.name(),
             "birthday": str(fake.date_between_dates(date_start=datetime(1985, 1, 1),
                                                     date_end=datetime(2000, 1, 1))),
-            "salary": random.randrange(100, 80, 100),
+            "salary": random.randrange(100, 5000, 100),
             "dep": random.choice(['web', 'frontend', 'backend', 'simulations',
                                   'graphic', 'android', 'iOS', 'ml', 'ds', 'marketing'])
         }
         all_dicts.append(new_dict)
     my_data = json.dumps(all_dicts)
     headers = {'Content-type': 'application/json'}
-    url = 'http://localhost:80/' + 'json/employees'
+    url = request.host_url + 'json/employees'
     rq = requests.post(url, headers=headers, params={"populate": True}, data=my_data, verify=False,
                        allow_redirects=True)
     if rq.status_code == 201:

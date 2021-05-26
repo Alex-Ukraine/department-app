@@ -1,7 +1,10 @@
 import http
 import json
+import time
 from dataclasses import dataclass
 from unittest.mock import patch
+
+import pytest
 
 from src import app, db
 from src.models.my_models import Department
@@ -16,8 +19,12 @@ class FakeEmployee:
 
 
 class TestRestEmployees:
-    db.create_all()
     id = []
+
+    def test_create_all(self):
+        db.session.commit()
+        db.drop_all()
+        db.create_all()
 
     def test_populate_db(self):
         client = app.test_client()
@@ -276,3 +283,9 @@ class TestRestEmployees:
         url = f'/json/departments/{temp_id_dep}'
         resp = client.delete(url)
         assert resp.status_code == http.HTTPStatus.NO_CONTENT
+
+    def test_drop_all(self):
+        db.session.commit()
+        db.drop_all()
+        db.create_all()
+        time.sleep(2)
