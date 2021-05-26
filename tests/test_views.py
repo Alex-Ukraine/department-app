@@ -14,9 +14,9 @@ class TestViews:
     db.create_all()
     temp_id_emp = 21
     temp_id_dep = 21
-    port = ':80'
+    #port = ':80'
 
-    #port = ':5000'
+    port = ':5000'
 
     def test_populate_db_example(self):
         client = app.test_client()
