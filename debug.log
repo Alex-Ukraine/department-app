@@ -1,0 +1,33 @@
+2021-05-26 12:45:01,468 - DEBUG - app_logger - Validation error in post Department by Api is {'mood': ['Unknown field.']}
+2021-05-26 12:45:01,474 - DEBUG - app_logger - Department not unique, already exists
+2021-05-26 12:45:01,505 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend123'}]
+2021-05-26 12:45:01,524 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend123'}]
+2021-05-26 12:45:01,537 - DEBUG - app_logger - <Employee 20>
+2021-05-26 12:45:01,561 - DEBUG - app_logger - Validation error in put Department by Api is {'mood': ['Unknown field.']}
+2021-05-26 12:45:01,768 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend'}]
+2021-05-26 12:45:01,776 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend'}]
+2021-05-26 12:45:01,786 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'some super mega strange name department'}]
+2021-05-26 12:45:01,799 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'web', 'mood': 'crazy'}]
+2021-05-26 12:45:01,801 - DEBUG - app_logger - Validation error to post Employee by Api is {'mood': ['Unknown field.']}
+2021-05-26 12:45:01,805 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '2020-03-05', 'salary': 1000, 'dep': 'web'}]
+2021-05-26 12:45:01,808 - DEBUG - app_logger - Validation error to post Employee by Api is {'birthday': ['birthday must not be greater than 2015.']}
+2021-05-26 12:45:01,813 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1900-03-05', 'salary': 1000, 'dep': 'web'}]
+2021-05-26 12:45:01,815 - DEBUG - app_logger - Validation error to post Employee by Api is {'birthday': ['birthday must be greater than 1930.']}
+2021-05-26 12:45:01,828 - DEBUG - app_logger - [{'name': 'Test Employee', 'birthday': '1990-03-05', 'salary': 560, 'dep': 'web'}]
+2021-05-26 12:45:01,869 - DEBUG - app_logger - Validation error in put Employee by Api is {'mood': ['Unknown field.']}
+2021-05-26 12:45:01,877 - DEBUG - app_logger - Validation error in patch Employee by Api is {'mood': ['Unknown field.']}
+2021-05-26 12:45:02,667 - DEBUG - app_logger - Value error 'the first date must be less than the second'
+2021-05-26 12:45:02,702 - DEBUG - app_logger - Value error for search Employees between dates is time data '19850722' does not match format '%Y-%m-%d'
+2021-05-26 12:45:02,809 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '1990.11.11' does not match format '%Y-%m-%d'
+2021-05-26 12:45:02,820 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '1990.11.11' does not match format '%Y-%m-%d'
+2021-05-26 12:45:02,909 - DEBUG - app_logger - Value error for insert Employee in field birthday is date must be in range between dates 1900-01-01 and 2015-01-01
+2021-05-26 12:45:02,921 - DEBUG - app_logger - Value error for insert Employee in field birthday is date must be in range between dates 1900-01-01 and 2015-01-01
+2021-05-26 12:45:02,954 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-26 12:45:02,972 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-26 12:45:03,049 - DEBUG - app_logger - Value error for insert Employee in field salary
+2021-05-26 12:45:03,060 - DEBUG - app_logger - Value error for insert Employee in field salary
+2021-05-26 12:45:03,135 - DEBUG - app_logger - Value error for update Employee in field birthday is time data '1989.06.10' does not match format '%Y-%m-%d'
+2021-05-26 12:45:03,170 - DEBUG - app_logger - Value error for update Employee in field salary
+2021-05-26 12:45:03,205 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-26 12:45:03,358 - DEBUG - app_logger - Validation error, field name must not be empty
+2021-05-26 12:45:03,439 - DEBUG - app_logger - Validation error, field name must not be empty

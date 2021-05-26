@@ -135,7 +135,6 @@ def departments():
 
     url = request.host_url + 'json/departments'
     rq = requests.get(url, headers=headers, verify=False)
-
     return render_template("departments.html", departments=rq.json())
 
 

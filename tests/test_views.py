@@ -1,5 +1,8 @@
 import http
+import inspect
+import os
 
+import flask
 import requests
 from flask import request, get_flashed_messages
 
@@ -12,13 +15,21 @@ class TestViews:
     temp_id_dep = 21
     port = ':80'
 
-    #port = ':5000'
+    # port = ':5000'
+
+    def test_populate_db_example(self):
+        client = app.test_client()
+        resp = client.get('/populate/2', follow_redirects=False)
+
+        assert resp.status_code == http.HTTPStatus.FOUND
 
     def test_populate_db(self):
         id = 20
         with app.test_request_context('/'), \
                 app.test_client() as client:
-            url = request.host_url[:-1] + f'{TestViews.port}/' + f'populate/{id}'
+            # url = request.host_url[:-1] + f'{TestViews.port}/' + f'populate/{id}'
+            url = os.environ['TRAVIS_APP_HOST'] + f'populate/{id}'
+            print(url)
             resp = client.get(url, follow_redirects=True)
             message = get_flashed_messages()
 
