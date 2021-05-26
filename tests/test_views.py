@@ -12,7 +12,7 @@ class TestViews:
     temp_id_dep = 21
     port = ''
 
-    # port = ':5000'
+    #port = ':5000'
 
     def test_populate_db(self):
         id = 20
@@ -21,11 +21,10 @@ class TestViews:
             url = request.host_url[:-1] + f'{TestViews.port}/' + f'populate/{id}'
             resp = client.get(url, follow_redirects=True)
             message = get_flashed_messages()
-            assert url == 'localhost'
-            assert request.environ['RAW_URI'] == ''
-            assert request.full_path == ''
-            assert request.server_port == ''
-            assert request.environ['REQUEST_URI'] == ''
+
+            s = request.environ['RAW_URI'], request.full_path, request.environ['REQUEST_URI']
+            assert s == ''
+
         assert message[0] == f"DB successfully populated by {id} records"
         assert resp.status_code == http.HTTPStatus.OK
         TestViews.temp_id_emp = db.session.query(Employee).all()[-1].id
