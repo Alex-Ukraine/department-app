@@ -13,6 +13,7 @@ from src.models.my_models import Department, Employee
 from src.service.service import DepartmentService
 
 
+@app.route('/index', methods=['GET'])
 @app.route('/', methods=['GET'])
 def index():
     """If User goes address '/' program will give him list of all employees.

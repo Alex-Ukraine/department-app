@@ -10,12 +10,13 @@ from src.models.my_models import Department, Employee
 class TestViews:
     temp_id_emp = 21
     temp_id_dep = 21
+    port = ':5000'
 
     def test_populate_db(self):
         id = 20
         with app.test_request_context('/'), \
                 app.test_client() as client:
-            url = request.host_url[:-1] + ':5000/' + f'populate/{id}'
+            url = request.host_url[:-1] + f'{TestViews.port}/' + f'populate/{id}'
             resp = client.get(url, follow_redirects=True)
             message = get_flashed_messages()
 
@@ -28,7 +29,7 @@ class TestViews:
         id = 200000
         with app.test_request_context('/'), \
                 app.test_client() as client:
-            url = request.host_url[:-1] + ':5000/' + f'populate/{id}'
+            url = request.host_url[:-1] + f'{TestViews.port}/' + f'populate/{id}'
             resp = client.get(url, follow_redirects=True)
             message = get_flashed_messages()
 
@@ -39,7 +40,7 @@ class TestViews:
         id = 2
         with app.test_request_context('/'), \
                 app.test_client() as client:
-            url = request.host_url[:-1] + ':5000/' + f'populate2/{id}'
+            url = request.host_url[:-1] + f'{TestViews.port}/' + f'populate2/{id}'
             resp = client.get(url, follow_redirects=True)
             message = get_flashed_messages()
 
@@ -50,7 +51,7 @@ class TestViews:
         id = 200000
         with app.test_request_context('/'), \
                 app.test_client() as client:
-            url = request.host_url[:-1] + ':5000/' + f'populate2/{id}'
+            url = request.host_url[:-1] + f'{TestViews.port}/' + f'populate2/{id}'
             resp = client.get(url, follow_redirects=True)
             message = get_flashed_messages()
 
@@ -60,7 +61,7 @@ class TestViews:
     def test_get_view_employees_with_db(self):
         with app.test_request_context('/'), \
                 app.test_client() as client:
-            url = request.host_url[:-1] + ':5000/'
+            url = request.host_url[:-1] + f'{TestViews.port}/'
             resp = client.get(url)
         assert resp.status_code == http.HTTPStatus.OK
 
@@ -80,7 +81,7 @@ class TestViews:
         with app.test_request_context('/'), \
                 app.test_client() as client:
             params = '?date_picker1=1985-07-22&date_picker2=1992-07-22'
-            url = request.host_url[:-1] + ':5000/' + params
+            url = request.host_url[:-1] + f'{TestViews.port}/' + params
             resp = client.get(url, follow_redirects=True)
 
         assert resp.status_code == http.HTTPStatus.OK
@@ -89,7 +90,7 @@ class TestViews:
         with app.test_request_context('/'), \
                 app.test_client() as client:
             params = '?department_id=1'
-            url = request.host_url[:-1] + ':5000/' + params
+            url = request.host_url[:-1] + f'{TestViews.port}/' + params
             resp = client.get(url, follow_redirects=True)
 
         assert resp.status_code == http.HTTPStatus.OK
@@ -98,7 +99,7 @@ class TestViews:
         with app.test_request_context('/'), \
                 app.test_client() as client:
             params = '?date_picker1=1997-07-22&date_picker2=1992-07-22'
-            url = request.host_url[:-1] + ':5000/' + params
+            url = request.host_url[:-1] + f'{TestViews.port}/' + params
             resp = client.get(url, follow_redirects=True)
             message = get_flashed_messages()
 
@@ -109,7 +110,7 @@ class TestViews:
         with app.test_request_context('/'), \
                 app.test_client() as client:
             params = '?date_picker1=19850722&date_picker2=19920722'
-            url = request.host_url[:-1] + ':5000/' + params
+            url = request.host_url[:-1] + f'{TestViews.port}/' + params
             resp = client.get(url, follow_redirects=True)
             message = get_flashed_messages()
 
@@ -125,7 +126,7 @@ class TestViews:
         }
         with app.test_request_context('/'), \
                 app.test_client() as client:
-            url = request.host_url[:-1] + ':5000/' + 'insert'
+            url = request.host_url[:-1] + f'{TestViews.port}/' + 'insert'
             client.post(url, data=data, follow_redirects=True)
             client.post(url, data=data, follow_redirects=True)
             resp = client.post(url, data=data, follow_redirects=True)
@@ -143,7 +144,7 @@ class TestViews:
         }
         with app.test_request_context('/'), \
                 app.test_client() as client:
-            url = request.host_url[:-1] + ':5000/' + 'insert'
+            url = request.host_url[:-1] + f'{TestViews.port}/' + 'insert'
             client.post(url, data=data, follow_redirects=True)
             resp = client.post(url, data=data, follow_redirects=True)
             message = get_flashed_messages()
@@ -160,7 +161,7 @@ class TestViews:
         }
         with app.test_request_context('/'), \
                 app.test_client() as client:
-            url = request.host_url[:-1] + ':5000/' + 'insert'
+            url = request.host_url[:-1] + f'{TestViews.port}/' + 'insert'
             client.post(url, data=data, follow_redirects=True)
             resp = client.post(url, data=data, follow_redirects=True)
             message = get_flashed_messages()
@@ -177,7 +178,7 @@ class TestViews:
         }
         with app.test_request_context('/'), \
                 app.test_client() as client:
-            url = request.host_url[:-1] + ':5000/' + 'insert'
+            url = request.host_url[:-1] + f'{TestViews.port}/' + 'insert'
             client.post(url, data=data, follow_redirects=True)
             resp = client.post(url, data=data, follow_redirects=True)
             message = get_flashed_messages()
@@ -194,7 +195,7 @@ class TestViews:
         }
         with app.test_request_context('/'), \
                 app.test_client() as client:
-            url = request.host_url[:-1] + ':5000/' + 'insert'
+            url = request.host_url[:-1] + f'{TestViews.port}/' + 'insert'
             client.post(url, data=data, follow_redirects=True)
             resp = client.post(url, data=data, follow_redirects=True)
             message = get_flashed_messages()
@@ -211,7 +212,7 @@ class TestViews:
         }
         with app.test_request_context('/'), \
                 app.test_client() as client:
-            url = request.host_url[:-1] + ':5000/' + 'insert'
+            url = request.host_url[:-1] + f'{TestViews.port}/' + 'insert'
             client.post(url, data=data, follow_redirects=True)
             resp = client.post(url, data=data, follow_redirects=True)
             message = get_flashed_messages()
@@ -228,7 +229,7 @@ class TestViews:
         }
         with app.test_request_context('/'), \
                 app.test_client() as client:
-            url = request.host_url[:-1] + ':5000/' + f'update/{TestViews.temp_id_emp}'
+            url = request.host_url[:-1] + f'{TestViews.port}/' + f'update/{TestViews.temp_id_emp}'
 
             resp = client.post(url, data=data, follow_redirects=True)
             message = get_flashed_messages()
@@ -245,7 +246,7 @@ class TestViews:
         }
         with app.test_request_context('/'), \
                 app.test_client() as client:
-            url = request.host_url[:-1] + ':5000/' + f'update/{TestViews.temp_id_emp}'
+            url = request.host_url[:-1] + f'{TestViews.port}/' + f'update/{TestViews.temp_id_emp}'
 
             resp = client.post(url, data=data, follow_redirects=True)
             message = get_flashed_messages()
@@ -262,7 +263,7 @@ class TestViews:
         }
         with app.test_request_context('/'), \
                 app.test_client() as client:
-            url = request.host_url[:-1] + ':5000/' + f'update/{TestViews.temp_id_emp}'
+            url = request.host_url[:-1] + f'{TestViews.port}/' + f'update/{TestViews.temp_id_emp}'
 
             resp = client.post(url, data=data, follow_redirects=True)
             message = get_flashed_messages()
@@ -279,7 +280,7 @@ class TestViews:
         }
         with app.test_request_context('/'), \
                 app.test_client() as client:
-            url = request.host_url[:-1] + ':5000/' + f'update/{TestViews.temp_id_emp}'
+            url = request.host_url[:-1] + f'{TestViews.port}/' + f'update/{TestViews.temp_id_emp}'
 
             resp = client.post(url, data=data, follow_redirects=True)
             message = get_flashed_messages()
@@ -290,7 +291,7 @@ class TestViews:
     def test_delete_view_employee_with_db(self):
         with app.test_request_context('/'), \
                 app.test_client() as client:
-            url = request.host_url[:-1] + ':5000/' + f'delete/{TestViews.temp_id_emp}'
+            url = request.host_url[:-1] + f'{TestViews.port}/' + f'delete/{TestViews.temp_id_emp}'
 
             resp = client.get(url, follow_redirects=True)
             message = get_flashed_messages()
@@ -301,7 +302,7 @@ class TestViews:
     def test_get_view_departments_with_db(self):
         with app.test_request_context('/'), \
                 app.test_client() as client:
-            url = request.host_url[:-1] + ':5000/' + 'departments'
+            url = request.host_url[:-1] + f'{TestViews.port}/' + 'departments'
             resp = client.get(url)
         assert resp.status_code == http.HTTPStatus.OK
 
@@ -311,7 +312,7 @@ class TestViews:
         }
         with app.test_request_context('/'), \
                 app.test_client() as client:
-            url = request.host_url[:-1] + ':5000/' + 'departments/' + 'insert'
+            url = request.host_url[:-1] + f'{TestViews.port}/' + 'departments/' + 'insert'
             resp = client.post(url, data=data, follow_redirects=True)
             message = get_flashed_messages()
 
@@ -324,7 +325,7 @@ class TestViews:
         }
         with app.test_request_context('/'), \
                 app.test_client() as client:
-            url = request.host_url[:-1] + ':5000/' + 'departments/' + 'insert'
+            url = request.host_url[:-1] + f'{TestViews.port}/' + 'departments/' + 'insert'
             resp = client.post(url, data=data, follow_redirects=True)
             message = get_flashed_messages()
 
@@ -337,7 +338,7 @@ class TestViews:
         }
         with app.test_request_context('/'), \
                 app.test_client() as client:
-            url = request.host_url[:-1] + ':5000/' + 'departments/' + f'update/{TestViews.temp_id_dep}'
+            url = request.host_url[:-1] + f'{TestViews.port}/' + 'departments/' + f'update/{TestViews.temp_id_dep}'
 
             resp = client.post(url, data=data, follow_redirects=True)
             message = get_flashed_messages()
@@ -351,7 +352,7 @@ class TestViews:
         }
         with app.test_request_context('/'), \
                 app.test_client() as client:
-            url = request.host_url[:-1] + ':5000/' + 'departments/' + f'update/{TestViews.temp_id_dep}'
+            url = request.host_url[:-1] + f'{TestViews.port}/' + 'departments/' + f'update/{TestViews.temp_id_dep}'
 
             resp = client.post(url, data=data, follow_redirects=True)
             message = get_flashed_messages()
@@ -363,7 +364,7 @@ class TestViews:
     def test_delete_view_department_with_db(self):
         with app.test_request_context('/'), \
                 app.test_client() as client:
-            url = request.host_url[:-1] + ':5000/' + 'departments/' + f'delete/{TestViews.temp_id_dep}'
+            url = request.host_url[:-1] + f'{TestViews.port}/' + 'departments/' + f'delete/{TestViews.temp_id_dep}'
             resp = client.get(url, follow_redirects=True)
             message = get_flashed_messages()
 
@@ -373,7 +374,7 @@ class TestViews:
     def test_drop_all(self):
         with app.test_request_context('/'), \
                 app.test_client() as client:
-            url = request.host_url[:-1] + ':5000/' + 'drop-all'
+            url = request.host_url[:-1] + f'{TestViews.port}/' + 'drop-all'
             resp = client.get(url, follow_redirects=True)
             message = get_flashed_messages()
 
