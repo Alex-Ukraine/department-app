@@ -264,7 +264,7 @@ class TestRestEmployees:
     def test_delete_employee_with_db_no_such_id_404(self):
         client = app.test_client()
         url = f'/json/employees/666666666666'
-        resp = client.delete(url)
+        resp = client.delete(url, follow_redirects=True)
         assert resp.status_code == http.HTTPStatus.NOT_FOUND
 
     def test_delete_department_with_db_if_employees_relate_exists(self):

@@ -1,4 +1,4 @@
-from flask import request
+from flask import request, jsonify
 from flask_restful import Resource
 from marshmallow import ValidationError
 from sqlalchemy.orm import selectinload
@@ -122,7 +122,7 @@ class EmployeeListApi(Resource):
         'salary', 'birthday') and return status code 204 or 404"""
         employee = EmployeeService.fetch_employee_by_id(db.session, id)
         if not employee:
-            return '', 404
+            return {"message": "BAD REQUEST"}, 404
         db.session.delete(employee)
         db.session.commit()
         return '', 204

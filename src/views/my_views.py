@@ -250,10 +250,11 @@ def populate_db2(id):
     my_data = json.dumps(all_dicts)
     headers = {'Content-type': 'application/json'}
     url = request.host_url + 'json/employees'
-    rq = requests.post(url, headers=headers, params={"populate": True}, data=my_data, verify=False)
+    rq = requests.post(url, headers=headers, params={"populate": True}, data=my_data, verify=False,
+                       allow_redirects=True)
     if rq.status_code == 201:
         flash(f"DB successfully populated by {id} records", "success")
-        return redirect(url_for('index'))
+    return redirect(url_for('index'))
 
 
 @app.route('/drop-all', methods=['GET'])
