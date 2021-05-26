@@ -14,6 +14,7 @@ class FakeDepartment:
 
 
 class TestRestDepartments:
+    db.create_all()
     id = []
 
     def test_populate_db(self):

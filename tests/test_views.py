@@ -11,6 +11,7 @@ from src.models.my_models import Department, Employee
 
 
 class TestViews:
+    db.create_all()
     temp_id_emp = 21
     temp_id_dep = 21
     port = ':80'

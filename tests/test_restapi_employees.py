@@ -16,6 +16,7 @@ class FakeEmployee:
 
 
 class TestRestEmployees:
+    db.create_all()
     id = []
 
     def test_populate_db(self):
