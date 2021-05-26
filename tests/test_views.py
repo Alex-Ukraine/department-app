@@ -22,7 +22,7 @@ class TestViews:
             resp = client.get(url, follow_redirects=True)
             message = get_flashed_messages()
 
-            s = request.environ['RAW_URI'], request.full_path, request.environ['REQUEST_URI']
+            s = request.host, request.environ['RAW_URI'], request.full_path, request.environ['REQUEST_URI']
             assert s == ''
 
         assert message[0] == f"DB successfully populated by {id} records"
