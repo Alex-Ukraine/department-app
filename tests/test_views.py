@@ -10,7 +10,7 @@ from src.models.my_models import Department, Employee
 class TestViews:
     temp_id_emp = 21
     temp_id_dep = 21
-    port = ''
+    port = ':80'
 
     #port = ':5000'
 
@@ -22,13 +22,10 @@ class TestViews:
             resp = client.get(url, follow_redirects=True)
             message = get_flashed_messages()
 
-            s = request.host, request.environ['RAW_URI'], request.full_path, request.environ['REQUEST_URI']
-            assert s == ''
-
-        assert message[0] == f"DB successfully populated by {id} records"
-        assert resp.status_code == http.HTTPStatus.OK
-        TestViews.temp_id_emp = db.session.query(Employee).all()[-1].id
-        TestViews.temp_id_dep = db.session.query(Department).all()[-1].id
+            assert message[0] == f"DB successfully populated by {id} records"
+            assert resp.status_code == http.HTTPStatus.OK
+            TestViews.temp_id_emp = db.session.query(Employee).all()[-1].id
+            TestViews.temp_id_dep = db.session.query(Department).all()[-1].id
 
     def test_populate_db_over_limit(self):
         id = 200000
