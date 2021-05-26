@@ -1,0 +1,33 @@
+2021-05-26 15:24:49,342 - DEBUG - app_logger - Validation error in post Department by Api is {'mood': ['Unknown field.']}
+2021-05-26 15:24:49,348 - DEBUG - app_logger - Department not unique, already exists
+2021-05-26 15:24:49,380 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend123'}]
+2021-05-26 15:24:49,398 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend123'}]
+2021-05-26 15:24:49,635 - DEBUG - app_logger - Validation error in put Department by Api is {'mood': ['Unknown field.']}
+2021-05-26 15:24:49,799 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend'}]
+2021-05-26 15:24:49,812 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'frontend'}]
+2021-05-26 15:24:49,822 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'some super mega strange name department'}]
+2021-05-26 15:24:49,835 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1990-03-05', 'salary': 1000, 'dep': 'web', 'mood': 'crazy'}]
+2021-05-26 15:24:49,841 - DEBUG - app_logger - Validation error to post Employee by Api is {'mood': ['Unknown field.']}
+2021-05-26 15:24:49,845 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '2020-03-05', 'salary': 1000, 'dep': 'web'}]
+2021-05-26 15:24:49,847 - DEBUG - app_logger - Validation error to post Employee by Api is {'birthday': ['birthday must not be greater than 2015.']}
+2021-05-26 15:24:49,853 - DEBUG - app_logger - [{'name': 'Fake Employee', 'birthday': '1900-03-05', 'salary': 1000, 'dep': 'web'}]
+2021-05-26 15:24:49,855 - DEBUG - app_logger - Validation error to post Employee by Api is {'birthday': ['birthday must be greater than 1930.']}
+2021-05-26 15:24:49,868 - DEBUG - app_logger - [{'name': 'Test Employee', 'birthday': '1990-03-05', 'salary': 560, 'dep': 'web'}]
+2021-05-26 15:24:49,914 - DEBUG - app_logger - Validation error in put Employee by Api is {'mood': ['Unknown field.']}
+2021-05-26 15:24:49,922 - DEBUG - app_logger - Validation error in patch Employee by Api is {'mood': ['Unknown field.']}
+2021-05-26 15:24:50,487 - DEBUG - app_logger - {'environ': {'REMOTE_ADDR': '127.0.0.1', 'HTTP_USER_AGENT': 'werkzeug/1.0.1', 'REQUEST_METHOD': 'GET', 'SCRIPT_NAME': '', 'PATH_INFO': '/', 'QUERY_STRING': 'date_picker1=1985-07-22&date_picker2=1992-07-22', 'REQUEST_URI': '/', 'RAW_URI': '/', 'SERVER_NAME': 'localhost', 'SERVER_PORT': '80', 'HTTP_HOST': 'localhost:80', 'SERVER_PROTOCOL': 'HTTP/1.1', 'wsgi.version': (1, 0), 'wsgi.url_scheme': 'http', 'wsgi.input': <_io.BytesIO object at 0x0000020DE5976AE0>, 'wsgi.errors': <_io.TextIOWrapper name='<tempfile._TemporaryFileWrapper object at 0x0000020DE25ADA60>' mode='r+' encoding='utf-8'>, 'wsgi.multithread': False, 'wsgi.multiprocess': False, 'wsgi.run_once': False, 'flask._preserve_context': True, 'werkzeug.request': <Request 'http://localhost/?date_picker1=1985-07-22&date_picker2=1992-07-22' [GET]>}, 'shallow': False, 'cookies': ImmutableMultiDict([]), 'url_rule': <Rule '/' (HEAD, OPTIONS, GET) -> index>, 'view_args': {}, 'args': ImmutableMultiDict([('date_picker1', '1985-07-22'), ('date_picker2', '1992-07-22')]), 'url': 'http://localhost/?date_picker1=1985-07-22&date_picker2=1992-07-22'}
+2021-05-26 15:24:50,550 - DEBUG - app_logger - Value error 'the first date must be less than the second'
+2021-05-26 15:24:50,583 - DEBUG - app_logger - Value error for search Employees between dates is time data '19850722' does not match format '%Y-%m-%d'
+2021-05-26 15:24:50,691 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '1990.11.11' does not match format '%Y-%m-%d'
+2021-05-26 15:24:50,703 - DEBUG - app_logger - Value error for insert Employee in field birthday is time data '1990.11.11' does not match format '%Y-%m-%d'
+2021-05-26 15:24:50,790 - DEBUG - app_logger - Value error for insert Employee in field birthday is date must be in range between dates 1900-01-01 and 2015-01-01
+2021-05-26 15:24:50,801 - DEBUG - app_logger - Value error for insert Employee in field birthday is date must be in range between dates 1900-01-01 and 2015-01-01
+2021-05-26 15:24:50,835 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-26 15:24:50,853 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-26 15:24:50,892 - DEBUG - app_logger - Value error for insert Employee in field salary
+2021-05-26 15:24:50,903 - DEBUG - app_logger - Value error for insert Employee in field salary
+2021-05-26 15:24:51,009 - DEBUG - app_logger - Value error for update Employee in field birthday is time data '1989.06.10' does not match format '%Y-%m-%d'
+2021-05-26 15:24:51,042 - DEBUG - app_logger - Value error for update Employee in field salary
+2021-05-26 15:24:51,077 - DEBUG - app_logger - Validation error, fields name or department are empty
+2021-05-26 15:24:51,234 - DEBUG - app_logger - Validation error, field name must not be empty
+2021-05-26 15:24:51,312 - DEBUG - app_logger - Validation error, field name must not be empty

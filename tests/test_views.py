@@ -14,9 +14,9 @@ class TestViews:
     db.create_all()
     temp_id_emp = 21
     temp_id_dep = 21
-    #port = ':80'
+    port = ':80'
 
-    port = ':5000'
+    #port = ':5000'
 
     def test_populate_db_example(self):
         client = app.test_client()
@@ -29,8 +29,6 @@ class TestViews:
         with app.test_request_context('/'), \
                 app.test_client() as client:
             url = request.host_url[:-1] + f'{TestViews.port}/' + f'populate/{id}'
-            #url = 127.0.0.1:5000 + f'populate/{id}'
-            #http://127.0.0.1:80/
             resp = client.get(url, follow_redirects=True)
             message = get_flashed_messages()
 
