@@ -33,6 +33,7 @@ class TestViews:
             resp = client.get(url, follow_redirects=True)
             message = get_flashed_messages()
 
+            assert url == ''
             assert message[0] == f"DB successfully populated by {id} records"
             assert resp.status_code == http.HTTPStatus.OK
             TestViews.temp_id_emp = db.session.query(Employee).all()[-1].id
