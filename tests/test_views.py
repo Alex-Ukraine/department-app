@@ -15,7 +15,7 @@ class TestViews:
     temp_id_dep = 21
     port = ':80'
 
-    # port = ':5000'
+    #port = ':5000'
 
     def test_populate_db_example(self):
         client = app.test_client()
@@ -27,13 +27,12 @@ class TestViews:
         id = 20
         with app.test_request_context('/'), \
                 app.test_client() as client:
-            # url = request.host_url[:-1] + f'{TestViews.port}/' + f'populate/{id}'
-            url = os.environ['TRAVIS_APP_HOST'] + f'populate/{id}'
-            print(url)
+            url = request.host_url[:-1] + f'{TestViews.port}/' + f'populate/{id}'
+            #url = 127.0.0.1:5000 + f'populate/{id}'
+            #http://127.0.0.1:80/
             resp = client.get(url, follow_redirects=True)
             message = get_flashed_messages()
 
-            assert url == ''
             assert message[0] == f"DB successfully populated by {id} records"
             assert resp.status_code == http.HTTPStatus.OK
             TestViews.temp_id_emp = db.session.query(Employee).all()[-1].id
