@@ -1,4 +1,5 @@
 import http
+import os
 import time
 
 import requests
@@ -11,9 +12,9 @@ from src.models.my_models import Department, Employee
 class TestViews:
     temp_id_emp = 21
     temp_id_dep = 21
-    #port = ':5000'
-
-    port = ':80'
+    # port = ':5000'
+    # port = ':80'
+    port = ':'+str(os.environ.get('PORT', 5000))
 
     def test_create_all(self):
         db.session.commit()
@@ -38,11 +39,12 @@ class TestViews:
         with app.test_request_context('/'), \
                 app.test_client() as client:
             url = request.host_url[:-1] + f'{TestViews.port}/' + f'populate/{id}'
+            default = app.config['SQLALCHEMY_DATABASE_URI']
             app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:@localhost/finalproject1235"
             resp = client.get(url, follow_redirects=True)
 
         assert resp.status_code == http.HTTPStatus.INTERNAL_SERVER_ERROR
-        app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:@localhost/finalproject"
+        app.config['SQLALCHEMY_DATABASE_URI'] = default
 
     def test_populate_db_over_limit(self):
         id = 200000

@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy, get_debug_queries
@@ -11,9 +13,12 @@ from settings import logger_config
 app = Flask(__name__)
 app.secret_key = "Secret Key"
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:@localhost/finalproject"
-app.config[
-    'SQLALCHEMY_DATABASE_URI'] = 'mysql://b28bfef9567dc7:4956928b@eu-cdbr-west-01.cleardb.com/heroku_380d0cff17aa9f2'
+if os.environ.get('IMONHEROKU') == 'TRUE':
+    app.config[
+        'SQLALCHEMY_DATABASE_URI'] = 'mysql://b28bfef9567dc7:4956928b@eu-cdbr-west-01.cleardb.com/heroku_380d0cff17aa9f2'
+
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:@localhost/finalproject"
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 logging.config.dictConfig(logger_config)
