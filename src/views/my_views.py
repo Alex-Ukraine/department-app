@@ -6,8 +6,10 @@ from faker import Faker
 import requests
 
 from flask import render_template, request, flash, url_for, redirect, jsonify, make_response
+from requests.adapters import HTTPAdapter
 from sqlalchemy import text
 from sqlalchemy.exc import OperationalError
+from urllib3 import Retry
 
 from src import app, db, logger
 
@@ -46,6 +48,7 @@ def index():
         if all_employees.status_code == 200:
             flash(f"Employees successfully selected by department", "success")
     else:
+        requests.Session().mount("http://", HTTPAdapter(max_retries=Retry(total=10)))
         all_employees = requests.get(request.host_url + 'json/employees', verify=False, allow_redirects=True)
     return render_template("index.html", employee=all_employees.json())
 
