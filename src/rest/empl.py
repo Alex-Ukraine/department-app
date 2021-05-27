@@ -20,8 +20,10 @@ from src.service.service import EmployeeService, DepartmentService
 def before_request():
     try:
         db.engine.execute(text("SELECT 1"))
-    except OperationalError:
-        return make_response(jsonify({"message": "No connection with DB"}), 500)
+    except OperationalError as e:
+        return make_response(jsonify({"message": f"No connection with DB(generally): {e}"}), 500)
+    except Exception as e:
+        return make_response(jsonify({"message": f"{e}"}), 500)
 
 
 class EmployeeListApi(Resource):
