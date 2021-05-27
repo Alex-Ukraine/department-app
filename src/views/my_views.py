@@ -6,8 +6,10 @@ from faker import Faker
 import requests
 
 from flask import render_template, request, flash, url_for, redirect, jsonify, make_response
+from requests.adapters import HTTPAdapter
 from sqlalchemy import text
 from sqlalchemy.exc import OperationalError
+from urllib3 import Retry
 
 from src import app, db, logger
 
@@ -35,18 +37,19 @@ def index():
         my_data = dict(date1=date1, date2=date2)
         url = request.host_url + 'json/employees'
         logger.debug(request.__dict__)
-        all_employees = requests.get(url, params=my_data, verify=False)
+        all_employees = requests.get(url, params=my_data, verify=False, allow_redirects=True)
         if all_employees.status_code == 200:
             flash(f"Employees successfully searched between dates {date1} and {date2}", "success")
     elif request.args.get('department_id'):
         department_id = request.args.get('department_id')
         my_data = dict(department_id=department_id)
         url = request.host_url + 'json/employees'
-        all_employees = requests.get(url, params=my_data, verify=False)
+        all_employees = requests.get(url, params=my_data, verify=False, allow_redirects=True)
         if all_employees.status_code == 200:
             flash(f"Employees successfully selected by department", "success")
     else:
-        all_employees = requests.get(request.host_url + 'json/employees', verify=False)
+        requests.Session().mount("http://", HTTPAdapter(max_retries=Retry(total=10)))
+        all_employees = requests.get(request.host_url + 'json/employees', verify=False, allow_redirects=True)
     return render_template("index.html", employee=all_employees.json())
 
 
@@ -76,7 +79,7 @@ def insert():
 
     headers = {'Content-type': 'application/json'}
     url = request.host_url + 'json/employees'
-    rq = requests.post(url, headers=headers, data=my_data, verify=False)
+    rq = requests.post(url, headers=headers, data=my_data, verify=False, allow_redirects=True)
     if rq.status_code == 400:
         flash(rq.json()['message'], 'danger')
     if rq.status_code == 201:
@@ -110,7 +113,7 @@ def update(id):
 
         headers = {'Content-type': 'application/json'}
         url = request.host_url + 'json/employees/' + str(id)
-        rq = requests.patch(url, headers=headers, data=my_data, verify=False)
+        rq = requests.patch(url, headers=headers, data=my_data, verify=False, allow_redirects=True)
         if rq.status_code == 200:
             flash("Employee Updated Successfully", "success")
 
@@ -122,7 +125,7 @@ def delete(id):
     """After click button delete on page 'employees'
     the specified record will try to delete and user will see a message"""
     url = request.host_url + 'json/employees/' + str(id)
-    rq = requests.delete(url, verify=False)
+    rq = requests.delete(url, verify=False, allow_redirects=True)
 
     if rq.status_code == 204:
         flash("Employee Deleted Successfully", "success")
@@ -136,7 +139,7 @@ def departments():
     headers = {'Content-type': 'application/json'}
 
     url = request.host_url + 'json/departments'
-    rq = requests.get(url, headers=headers, verify=False)
+    rq = requests.get(url, headers=headers, verify=False, allow_redirects=True)
     return render_template("departments.html", departments=rq.json())
 
 
@@ -153,7 +156,7 @@ def department_insert():
 
     headers = {'Content-type': 'application/json'}
     url = request.host_url + 'json/departments'
-    rq = requests.post(url, headers=headers, data=my_data, verify=False)
+    rq = requests.post(url, headers=headers, data=my_data, verify=False, allow_redirects=True)
     if rq.status_code == 409:
         flash(rq.json()['message'], 'danger')
     if rq.status_code == 201:
@@ -174,7 +177,7 @@ def department_update(id):
 
     headers = {'Content-type': 'application/json'}
     url = request.host_url + 'json/departments/' + str(id)
-    rq = requests.put(url, headers=headers, data=my_data, verify=False)
+    rq = requests.put(url, headers=headers, data=my_data, verify=False, allow_redirects=True)
     if rq.status_code == 200:
         flash("Department Updated Successfully", "success")
     return redirect(url_for('departments'))
@@ -185,7 +188,7 @@ def department_delete(id):
     """After click button delete on page 'departments'
     the specified record will be tried to delete and user will see a message"""
     url = request.host_url + 'json/departments/' + str(id)
-    rq = requests.delete(url, verify=False)
+    rq = requests.delete(url, verify=False, allow_redirects=True)
     if rq.status_code == 204:
         flash("Department Deleted Successfully", "success")
 
