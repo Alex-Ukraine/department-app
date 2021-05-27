@@ -34,6 +34,14 @@ class TestRestDepartments:
 
         assert resp.status_code == http.HTTPStatus.OK
 
+    def test_get_departments_with_db_error_connection(self):
+        app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:@localhost/finalproject1234"
+        client = app.test_client()
+        resp = client.get('/json/departments')
+
+        assert resp.status_code == http.HTTPStatus.INTERNAL_SERVER_ERROR
+        app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:@localhost/finalproject"
+
     def test_get_departments_with_db_no_id_404(self):
         client = app.test_client()
         resp = client.get(f'/json/departments/{str(id(random.randint(1000, 2000)))}')

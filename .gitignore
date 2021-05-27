@@ -1,4 +1,3 @@
 .coverage
-tests/test_views.py
 debug.log
 Dockerfile

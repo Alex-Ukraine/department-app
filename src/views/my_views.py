@@ -5,7 +5,9 @@ from faker import Faker
 
 import requests
 
-from flask import render_template, request, flash, url_for, redirect, jsonify
+from flask import render_template, request, flash, url_for, redirect, jsonify, make_response
+from sqlalchemy import text
+from sqlalchemy.exc import OperationalError
 
 from src import app, db, logger
 
@@ -193,7 +195,8 @@ def department_delete(id):
 @app.route('/populate/<int:id>', methods=['GET'])
 def populate_db(id):
     """User can get address like /populate/23, where 23 is arbitrary number of new fake Employees.
-    After this request DB will be updated with new records"""
+        After this request DB will be updated with new records"""
+
     if id > 1000:
         flash(f"DB not populated by {id} records, please request less 1000 records", "danger")
         return redirect(url_for('index'))

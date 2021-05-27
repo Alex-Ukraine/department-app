@@ -1,12 +1,27 @@
-from flask import request, jsonify
+import json
+
+import MySQLdb
+import mysql
+import sqlalchemy
+from flask import request, jsonify, Response, make_response
 from flask_restful import Resource
 from marshmallow import ValidationError
+from sqlalchemy import text
+from sqlalchemy.exc import OperationalError
 from sqlalchemy.orm import selectinload
 
 from src import db, api, app, logger
 from src.models.my_models import Department
 from src.rest.schemas import EmployeeSchema, DepartmentSchema
 from src.service.service import EmployeeService, DepartmentService
+
+
+@app.before_request
+def before_request():
+    try:
+        db.engine.execute(text("SELECT 1"))
+    except OperationalError:
+        return make_response(jsonify({"message": "No connection with DB"}), 500)
 
 
 class EmployeeListApi(Resource):
@@ -33,7 +48,7 @@ class EmployeeListApi(Resource):
 
         employee = EmployeeService.fetch_employee_by_id(db.session, id)
         if not employee:
-            return '', 404
+            return make_response(jsonify({"message": "Employee not found"}), 404)
         return self.employee_schema.dump(employee), 200
 
     def post(self):
@@ -60,7 +75,7 @@ class EmployeeListApi(Resource):
                 employee = self.employee_schema.load(one, session=db.session)
             except ValidationError as e:
                 logger.debug(f"Validation error to post Employee by Api is {e}")
-                return {'message': f'Validation error to post Employee {e}'}, 400
+                return make_response(jsonify({'message': f'Validation error to post Employee {e}'}), 400)
             db.session.add(employee)
         db.session.commit()
         return self.employee_schema.dump(employee), 201
@@ -72,7 +87,7 @@ class EmployeeListApi(Resource):
         Every field must be filled"""
         employee = EmployeeService.fetch_employee_by_id(db.session, id)
         if not employee:
-            return "", 404
+            return make_response(jsonify({"message": "Employee not found"}), 404)
         rq = request.json
         dep = rq['dep']
         department = DepartmentService.fetch_department_by_name(db.session, name=dep)
@@ -86,7 +101,7 @@ class EmployeeListApi(Resource):
             employee = self.employee_schema.load(request.json, instance=employee, session=db.session)
         except ValidationError as e:
             logger.debug(f"Validation error in put Employee by Api is {e}")
-            return {'message': str(e)}, 400
+            return make_response(jsonify({'message': str(e)}), 400)
         db.session.add(employee)
         db.session.commit()
         return self.employee_schema.dump(employee), 200
@@ -97,7 +112,7 @@ class EmployeeListApi(Resource):
                 If department not exist algorithm creates new department in db."""
         employee = EmployeeService.fetch_employee_by_id(db.session, id)
         if not employee:
-            return '', 404
+            return make_response(jsonify({"message": "Employee not found"}), 404)
         rq = request.json
         dep = rq['dep']
         department = DepartmentService.fetch_department_by_name(db.session, name=dep)
@@ -112,7 +127,7 @@ class EmployeeListApi(Resource):
                                                  partial=True)
         except ValidationError as e:
             logger.debug(f"Validation error in patch Employee by Api is {e}")
-            return {'Message': f'error: {e}'}, 400
+            return make_response(jsonify({'Message': f'error: {e}'}), 400)
         db.session.add(employee)
         db.session.commit()
         return self.employee_schema.dump(employee), 200
@@ -122,10 +137,10 @@ class EmployeeListApi(Resource):
         'salary', 'birthday') and return status code 204 or 404"""
         employee = EmployeeService.fetch_employee_by_id(db.session, id)
         if not employee:
-            return {"message": "BAD REQUEST"}, 404
+            return make_response(jsonify({"message": "Employee not found"}), 404)
         db.session.delete(employee)
         db.session.commit()
-        return '', 204
+        return make_response(jsonify({"message": "Employee successfully deleted"}), 204)
 
 
 class DepartmentListApi(Resource):
@@ -133,6 +148,13 @@ class DepartmentListApi(Resource):
     department_schema_with_avg = DepartmentSchema(only=("id", "name", "avg", "count"))
     """department_schema = DepartmentSchema()
     department_schema_with_avg = DepartmentSchemaWithAVG()"""
+
+    """@app.before_request
+    def before_request():
+        try:
+            db.engine.execute(text("SELECT 1"))
+        except OperationalError:
+            return make_response(jsonify({"message": "No connection with DB"}), 500)"""
 
     def get(self, id=None):
         """send get request with id or no to db(joined query between tables employee and department)
@@ -144,7 +166,7 @@ class DepartmentListApi(Resource):
 
         department = DepartmentService.fetch_department_by_id(db.session, id)
         if not department:
-            return '', 404
+            return make_response(jsonify({"message": "Department not found"}), 404)
         return self.department_schema_with_avg.dump(department), 200
 
     def post(self):
@@ -154,10 +176,10 @@ class DepartmentListApi(Resource):
             department = self.department_schema.load(request.json, session=db.session)
         except ValidationError as e:
             logger.debug(f"Validation error in post Department by Api is {e}")
-            return {'message': str(e)}, 400
+            return make_response(jsonify({'message': str(e)}), 400)
         if DepartmentService.fetch_department_by_name(db.session, department.name):
             logger.debug('Department not unique, already exists')
-            return {'message': 'Department not unique, already exists'}, 409
+            return make_response(jsonify({'message': 'Department not unique, already exists'}), 409)
         db.session.add(department)
         db.session.commit()
 
@@ -167,7 +189,7 @@ class DepartmentListApi(Resource):
         """send put request with json(fields: 'id','name') and return json data(fields: 'name', 'id')."""
         department = DepartmentService.fetch_department_by_id(db.session, id)
         if not department:
-            return "", 404
+            return make_response(jsonify({"message": "Department not found"}), 404)
 
         # update employees department_id into new department_id and delete updated department
         department2 = DepartmentService.fetch_department_by_name(db.session, request.json['name'])
@@ -185,7 +207,7 @@ class DepartmentListApi(Resource):
             department = self.department_schema.load(request.json, instance=department, session=db.session)
         except ValidationError as e:
             logger.debug(f"Validation error in put Department by Api is {e}")
-            return {'message': str(e)}, 400
+            return make_response(jsonify({'message': str(e)}), 400)
         db.session.add(department)
         db.session.commit()
         return self.department_schema.dump(department), 200
@@ -201,7 +223,7 @@ class DepartmentListApi(Resource):
 
         department = DepartmentService.fetch_department_by_id(db.session, id)
         if not department:
-            return '', 404
+            return make_response(jsonify({"message": "Department not found"}), 404)
         db.session.delete(department)
         db.session.commit()
         return '', 204
