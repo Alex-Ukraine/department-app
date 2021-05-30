@@ -1,3 +1,5 @@
 .coverage
 debug.log
 Dockerfile
+venv
+tests/test_views.py
