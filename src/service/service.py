@@ -18,7 +18,7 @@ class EmployeeService:
         """make a query to db table 'employee' and fetch records who satisfies condition
         'Employee.department_id == id'"""
         return session.query(Employee.id, Employee.name, Employee.birthday, Employee.salary,
-                             Employee.department_id, Department.name.label('dep')).join(Department).filter(
+                             Employee.department_id, Department.name.label('department_name')).join(Department).filter(
             Employee.department_id == id)
 
     @staticmethod
@@ -26,7 +26,7 @@ class EmployeeService:
         """make a query to db table 'employee' and 'department', fetch all records + add new field 'dep',
          filled with values from table 'department'"""
         return session.query(Employee.id, Employee.name, Employee.birthday, Employee.salary,
-                             Employee.department_id, Department.name.label('dep')).join(Department)
+                             Employee.department_id, Department.name.label('department_name')).join(Department)
 
     @staticmethod
     def fetch_all_employees_with_dep_between_dates(session, date1, date2):
@@ -38,7 +38,7 @@ class EmployeeService:
          Department.name AS 'dep' FROM employee LEFT JOIN department on
          employee.department_id = department.id WHERE Employee.birthday BETWEEN '1985-01-01' AND '1991-01-01';"""
         return session.query(Employee.id, Employee.name, Employee.birthday, Employee.salary,
-                             Employee.department_id, Department.name.label('dep')). \
+                             Employee.department_id, Department.name.label('department_name')). \
             join(Department).filter(and_(
             Employee.birthday > date1,
             Employee.birthday < date2

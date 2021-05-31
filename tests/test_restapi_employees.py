@@ -1,11 +1,7 @@
 import http
 import json
-import time
-import unittest
 from dataclasses import dataclass
 from unittest.mock import patch
-
-import pytest
 
 from src import app, db
 from src.models.my_models import Department
@@ -35,7 +31,6 @@ class TestRestEmployees:
         client = app.test_client()
         resp = client.get('/json/employees')
 
-        # self.assertEqual(http.HTTPStatus.OK, resp.status_code)
         assert resp.status_code == http.HTTPStatus.OK
 
     def test_get_employees_with_db_error_connection(self):
@@ -78,7 +73,7 @@ class TestRestEmployees:
             "name": "Fake Employee",
             "birthday": "1990-03-05",
             "salary": 1000,
-            "dep": "frontend"
+            "department_name": "frontend"
         }
         resp = client.post('/json/employees', data=json.dumps(data), content_type='application/json')
         resp = client.post('/json/employees', data=json.dumps(data), content_type='application/json')
@@ -92,7 +87,7 @@ class TestRestEmployees:
             "name": "Fake Employee",
             "birthday": "1990-03-05",
             "salary": 1000,
-            "dep": 'some super mega strange name department'
+            "department_name": 'some super mega strange name department'
         }
         resp = client.post('/json/employees', data=json.dumps(data), content_type='application/json')
         assert resp.status_code == http.HTTPStatus.CREATED
@@ -105,7 +100,7 @@ class TestRestEmployees:
             "name": "Fake Employee",
             "birthday": "1990-03-05",
             "salary": 1000,
-            "dep": "web",
+            "department_name": "web",
             "mood": "crazy"
         }
         resp = client.post('/json/employees', data=json.dumps(data), content_type='application/json')
@@ -117,7 +112,7 @@ class TestRestEmployees:
             "name": "Fake Employee",
             "birthday": "2020-03-05",
             "salary": 1000,
-            "dep": "web"
+            "department_name": "web"
         }
         resp = client.post('/json/employees', data=json.dumps(data), content_type='application/json')
         assert resp.status_code == http.HTTPStatus.BAD_REQUEST
@@ -128,7 +123,7 @@ class TestRestEmployees:
             "name": "Fake Employee",
             "birthday": "1900-03-05",
             "salary": 1000,
-            "dep": "web"
+            "department_name": "web"
         }
         resp = client.post('/json/employees', data=json.dumps(data), content_type='application/json')
         assert resp.status_code == http.HTTPStatus.BAD_REQUEST
@@ -147,9 +142,9 @@ class TestRestEmployees:
                 "name": "Test Employee",
                 "birthday": "1990-03-05",
                 "salary": 560,
-                "dep": "web"
+                "department_name": "web"
             }
-            resp = client.post('/json/employees', data=json.dumps(data), content_type='application/json')
+            client.post('/json/employees', data=json.dumps(data), content_type='application/json')
             mock_session_add.assert_called_once()
             mock_session_commit.assert_called_once()
 
@@ -160,7 +155,7 @@ class TestRestEmployees:
             "name": "Update Name",
             "salary": 780,
             "birthday": "2010-04-02",
-            "dep": "android"
+            "department_name": "android"
         }
         resp = client.patch(url, data=json.dumps(data), content_type='application/json')
         assert resp.status_code == http.HTTPStatus.OK
@@ -173,7 +168,7 @@ class TestRestEmployees:
             "name": "Update Name",
             "salary": 780,
             "birthday": "2010-04-02",
-            "dep": "android"
+            "department_name": "android"
         }
         resp = client.put(url, data=json.dumps(data), content_type='application/json')
         assert resp.status_code == http.HTTPStatus.NOT_FOUND
@@ -185,7 +180,7 @@ class TestRestEmployees:
             "name": "Update Name",
             "salary": 780,
             "birthday": "2010-04-02",
-            "dep": "android"
+            "department_name": "android"
         }
         resp = client.patch(url, data=json.dumps(data), content_type='application/json')
         assert resp.status_code == http.HTTPStatus.NOT_FOUND
@@ -197,7 +192,7 @@ class TestRestEmployees:
             "name": "Update Name",
             "salary": 780,
             "birthday": "2010-04-02",
-            "dep": "android"
+            "department_name": "android"
         }
         resp = client.put(url, data=json.dumps(data), content_type='application/json')
         assert resp.status_code == http.HTTPStatus.OK
@@ -210,7 +205,7 @@ class TestRestEmployees:
             "name": "Update Name",
             "salary": 780,
             "birthday": "2010-04-02",
-            "dep": "android",
+            "department_name": "android",
             "mood": "sad"
         }
         resp = client.put(url, data=json.dumps(data), content_type='application/json')
@@ -223,7 +218,7 @@ class TestRestEmployees:
             "name": "Update Name",
             "salary": 780,
             "birthday": "2010-04-02",
-            "dep": "android",
+            "department_name": "android",
             "mood": "sad"
         }
         resp = client.patch(url, data=json.dumps(data), content_type='application/json')
@@ -236,7 +231,7 @@ class TestRestEmployees:
             "name": "Update Name",
             "salary": 780,
             "birthday": "2010-04-02",
-            "dep": 'some department with freaky name'
+            "department_name": 'some department with freaky name'
         }
         resp = client.put(url, data=json.dumps(data), content_type='application/json')
         assert resp.status_code == http.HTTPStatus.OK
@@ -249,7 +244,7 @@ class TestRestEmployees:
             "name": "Update Name",
             "salary": 780,
             "birthday": "2010-04-01",
-            "dep": 'some awesome new department'
+            "department_name": 'some awesome new department'
         }
         resp = client.patch(url, data=json.dumps(data), content_type='application/json')
         assert resp.status_code == http.HTTPStatus.OK
@@ -267,7 +262,7 @@ class TestRestEmployees:
                 "name": "Update Name",
                 "salary": 150,
                 "birthday": "2010-04-01",
-                "dep": "android"
+                "department_name": "android"
             }
             resp = client.patch(url, data=json.dumps(data), content_type='application/json')
             mocked_query2.assert_called_once()
@@ -299,4 +294,3 @@ class TestRestEmployees:
         db.session.commit()
         db.drop_all()
         db.create_all()
-        #time.sleep(1)

@@ -55,24 +55,22 @@ class EmployeeListApi(Resource):
         if not rq_args.get('populate'):
             rq = [rq]
         logger.debug(rq)
-        for one in rq:
-            dep = one['dep']
-            department = DepartmentService.fetch_department_by_name(db.session, name=dep)
+        for one_record in rq:
+            department_name = one_record['department_name']
+            department = DepartmentService.fetch_department_by_name(db.session, name=department_name)
 
             if not department:
-                department = self.department_schema_without_id.load(dict(name=dep), session=db.session)
+                department = self.department_schema_without_id.load(dict(name=department_name), session=db.session)
                 DepartmentService.create(department, db.session)
-                """db.session.add(department)
-                db.session.commit()"""
 
-            dep_record = copy.deepcopy(one)
+            dep_record = copy.deepcopy(one_record)
             dep_record['department_id'] = department.id
-            del dep_record['dep']
+            del dep_record['department_name']
             try:
                 employee = self.employee_schema.load(dep_record, session=db.session)
             except ValidationError as e:
-                logger.debug(f"Validation error to post Employee {one} by Api is {e}")
-                return make_response(jsonify({'message': f'Validation error to post Employee {one} is {e}'}), 400)
+                logger.debug(f"Validation error to post Employee {one_record} by Api is {e}")
+                return make_response(jsonify({'message': f'Validation error to post Employee {one_record} is {e}'}), 400)
             db.session.add(employee)
         db.session.commit()
         return self.employee_schema.dump(employee), 201
@@ -86,13 +84,13 @@ class EmployeeListApi(Resource):
         if not employee:
             return make_response(jsonify({"message": "Employee not found"}), 404)
         rq = request.json
-        dep = rq['dep']
-        department = DepartmentService.fetch_department_by_name(db.session, name=dep)
+        department_name = rq['department_name']
+        department = DepartmentService.fetch_department_by_name(db.session, name=department_name)
         if not department:
-            department = self.department_schema_without_id.load(dict(name=dep), session=db.session)
+            department = self.department_schema_without_id.load(dict(name=department_name), session=db.session)
             DepartmentService.create(department, db.session)
         rq['department_id'] = department.id
-        del rq['dep']
+        del rq['department_name']
         try:
             employee = self.employee_schema.load(request.json, instance=employee, session=db.session)
         except ValidationError as e:
@@ -108,13 +106,13 @@ class EmployeeListApi(Resource):
         if not employee:
             return make_response(jsonify({"message": "Employee not found"}), 404)
         rq = request.json
-        dep = rq['dep']
-        department = DepartmentService.fetch_department_by_name(db.session, name=dep)
+        department_name = rq['department_name']
+        department = DepartmentService.fetch_department_by_name(db.session, name=department_name)
         if not department:
-            department = self.department_schema_without_id.load(dict(name=dep), session=db.session)
+            department = self.department_schema_without_id.load(dict(name=department_name), session=db.session)
             DepartmentService.create(department, db.session)
         rq['department_id'] = department.id
-        del rq['dep']
+        del rq['department_name']
         try:
             employee = self.employee_schema.load(rq, instance=employee, session=db.session,
                                                  partial=True)

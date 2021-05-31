@@ -55,7 +55,7 @@
                     <td>{{row['birthday']}}</td>
                     <td>{{row['salary']}}</td>
 
-                    <td>{{ row['dep'] }}</td>
+                    <td>{{ row['department_name'] }}</td>
 
                     <td>
                         <a href="/update/{{row.id}}" class="btn btn-warning vtn-xs" data-bs-toggle="modal" data-bs-target="#modaledit{{row.id}}">Edit</a>
@@ -88,7 +88,7 @@
                 <div class="form-group">
                    <label>Department:</label>
                     <input type="hidden"  name="department_id" value="{{row.department_id}}">
-                  <input type="text" class="form-control" name="dep" value="{{row.dep}}" required="1">
+                  <input type="text" class="form-control" name="department_name" value="{{row.department_name}}" required="1">
                 </div>
                 <div class="form-group">
                    <button class="btn btn-primary" type="submit">Update</button>
@@ -134,7 +134,7 @@
                             <div class="form-group">
 
                                 <label>Department:</label>
-                                <input type="text" class="form-control" name="dep" required="1">
+                                <input type="text" class="form-control" name="department_name" required="1">
 
                             </div>
 

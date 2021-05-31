@@ -1,11 +1,8 @@
 import http
 import json
-import time
 from dataclasses import dataclass
 import random
 from unittest.mock import patch
-
-import pytest
 
 from src import app, db
 from src.models.my_models import Department
@@ -98,7 +95,7 @@ class TestRestDepartments:
             data = {
                 "name": "Test Department"
             }
-            resp = client.post('/json/departments', data=json.dumps(data), content_type='application/json')
+            client.post('/json/departments', data=json.dumps(data), content_type='application/json')
             mock_session_add.assert_called_once()
             mock_session_commit.assert_called_once()
 
@@ -119,7 +116,7 @@ class TestRestDepartments:
             "name": "Fake Employee",
             "birthday": "1990-03-05",
             "salary": 1000,
-            "dep": "frontend123"
+            "department_name": "frontend123"
         }
         client.post('/json/employees', data=json.dumps(data1), content_type='application/json')
         client.post('/json/employees', data=json.dumps(data1), content_type='application/json')
@@ -169,7 +166,7 @@ class TestRestDepartments:
             data = {
                 "name": "Fake Department"
             }
-            resp = client.put(url, data=json.dumps(data), content_type='application/json')
+            client.put(url, data=json.dumps(data), content_type='application/json')
             mock_session_add.assert_called_once()
             mock_session_commit.assert_called_once()
 
@@ -189,4 +186,3 @@ class TestRestDepartments:
         db.session.commit()
         db.drop_all()
         db.create_all()
-        #time.sleep(1)

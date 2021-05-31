@@ -8,8 +8,6 @@ import requests
 
 from flask import render_template, request, flash, url_for, redirect, jsonify, make_response
 from requests.adapters import HTTPAdapter
-from sqlalchemy import text
-from sqlalchemy.exc import OperationalError
 from urllib3 import Retry
 
 from src import app, db, logger
@@ -37,6 +35,7 @@ def index():
 
         my_data = dict(date1=date1, date2=date2)
         url = request.host_url + 'json/employees'
+        logger.debug(url)
         logger.debug(request.__dict__)
         logger.debug(os.environ.__dict__)
         all_employees = requests.get(url, params=my_data, verify=False, allow_redirects=True)
@@ -73,11 +72,11 @@ def insert():
         logger.debug("Value error for insert Employee in field salary")
         flash("Value error for insert Employee in field salary", "danger")
         return redirect(url_for('index'))
-    dep = request.form['dep']
-    if not all([name, dep]):
+    department_name = request.form['department_name']
+    if not all([name, department_name]):
         logger.debug("Validation error, fields name or department are empty")
         flash("Validation error, fields name or department are empty", "danger")
-    my_data = json.dumps(dict(name=name, birthday=birthday, salary=salary, dep=dep))
+    my_data = json.dumps(dict(name=name, birthday=birthday, salary=salary, department_name=department_name))
 
     headers = {'Content-type': 'application/json'}
     url = request.host_url + 'json/employees'
@@ -106,12 +105,12 @@ def update(id):
             logger.debug("Value error for update Employee in field salary")
             flash("Value error for update Employee in field salary", "danger")
             return redirect(url_for('index'))
-        dep = request.form['dep']
-        if not all([name, dep]):
+        department_name = request.form['department_name']
+        if not all([name, department_name]):
             logger.debug("Validation error, fields name or department are empty")
             flash("Validation error, fields name or department are empty", "danger")
 
-        my_data = json.dumps(dict(id=id, name=name, birthday=birthday, salary=salary, dep=dep))
+        my_data = json.dumps(dict(id=id, name=name, birthday=birthday, salary=salary, department_name=department_name))
 
         headers = {'Content-type': 'application/json'}
         url = request.host_url + 'json/employees/' + str(id)
@@ -214,13 +213,13 @@ def populate_db(id):
             "birthday": str(fake.date_between_dates(date_start=datetime(1985, 1, 1),
                                                     date_end=datetime(2000, 1, 1))),
             "salary": random.randrange(100, 5000, 100),
-            "dep": random.choice(['web', 'frontend', 'backend', 'simulations',
+            "department_name": random.choice(['web', 'frontend', 'backend', 'simulations',
                                   'graphic', 'android', 'iOS', 'ml', 'ds', 'marketing'])
         }
-        department = DepartmentService.fetch_department_by_name(db.session, name=data["dep"])
+        department = DepartmentService.fetch_department_by_name(db.session, name=data["department_name"])
 
         if not department:
-            department = Department(name=data["dep"])
+            department = Department(name=data["department_name"])
             db.session.add(department)
             db.session.commit()
 
@@ -251,7 +250,7 @@ def populate_db2(id):
             "birthday": str(fake.date_between_dates(date_start=datetime(1985, 1, 1),
                                                     date_end=datetime(2000, 1, 1))),
             "salary": random.randrange(100, 5000, 100),
-            "dep": random.choice(['web', 'frontend', 'backend', 'simulations',
+            "department_name": random.choice(['web', 'frontend', 'backend', 'simulations',
                                   'graphic', 'android', 'iOS', 'ml', 'ds', 'marketing'])
         }
         all_dicts.append(new_dict)

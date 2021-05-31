@@ -1,6 +1,5 @@
 import http
 import os
-import time
 
 import requests
 from flask import request, get_flashed_messages
@@ -143,7 +142,7 @@ class TestViews:
             "name": "Fake Employee",
             "birthday": "1990-11-11",
             "salary": 789,
-            "dep": "some_department"
+            "department_name": "some_department"
         }
         with app.test_request_context('/'), \
                 app.test_client() as client:
@@ -161,7 +160,7 @@ class TestViews:
             "name": "Fake Employee",
             "birthday": "1990.11.11",
             "salary": 789,
-            "dep": "some_department"
+            "department_name": "some_department"
         }
         with app.test_request_context('/'), \
                 app.test_client() as client:
@@ -178,7 +177,7 @@ class TestViews:
             "name": "Fake Employee",
             "birthday": "1900-11-11",
             "salary": 789,
-            "dep": "some_department"
+            "department_name": "some_department"
         }
         with app.test_request_context('/'), \
                 app.test_client() as client:
@@ -187,7 +186,7 @@ class TestViews:
             resp = client.post(url, data=data, follow_redirects=True)
             message = get_flashed_messages()
 
-        assert message[0] == "Validation error to post Employee {'name': 'Fake Employee', 'birthday': '1900-11-11', 'salary': '789', 'dep': 'some_department'} is {'birthday': ['birthday must be greater than 1930.']}"
+        assert message[0] == "Validation error to post Employee {'name': 'Fake Employee', 'birthday': '1900-11-11', 'salary': '789', 'department_name': 'some_department'} is {'birthday': ['birthday must be greater than 1930.']}"
         assert resp.status_code == http.HTTPStatus.OK
 
     def test_post_view_employee_with_db_data_out_of_range_on_form(self):
@@ -195,7 +194,7 @@ class TestViews:
             "name": "Fake Employee",
             "birthday": "2016-11-11",
             "salary": 789,
-            "dep": "some_department"
+            "department_name": "some_department"
         }
         with app.test_request_context('/'), \
                 app.test_client() as client:
@@ -212,7 +211,7 @@ class TestViews:
             "name": "",
             "birthday": "1990-11-11",
             "salary": 789,
-            "dep": " "
+            "department_name": " "
         }
         with app.test_request_context('/'), \
                 app.test_client() as client:
@@ -229,7 +228,7 @@ class TestViews:
             "name": "Fake Employee",
             "birthday": "1990-11-11",
             "salary": "wer122",
-            "dep": "some_department"
+            "department_name": "some_department"
         }
         with app.test_request_context('/'), \
                 app.test_client() as client:
@@ -246,7 +245,7 @@ class TestViews:
             "name": "Fake Employee",
             "birthday": "1989-06-10",
             "salary": 785,
-            "dep": "some_department"
+            "department_name": "some_department"
         }
         with app.test_request_context('/'), \
                 app.test_client() as client:
@@ -263,7 +262,7 @@ class TestViews:
             "name": "Fake Employee",
             "birthday": "1989.06.10",
             "salary": 785,
-            "dep": "some_department"
+            "department_name": "some_department"
         }
         with app.test_request_context('/'), \
                 app.test_client() as client:
@@ -280,7 +279,7 @@ class TestViews:
             "name": "Fake Employee",
             "birthday": "1989-06-10",
             "salary": 'ert',
-            "dep": "some_department"
+            "department_name": "some_department"
         }
         with app.test_request_context('/'), \
                 app.test_client() as client:
@@ -297,7 +296,7 @@ class TestViews:
             "name": " ",
             "birthday": "1989-06-10",
             "salary": '123',
-            "dep": ""
+            "department_name": ""
         }
         with app.test_request_context('/'), \
                 app.test_client() as client:
@@ -406,4 +405,3 @@ class TestViews:
         db.session.commit()
         db.drop_all()
         db.create_all()
-        # time.sleep(1)
