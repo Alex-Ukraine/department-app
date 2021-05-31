@@ -14,7 +14,7 @@ class TestViews:
     temp_id_dep = 21
     # port = ':5000'
     # port = ':80'
-    port = ':'+str(os.environ.get('PORT', 5000))
+    port = ':' + str(os.environ.get('PORT', 5000))
 
     def test_create_all(self):
         db.session.commit()
@@ -187,7 +187,7 @@ class TestViews:
             resp = client.post(url, data=data, follow_redirects=True)
             message = get_flashed_messages()
 
-        assert message[0] == "Validation error to post Employee {'birthday': ['birthday must be greater than 1930.']}"
+        assert message[0] == "Validation error to post Employee {'name': 'Fake Employee', 'birthday': '1900-11-11', 'salary': '789', 'dep': 'some_department'} is {'birthday': ['birthday must be greater than 1930.']}"
         assert resp.status_code == http.HTTPStatus.OK
 
     def test_post_view_employee_with_db_data_out_of_range_on_form(self):
@@ -406,4 +406,4 @@ class TestViews:
         db.session.commit()
         db.drop_all()
         db.create_all()
-        time.sleep(2)
+        # time.sleep(1)

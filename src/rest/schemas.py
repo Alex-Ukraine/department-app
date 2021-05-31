@@ -11,9 +11,8 @@ class EmployeeSchema(SQLAlchemyAutoSchema):
         model = Employee
         load_instance = True
         include_fk = True
-
-    name = fields.Str(validate=validate.Regexp(r'^[A-Za-zА-Яа-я\s\'`]{1,100}$'))
-    dep = fields.String(required=False)
+    name = fields.Str(validate=validate.Regexp(r'^[A-Za-zА-Яа-я\s\'`\.]{1,100}$'))
+    dep = fields.String(required=False, dump_only=True)
 
     @validates("birthday")
     def validate_birthday(self, value):

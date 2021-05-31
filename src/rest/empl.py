@@ -1,17 +1,11 @@
-import json
+import copy
 
-import MySQLdb
-import mysql
-import sqlalchemy
-from flask import request, jsonify, Response, make_response
+from flask import request, jsonify, make_response
 from flask_restful import Resource
 from marshmallow import ValidationError
 from sqlalchemy import text
-from sqlalchemy.exc import OperationalError
-from sqlalchemy.orm import selectinload
 
 from src import db, api, app, logger
-from src.models.my_models import Department
 from src.rest.schemas import EmployeeSchema, DepartmentSchema
 from src.service.service import EmployeeService, DepartmentService
 
@@ -25,7 +19,7 @@ def before_request():
 
 
 class EmployeeListApi(Resource):
-    employee_schema = EmployeeSchema(only=("id", "name", "birthday", "salary", "department_id",))
+    employee_schema = EmployeeSchema(only=("id", "name", "birthday", "salary", "department_id"))
     employee_schema_with_dep = EmployeeSchema()
     department_schema_without_id = DepartmentSchema(only=("name",))
 
@@ -69,13 +63,14 @@ class EmployeeListApi(Resource):
                 db.session.add(department)
                 db.session.commit()
 
-            one['department_id'] = department.id
-            del one['dep']
+            dep_record = copy.deepcopy(one)
+            dep_record['department_id'] = department.id
+            del dep_record['dep']
             try:
-                employee = self.employee_schema.load(one, session=db.session)
+                employee = self.employee_schema.load(dep_record, session=db.session)
             except ValidationError as e:
-                logger.debug(f"Validation error to post Employee by Api is {e}")
-                return make_response(jsonify({'message': f'Validation error to post Employee {e}'}), 400)
+                logger.debug(f"Validation error to post Employee {one} by Api is {e}")
+                return make_response(jsonify({'message': f'Validation error to post Employee {one} is {e}'}), 400)
             db.session.add(employee)
         db.session.commit()
         return self.employee_schema.dump(employee), 201
@@ -200,6 +195,7 @@ class DepartmentListApi(Resource):
                     x.department_id = department2.id
                     logger.debug(x)
                     db.session.add(x)
+            logger.debug(department)
             db.session.delete(department)
             db.session.commit()
             return self.department_schema.dump(department2), 200

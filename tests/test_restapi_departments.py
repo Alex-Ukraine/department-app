@@ -189,4 +189,4 @@ class TestRestDepartments:
         db.session.commit()
         db.drop_all()
         db.create_all()
-        time.sleep(2)
+        #time.sleep(1)

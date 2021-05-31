@@ -1,6 +1,7 @@
 import http
 import json
 import time
+import unittest
 from dataclasses import dataclass
 from unittest.mock import patch
 
@@ -34,6 +35,7 @@ class TestRestEmployees:
         client = app.test_client()
         resp = client.get('/json/employees')
 
+        # self.assertEqual(http.HTTPStatus.OK, resp.status_code)
         assert resp.status_code == http.HTTPStatus.OK
 
     def test_get_employees_with_db_error_connection(self):
@@ -297,4 +299,4 @@ class TestRestEmployees:
         db.session.commit()
         db.drop_all()
         db.create_all()
-        time.sleep(2)
+        #time.sleep(1)
