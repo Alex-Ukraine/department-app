@@ -70,7 +70,8 @@ class EmployeeListApi(Resource):
                 employee = self.employee_schema.load(dep_record, session=db.session)
             except ValidationError as e:
                 logger.debug(f"Validation error to post Employee {one_record} by Api is {e}")
-                return make_response(jsonify({'message': f'Validation error to post Employee {one_record} is {e}'}), 400)
+                return make_response(jsonify({'message': f'Validation error to post Employee {one_record} is {e}'}),
+                                     400)
             db.session.add(employee)
         db.session.commit()
         return self.employee_schema.dump(employee), 201

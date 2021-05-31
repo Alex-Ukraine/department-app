@@ -1,12 +1,11 @@
 import json
-import os
 import random
 from datetime import datetime
 from faker import Faker
 
 import requests
 
-from flask import render_template, request, flash, url_for, redirect, jsonify, make_response
+from flask import render_template, request, flash, url_for, redirect
 from requests.adapters import HTTPAdapter
 from urllib3 import Retry
 
@@ -35,9 +34,9 @@ def index():
 
         my_data = dict(date1=date1, date2=date2)
         url = request.host_url + 'json/employees'
-        logger.debug(url)
-        logger.debug(request.__dict__)
-        logger.debug(os.environ.__dict__)
+        #logger.debug(url)
+        #logger.debug(request.__dict__)
+        #logger.debug(os.environ.__dict__)
         all_employees = requests.get(url, params=my_data, verify=False, allow_redirects=True)
         if all_employees.status_code == 200:
             flash(f"Employees successfully searched between dates {date1} and {date2}", "success")

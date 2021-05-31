@@ -15,7 +15,7 @@ class Employee(db.Model):
         self.department_id = department_id
 
     def __repr__(self):
-        return f'Employee({self.id}, {self.name}, {self.birthday}, {self.salary}, {self.department_id})'
+        return f'Employee({self.id}, {self.name}, {self.birthday}, {self.salary}, {self.department_id}, {self.Department.name})'
 
 
 class Department(db.Model):

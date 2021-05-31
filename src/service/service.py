@@ -9,10 +9,6 @@ class EmployeeService:
         """make a query to db table 'employee' and fetch all records"""
         return session.query(Employee)
 
-    """@staticmethod
-    def fetch_all_employees_by_dep(session, id):
-        return session.query(Employee).filter(Employee.department_id == id)"""
-
     @staticmethod
     def fetch_all_employees_by_dep_with_names_dep(session, id):
         """make a query to db table 'employee' and fetch records who satisfies condition
