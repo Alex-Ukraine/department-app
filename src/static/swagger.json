@@ -1,0 +1,574 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "department-app flask restful api",
+    "description": "documentation",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:5000"
+    }
+  ],
+  "paths": {
+    "/json/departments/1": {
+      "get": {
+        "description": "Auto generated using Swagger Inspector",
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200"
+                },
+                "examples": {
+                  "0": {
+                    "value": "{\n    \"name\": \"marketing\",\n    \"employees\": [],\n    \"id\": 1\n}\n"
+                  },
+                  "1": {
+                    "value": "{\n    \"name\": \"marketing\",\n    \"employees\": [],\n    \"id\": 1\n}\n"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "http://127.0.0.1:5000"
+          }
+        ]
+      },
+      "put": {
+        "description": "Auto generated using Swagger Inspector",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body"
+              },
+              "examples": {
+                "0": {
+                  "value": "{\n    \"name\": \"marketing123\"\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200"
+                },
+                "examples": {
+                  "0": {
+                    "value": "{\n    \"name\": \"marketing123\",\n    \"employees\": [],\n    \"id\": 1\n}\n"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "http://127.0.0.1:5000"
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "http://127.0.0.1:5000"
+        }
+      ]
+    },
+    "/json/departments/3": {
+      "delete": {
+        "description": "Auto generated using Swagger Inspector",
+        "responses": {
+          "204": {
+            "description": "Auto generated using Swagger Inspector"
+          }
+        },
+        "servers": [
+          {
+            "url": "http://127.0.0.1:5000"
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "http://127.0.0.1:5000"
+        }
+      ]
+    },
+    "/json/employees": {
+      "get": {
+        "description": "Auto generated using Swagger Inspector",
+        "parameters": [
+          {
+            "name": "department_id",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "1"
+          },
+          {
+            "name": "date2",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "1996-07-26"
+          },
+          {
+            "name": "date1",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "1986-07-26"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "examples": {
+                  "0": {
+                    "value": "[\n    {\n        \"name\": \"Kathleen Navarro\",\n        \"birthday\": \"1996-07-26\",\n        \"id\": 1,\n        \"department_name\": \"marketing\",\n        \"department_id\": 1,\n        \"salary\": 600\n    }\n]\n"
+                  },
+                  "1": {
+                    "value": "[\n    {\n        \"department_name\": \"iOS\",\n        \"salary\": 1400,\n        \"department_id\": 2,\n        \"id\": 2,\n        \"birthday\": \"1990-05-05\",\n        \"name\": \"John Pope\"\n    },\n    {\n        \"department_name\": \"android\",\n        \"salary\": 1700,\n        \"department_id\": 4,\n        \"id\": 4,\n        \"birthday\": \"1993-06-11\",\n        \"name\": \"Hayden Mcclure\"\n    },\n    {\n        \"department_name\": \"backend\",\n        \"salary\": 3900,\n        \"department_id\": 5,\n        \"id\": 5,\n        \"birthday\": \"1991-12-10\",\n        \"name\": \"Joshua Baker\"\n    },\n    {\n        \"department_name\": \"backend\",\n        \"salary\": 2000,\n        \"department_id\": 5,\n        \"id\": 6,\n        \"birthday\": \"1995-01-18\",\n        \"name\": \"Dale Wright\"\n    },\n    {\n        \"department_name\": \"android\",\n        \"salary\": 2700,\n        \"department_id\": 4,\n        \"id\": 7,\n        \"birthday\": \"1992-02-04\",\n        \"name\": \"Jacqueline Jones\"\n    },\n    {\n        \"department_name\": \"frontend\",\n        \"salary\": 300,\n        \"department_id\": 3,\n        \"id\": 8,\n        \"birthday\": \"1995-01-01\",\n        \"name\": \"Matthew Christian\"\n    },\n    {\n        \"department_name\": \"graphic\",\n        \"salary\": 3400,\n        \"department_id\": 6,\n        \"id\": 10,\n        \"birthday\": \"1992-09-20\",\n        \"name\": \"Barbara Mccullough\"\n    }\n]\n"
+                  },
+                  "2": {
+                    "value": "[\n    {\n        \"department_name\": \"iOS\",\n        \"salary\": 1400,\n        \"department_id\": 2,\n        \"id\": 2,\n        \"birthday\": \"1990-05-05\",\n        \"name\": \"John Pope\"\n    },\n    {\n        \"department_name\": \"android\",\n        \"salary\": 1700,\n        \"department_id\": 4,\n        \"id\": 4,\n        \"birthday\": \"1993-06-11\",\n        \"name\": \"Hayden Mcclure\"\n    },\n    {\n        \"department_name\": \"backend\",\n        \"salary\": 3900,\n        \"department_id\": 5,\n        \"id\": 5,\n        \"birthday\": \"1991-12-10\",\n        \"name\": \"Joshua Baker\"\n    },\n    {\n        \"department_name\": \"backend\",\n        \"salary\": 2000,\n        \"department_id\": 5,\n        \"id\": 6,\n        \"birthday\": \"1995-01-18\",\n        \"name\": \"Dale Wright\"\n    },\n    {\n        \"department_name\": \"android\",\n        \"salary\": 2700,\n        \"department_id\": 4,\n        \"id\": 7,\n        \"birthday\": \"1992-02-04\",\n        \"name\": \"Jacqueline Jones\"\n    },\n    {\n        \"department_name\": \"frontend\",\n        \"salary\": 300,\n        \"department_id\": 3,\n        \"id\": 8,\n        \"birthday\": \"1995-01-01\",\n        \"name\": \"Matthew Christian\"\n    },\n    {\n        \"department_name\": \"graphic\",\n        \"salary\": 3400,\n        \"department_id\": 6,\n        \"id\": 10,\n        \"birthday\": \"1992-09-20\",\n        \"name\": \"Barbara Mccullough\"\n    }\n]\n"
+                  },
+                  "3": {
+                    "value": "[\n    {\n        \"department_name\": \"marketing\",\n        \"salary\": 600,\n        \"department_id\": 1,\n        \"id\": 1,\n        \"birthday\": \"1996-07-26\",\n        \"name\": \"Kathleen Navarro\"\n    },\n    {\n        \"department_name\": \"iOS\",\n        \"salary\": 1400,\n        \"department_id\": 2,\n        \"id\": 2,\n        \"birthday\": \"1990-05-05\",\n        \"name\": \"John Pope\"\n    },\n    {\n        \"department_name\": \"frontend\",\n        \"salary\": 3800,\n        \"department_id\": 3,\n        \"id\": 3,\n        \"birthday\": \"1998-06-11\",\n        \"name\": \"Kristen Clark\"\n    },\n    {\n        \"department_name\": \"android\",\n        \"salary\": 1700,\n        \"department_id\": 4,\n        \"id\": 4,\n        \"birthday\": \"1993-06-11\",\n        \"name\": \"Hayden Mcclure\"\n    },\n    {\n        \"department_name\": \"backend\",\n        \"salary\": 3900,\n        \"department_id\": 5,\n        \"id\": 5,\n        \"birthday\": \"1991-12-10\",\n        \"name\": \"Joshua Baker\"\n    },\n    {\n        \"department_name\": \"backend\",\n        \"salary\": 2000,\n        \"department_id\": 5,\n        \"id\": 6,\n        \"birthday\": \"1995-01-18\",\n        \"name\": \"Dale Wright\"\n    },\n    {\n        \"department_name\": \"android\",\n        \"salary\": 2700,\n        \"department_id\": 4,\n        \"id\": 7,\n        \"birthday\": \"1992-02-04\",\n        \"name\": \"Jacqueline Jones\"\n    },\n    {\n        \"department_name\": \"frontend\",\n        \"salary\": 300,\n        \"department_id\": 3,\n        \"id\": 8,\n        \"birthday\": \"1995-01-01\",\n        \"name\": \"Matthew Christian\"\n    },\n    {\n        \"department_name\": \"graphic\",\n        \"salary\": 3700,\n        \"department_id\": 6,\n        \"id\": 9,\n        \"birthday\": \"1999-05-31\",\n        \"name\": \"Linda Swanson\"\n    },\n    {\n        \"department_name\": \"graphic\",\n        \"salary\": 3400,\n        \"department_id\": 6,\n        \"id\": 10,\n        \"birthday\": \"1992-09-20\",\n        \"name\": \"Barbara Mccullough\"\n    }\n]\n"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "http://127.0.0.1:5000"
+          }
+        ]
+      },
+      "post": {
+        "description": "Auto generated using Swagger Inspector",
+        "parameters": [
+          {
+            "name": "populate",
+            "in": "query",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "boolean"
+            },
+            "example": "True"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_1"
+              },
+              "examples": {
+                "0": {
+                  "value": "[\n    {\n    \"name\": \"Kathleen Navarro one\",\n    \"department_name\": \"web\",\n    \"birthday\": \"1993-07-26\",\n    \"salary\": 900\n    },\n    {\n    \"name\": \"Kathleen Navarro two\",\n    \"department_name\": \"web\",\n    \"birthday\": \"1993-07-26\",\n    \"salary\": 900\n    }\n]"
+                },
+                "1": {
+                  "value": "[\n    {\n    \"name\": \"Kathleen Navarro1\",\n    \"department_name\": \"web\",\n    \"birthday\": \"1993-07-26\",\n    \"salary\": 900\n    },\n    {\n    \"name\": \"Kathleen Navarro2\",\n    \"department_name\": \"web\",\n    \"birthday\": \"1993-07-26\",\n    \"salary\": 900\n    }\n]"
+                },
+                "2": {
+                  "value": "{\n    \"name\": \"Kathleen Navarro\",\n    \"department_name\": \"web\",\n    \"birthday\": \"1993-07-26\",\n    \"salary\": 900\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_201"
+                },
+                "examples": {
+                  "0": {
+                    "value": "{\n    \"name\": \"Kathleen Navarro two\",\n    \"department_id\": 7,\n    \"birthday\": \"1993-07-26\",\n    \"salary\": 900,\n    \"id\": 13\n}\n"
+                  },
+                  "1": {
+                    "value": "{\n    \"name\": \"Kathleen Navarro\",\n    \"department_id\": 7,\n    \"birthday\": \"1993-07-26\",\n    \"salary\": 900,\n    \"id\": 11\n}\n"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_400"
+                },
+                "examples": {
+                  "0": {
+                    "value": "{\n  \"message\": \"Validation error to post Employee {'name': 'Kathleen Navarro1', 'department_name': 'web', 'birthday': '1993-07-26', 'salary': 900} is {'name': ['String does not match expected pattern.']}\"\n}\n"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "http://127.0.0.1:5000"
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "http://127.0.0.1:5000"
+        }
+      ]
+    },
+    "/json/departments/2": {
+      "get": {
+        "description": "Auto generated using Swagger Inspector",
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_200"
+                },
+                "examples": {
+                  "0": {
+                    "value": "{\n    \"name\": \"iOS\",\n    \"employees\": [],\n    \"id\": 2\n}\n"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "http://127.0.0.1:5000"
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "http://127.0.0.1:5000"
+        }
+      ]
+    },
+    "/json/departments/90": {
+      "put": {
+        "description": "Auto generated using Swagger Inspector",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_2"
+              },
+              "examples": {
+                "0": {
+                  "value": "{\n    \"name\": \"marketing123\"\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "404": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_400"
+                },
+                "examples": {
+                  "0": {
+                    "value": "{\n  \"message\": \"Department not found\"\n}\n"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "http://127.0.0.1:5000"
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "http://127.0.0.1:5000"
+        }
+      ]
+    },
+    "/json/employees/1": {
+      "get": {
+        "description": "Auto generated using Swagger Inspector",
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_201"
+                },
+                "examples": {
+                  "0": {
+                    "value": "{\n    \"name\": \"Kathleen Navarro\",\n    \"department_id\": 1,\n    \"birthday\": \"1996-07-26\",\n    \"salary\": 600,\n    \"id\": 1\n}\n"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "http://127.0.0.1:5000"
+          }
+        ]
+      },
+      "put": {
+        "description": "Auto generated using Swagger Inspector",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_3"
+              },
+              "examples": {
+                "0": {
+                  "value": "{\n    \"name\": \"Kathleen\",\n    \"department_name\": \"web\",\n    \"birthday\": \"1993-03-26\",\n    \"salary\": 900\n}\n  "
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_201"
+                },
+                "examples": {
+                  "0": {
+                    "value": "{\n    \"name\": \"Kathleen\",\n    \"department_id\": 7,\n    \"birthday\": \"1993-03-26\",\n    \"salary\": 900,\n    \"id\": 1\n}\n"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "http://127.0.0.1:5000"
+          }
+        ]
+      },
+      "delete": {
+        "description": "Auto generated using Swagger Inspector",
+        "responses": {
+          "204": {
+            "description": "Auto generated using Swagger Inspector"
+          },
+          "404": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inline_response_400"
+                },
+                "examples": {
+                  "0": {
+                    "value": "{\n  \"message\": \"Employee not found\"\n}\n"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "http://127.0.0.1:5000"
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "http://127.0.0.1:5000"
+        }
+      ]
+    },
+    "/json/departments": {
+      "get": {
+        "description": "Auto generated using Swagger Inspector",
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "examples": {
+                  "0": {
+                    "value": "[\n    {\n        \"name\": \"marketing123\",\n        \"avg\": 0.0,\n        \"count\": 0.0,\n        \"id\": 1\n    },\n    {\n        \"name\": \"iOS\",\n        \"avg\": 0.0,\n        \"count\": 0.0,\n        \"id\": 2\n    },\n    {\n        \"name\": \"frontend\",\n        \"avg\": 2050.0,\n        \"count\": 2.0,\n        \"id\": 3\n    },\n    {\n        \"name\": \"android\",\n        \"avg\": 2200.0,\n        \"count\": 2.0,\n        \"id\": 4\n    },\n    {\n        \"name\": \"backend\",\n        \"avg\": 2950.0,\n        \"count\": 2.0,\n        \"id\": 5\n    },\n    {\n        \"name\": \"graphic\",\n        \"avg\": 3550.0,\n        \"count\": 2.0,\n        \"id\": 6\n    },\n    {\n        \"name\": \"web\",\n        \"avg\": 900.0,\n        \"count\": 3.0,\n        \"id\": 7\n    }\n]\n"
+                  },
+                  "1": {
+                    "value": "[\n    {\n        \"name\": \"marketing\",\n        \"avg\": 0.0,\n        \"count\": 0.0,\n        \"id\": 1\n    },\n    {\n        \"name\": \"iOS\",\n        \"avg\": 0.0,\n        \"count\": 0.0,\n        \"id\": 2\n    },\n    {\n        \"name\": \"frontend\",\n        \"avg\": 2050.0,\n        \"count\": 2.0,\n        \"id\": 3\n    },\n    {\n        \"name\": \"android\",\n        \"avg\": 2200.0,\n        \"count\": 2.0,\n        \"id\": 4\n    },\n    {\n        \"name\": \"backend\",\n        \"avg\": 2950.0,\n        \"count\": 2.0,\n        \"id\": 5\n    },\n    {\n        \"name\": \"graphic\",\n        \"avg\": 3550.0,\n        \"count\": 2.0,\n        \"id\": 6\n    },\n    {\n        \"name\": \"web\",\n        \"avg\": 900.0,\n        \"count\": 3.0,\n        \"id\": 7\n    }\n]\n"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "http://127.0.0.1:5000"
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "http://127.0.0.1:5000"
+        }
+      ]
+    }
+  },
+  "components": {
+    "schemas": {
+      "inline_response_200": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "id": {
+            "type": "integer"
+          },
+          "employees": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "body": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "body_1": {
+        "type": "object",
+        "properties": {
+          "birthday": {
+            "type": "string"
+          },
+          "department_name": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "salary": {
+            "type": "integer"
+          }
+        }
+      },
+      "inline_response_201": {
+        "type": "object",
+        "properties": {
+          "birthday": {
+            "type": "string"
+          },
+          "department_id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "id": {
+            "type": "integer"
+          },
+          "salary": {
+            "type": "integer"
+          }
+        }
+      },
+      "inline_response_400": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "body_2": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "body_3": {
+        "type": "object",
+        "properties": {
+          "birthday": {
+            "type": "string"
+          },
+          "department_name": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "salary": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  }
+}

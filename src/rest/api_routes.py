@@ -2,6 +2,7 @@ import copy
 
 from flask import request, jsonify, make_response
 from flask_restful import Resource
+from flask_swagger_ui import get_swaggerui_blueprint
 from marshmallow import ValidationError
 from sqlalchemy import text
 
@@ -198,3 +199,9 @@ class DepartmentListApi(Resource):
 
 api.add_resource(EmployeeListApi, '/json/employees', '/json/employees/<id>', strict_slashes=False)
 api.add_resource(DepartmentListApi, '/json/departments', '/json/departments/<id>', strict_slashes=False)
+
+SWAGGER_URL = '/swagger'
+API_URL = '/static/swagger.json'
+swagger_ui_blueprint = get_swaggerui_blueprint(SWAGGER_URL, API_URL,
+                                               config={'app_name': "department-app flask restful api"})
+app.register_blueprint(swagger_ui_blueprint, url_prefix=SWAGGER_URL)

@@ -3,9 +3,12 @@ import random
 from datetime import datetime
 from faker import Faker
 
+from flask_swagger import swagger
+from flask_swagger_ui import get_swaggerui_blueprint
+
 import requests
 
-from flask import render_template, request, flash, url_for, redirect
+from flask import render_template, request, flash, url_for, redirect, jsonify
 from requests.adapters import HTTPAdapter
 from urllib3 import Retry
 
@@ -13,6 +16,14 @@ from src import app, db, logger
 
 from src.models.my_models import Department, Employee
 from src.service.service import DepartmentService
+
+"""@app.route("/json/docs")
+def spec():
+    swag = swagger(app, prefix='/json')
+    swag['info']['base'] = "http://localhost:5000"
+    swag['info']['version'] = "1.0"
+    swag['info']['title'] = "Department-app flask restful api"
+    return jsonify(swag)"""
 
 
 @app.route('/', methods=['GET'])
@@ -34,9 +45,9 @@ def index():
 
         my_data = dict(date1=date1, date2=date2)
         url = request.host_url + 'json/employees'
-        #logger.debug(url)
-        #logger.debug(request.__dict__)
-        #logger.debug(os.environ.__dict__)
+        # logger.debug(url)
+        # logger.debug(request.__dict__)
+        # logger.debug(os.environ.__dict__)
         all_employees = requests.get(url, params=my_data, verify=False, allow_redirects=True)
         if all_employees.status_code == 200:
             flash(f"Employees successfully searched between dates {date1} and {date2}", "success")
@@ -213,7 +224,7 @@ def populate_db(id):
                                                     date_end=datetime(2000, 1, 1))),
             "salary": random.randrange(100, 5000, 100),
             "department_name": random.choice(['web', 'frontend', 'backend', 'simulations',
-                                  'graphic', 'android', 'iOS', 'ml', 'ds', 'marketing'])
+                                              'graphic', 'android', 'iOS', 'ml', 'ds', 'marketing'])
         }
         department = DepartmentService.fetch_department_by_name(db.session, name=data["department_name"])
 
@@ -250,7 +261,7 @@ def populate_db2(id):
                                                     date_end=datetime(2000, 1, 1))),
             "salary": random.randrange(100, 5000, 100),
             "department_name": random.choice(['web', 'frontend', 'backend', 'simulations',
-                                  'graphic', 'android', 'iOS', 'ml', 'ds', 'marketing'])
+                                              'graphic', 'android', 'iOS', 'ml', 'ds', 'marketing'])
         }
         all_dicts.append(new_dict)
     my_data = json.dumps(all_dicts)
