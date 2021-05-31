@@ -176,7 +176,7 @@ class DepartmentListApi(Resource):
         dep_by_name = DepartmentService.fetch_department_by_name(db.session, name=request.json['name'])
 
         if dep_by_name:
-            return self.department_schema.dump(DepartmentService.create(department, db.session)), 200
+            return self.department_schema.dump(DepartmentService.delete(department, db.session)), 200
 
         try:
             department = self.department_schema.load(request.json, instance=department, session=db.session)
