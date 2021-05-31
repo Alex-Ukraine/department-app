@@ -9,11 +9,9 @@ class EmployeeService:
         """make a query to db table 'employee' and fetch all records"""
         return session.query(Employee)
 
-    @staticmethod
+    """@staticmethod
     def fetch_all_employees_by_dep(session, id):
-        """make a query to db table 'employee' and fetch records who satisfies condition
-        'Employee.department_id == id'"""
-        return session.query(Employee).filter(Employee.department_id == id)
+        return session.query(Employee).filter(Employee.department_id == id)"""
 
     @staticmethod
     def fetch_all_employees_by_dep_with_names_dep(session, id):
@@ -52,8 +50,38 @@ class EmployeeService:
                 'Employee.id == id'"""
         return cls.fetch_all_employees(session).filter_by(id=id).first()
 
+    @classmethod
+    def update_department_id(cls, session, id, name):
+        department_id = DepartmentService.fetch_department_by_name(session=session, name=name)
+        if department_id:
+            department_id = department_id.id
+        return session.query(Employee).filter(Employee.department_id == id).update(
+            {Employee.department_id: department_id})
+
+    @classmethod
+    def create(cls, self, session):
+        session.add(self)
+        session.commit()
+        return self
+
+    @classmethod
+    def delete(cls, self, session):
+        session.delete(self)
+        session.commit()
+
 
 class DepartmentService:
+    @classmethod
+    def create(cls, self, session):
+        session.add(self)
+        session.commit()
+        return self
+
+    @classmethod
+    def delete(cls, self, session):
+        session.delete(self)
+        session.commit()
+
     @staticmethod
     def fetch_all_departments(session):
         """make a query to db table 'department' and fetch all records"""

@@ -12,7 +12,7 @@ class EmployeeSchema(SQLAlchemyAutoSchema):
         load_instance = True
         include_fk = True
     name = fields.Str(validate=validate.Regexp(r'^[A-Za-zА-Яа-я\s\'`\.]{1,100}$'))
-    dep = fields.String(required=False, dump_only=True)
+    dep = fields.String(required=True, dump_only=True)
 
     @validates("birthday")
     def validate_birthday(self, value):
@@ -26,7 +26,7 @@ class DepartmentSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = Department
         load_instance = True
-        include_fk = True
 
-    avg = fields.Float(required=True, default=0)
-    count = fields.Float(required=True, default=0)
+    employees = fields.Nested(EmployeeSchema, many=True, only=["id", "name", "birthday", "salary", "department_id"])
+    avg = fields.Float(required=True, default=0, dump_only=True)
+    count = fields.Float(required=True, default=0, dump_only=True)

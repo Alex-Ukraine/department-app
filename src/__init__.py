@@ -64,7 +64,7 @@ app.after_request(sql_debug)"""
 
 from src.models import my_models
 from src.views import my_views
-from src.rest import empl, schemas
+from src.rest import api_routes, schemas
 
 # db.create_all()
 

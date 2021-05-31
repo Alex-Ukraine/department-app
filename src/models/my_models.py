@@ -21,11 +21,11 @@ class Employee(db.Model):
 class Department(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(100), unique=True, nullable=False)
-    child = db.relationship('Employee', backref='dep_record')
+    employees = db.relationship('Employee', backref='Department')
 
-    def __init__(self, name):
+    def __init__(self, name, employees=[]):
         self.name = name
+        self.employees = employees
 
     def __repr__(self):
-        return f'Department({self.id}, {self.name}, {self.child})'
-
+        return f'Department({self.id}, {self.name}, {self.employees})'
