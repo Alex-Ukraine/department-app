@@ -1,11 +1,14 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "department-app flask restful api",
-    "description": "documentation",
-    "version": "1.0"
+    "title": "department_app_api",
+    "description": "api for CRUD operaions with joined tables Employee and Department",
+    "version": "1.1"
   },
   "servers": [
+    {
+      "url": "http://127.0.0.1:5000"
+    },
     {
       "url": "https://alex-app-flask.herokuapp.com"
     }
@@ -35,6 +38,9 @@
           }
         },
         "servers": [
+          {
+            "url": "http://127.0.0.1:5000"
+          },
           {
             "url": "https://alex-app-flask.herokuapp.com"
           }
@@ -75,11 +81,17 @@
         },
         "servers": [
           {
+            "url": "http://127.0.0.1:5000"
+          },
+          {
             "url": "https://alex-app-flask.herokuapp.com"
           }
         ]
       },
       "servers": [
+        {
+          "url": "http://127.0.0.1:5000"
+        },
         {
           "url": "https://alex-app-flask.herokuapp.com"
         }
@@ -95,11 +107,17 @@
         },
         "servers": [
           {
+            "url": "http://127.0.0.1:5000"
+          },
+          {
             "url": "https://alex-app-flask.herokuapp.com"
           }
         ]
       },
       "servers": [
+        {
+          "url": "http://127.0.0.1:5000"
+        },
         {
           "url": "https://alex-app-flask.herokuapp.com"
         }
@@ -171,6 +189,9 @@
           }
         },
         "servers": [
+          {
+            "url": "http://127.0.0.1:5000"
+          },
           {
             "url": "https://alex-app-flask.herokuapp.com"
           }
@@ -248,11 +269,17 @@
         },
         "servers": [
           {
+            "url": "http://127.0.0.1:5000"
+          },
+          {
             "url": "https://alex-app-flask.herokuapp.com"
           }
         ]
       },
       "servers": [
+        {
+          "url": "http://127.0.0.1:5000"
+        },
         {
           "url": "https://alex-app-flask.herokuapp.com"
         }
@@ -280,11 +307,17 @@
         },
         "servers": [
           {
+            "url": "http://127.0.0.1:5000"
+          },
+          {
             "url": "https://alex-app-flask.herokuapp.com"
           }
         ]
       },
       "servers": [
+        {
+          "url": "http://127.0.0.1:5000"
+        },
         {
           "url": "https://alex-app-flask.herokuapp.com"
         }
@@ -326,11 +359,17 @@
         },
         "servers": [
           {
+            "url": "http://127.0.0.1:5000"
+          },
+          {
             "url": "https://alex-app-flask.herokuapp.com"
           }
         ]
       },
       "servers": [
+        {
+          "url": "http://127.0.0.1:5000"
+        },
         {
           "url": "https://alex-app-flask.herokuapp.com"
         }
@@ -357,6 +396,9 @@
           }
         },
         "servers": [
+          {
+            "url": "http://127.0.0.1:5000"
+          },
           {
             "url": "https://alex-app-flask.herokuapp.com"
           }
@@ -397,6 +439,9 @@
         },
         "servers": [
           {
+            "url": "http://127.0.0.1:5000"
+          },
+          {
             "url": "https://alex-app-flask.herokuapp.com"
           }
         ]
@@ -425,11 +470,17 @@
         },
         "servers": [
           {
+            "url": "http://127.0.0.1:5000"
+          },
+          {
             "url": "https://alex-app-flask.herokuapp.com"
           }
         ]
       },
       "servers": [
+        {
+          "url": "http://127.0.0.1:5000"
+        },
         {
           "url": "https://alex-app-flask.herokuapp.com"
         }
@@ -461,11 +512,17 @@
         },
         "servers": [
           {
+            "url": "http://127.0.0.1:5000"
+          },
+          {
             "url": "https://alex-app-flask.herokuapp.com"
           }
         ]
       },
       "servers": [
+        {
+          "url": "http://127.0.0.1:5000"
+        },
         {
           "url": "https://alex-app-flask.herokuapp.com"
         }

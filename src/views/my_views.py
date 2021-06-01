@@ -19,7 +19,7 @@ from src.service.service import DepartmentService
 
 """@app.route("/json/docs")
 def spec():
-    swag = swagger(app, prefix='/json')
+    swag = static(app, prefix='/json')
     swag['info']['base'] = "http://localhost:5000"
     swag['info']['version'] = "1.0"
     swag['info']['title'] = "Department-app flask restful api"
