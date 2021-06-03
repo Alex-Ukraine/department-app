@@ -61,7 +61,15 @@ def index():
     else:
         requests.Session().mount("http://", HTTPAdapter(max_retries=Retry(total=10)))
         all_employees = requests.get(request.host_url + 'json/employees', verify=False, allow_redirects=True)
-    return render_template("index.html", employee=all_employees.json())
+
+    n_rows = request.args.get('rows') or 10
+    if request.args.get('less'):
+        n_rows = int(n_rows) - 10
+    elif request.args.get('more'):
+        n_rows = int(n_rows) + 10
+    n_rows = max(int(n_rows), 10)
+
+    return render_template("index.html", employee=all_employees.json()[:n_rows], n_rows=n_rows)
 
 
 @app.route('/insert', methods=['POST'])
@@ -144,13 +152,14 @@ def delete(id):
     return redirect(url_for('index'))
 
 
-@app.route('/departments')
+@app.route('/departments', methods=['GET'])
 def departments():
     """If User goes address '/departments' program will give him list of departments with which Employees were binded"""
     headers = {'Content-type': 'application/json'}
 
     url = request.host_url + 'json/departments'
-    rq = requests.get(url, headers=headers, verify=False, allow_redirects=True)
+    params = {"field": request.args.get("field", "id"), "ordr": request.args.get("ordr", "desc")}
+    rq = requests.get(url, headers=headers, params=params, verify=False, allow_redirects=True)
     return render_template("departments.html", departments=rq.json())
 
 

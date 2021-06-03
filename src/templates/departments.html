@@ -29,10 +29,17 @@
 
             <table class="table table-striped table-hover">
                 <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Average Salary</th>
-                    <th>Number of employees</th>
+                    {% if request.args.get('ordr') == 'asc' %}
+                    {% set ordr = 'desc' %}
+                    {% else %}
+                    {% set ordr = 'asc' %}
+                    {% endif %}
+                    <th><a href="/departments?field=id&ordr={{ordr}}" TITLE="click to order by ID">ID</a></th>
+                    <th><a href="/departments?field=name&ordr={{ordr}}" TITLE="click to order by Name">Name</a></th>
+                    <th><a href="/departments?field=avg&ordr={{ordr}}" TITLE="click to order by Average Salary">Average
+                        Salary</a></th>
+                    <th><a href="/departments?field=count&ordr={{ordr}}" TITLE="click to order by Number of employees">Number
+                        of employees</a></th>
                     <th>Action</th>
                 </tr>
                 {% for row in departments %}
@@ -61,7 +68,8 @@
                                     <div class="form-group">
                                         <label>Name:</label>
                                         <input type="hidden" name="id" value="{{row.id}}">
-                                        <input type="text" class="form-control" name="name" value="{{row.name}}" required="1">
+                                        <input type="text" class="form-control" name="name" value="{{row.name}}"
+                                               required="1">
                                     </div>
 
                                     <div class="form-group">

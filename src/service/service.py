@@ -1,4 +1,4 @@
-from sqlalchemy import func, and_
+from sqlalchemy import func, and_, text
 
 from src.models.my_models import Employee, Department
 
@@ -92,6 +92,17 @@ class DepartmentService:
                              func.coalesce(func.avg(Employee.salary), 0).label('avg'),
                              func.count(Employee.id).label('count')).group_by(Department.id).join(Employee,
                                                                                                   isouter=True)
+
+    @staticmethod
+    def fetch_all_departments_with_avg_salary_sort_by(session, field='name', ordr='desc'):
+        """SELECT department.name, AVG(employee.salary), COUNT(employee.id) FROM employee
+        RIGHT JOIN department on employee.department_id = department.id
+        GROUP BY department.id;"""
+        return session.query(Department.id.label('id'), Department.name.label('name'),
+                             func.coalesce(func.avg(Employee.salary), 0).label('avg'),
+                             func.count(Employee.id).label('count')).group_by(Department.id).join(Employee,
+                                                                                                  isouter=True).order_by(
+            text(field + ' ' + ordr))
 
     @classmethod
     def fetch_department_by_id(cls, session, id):

@@ -13,29 +13,29 @@
             <h6>
                 <b>Table Employees</b> <br><br>
                 <form action="{{url_for('index')}}" method="GET">
-                <label for="start1">Date from:</label>
-                <input type="date" id="start1" name="date_picker1" value="1987-07-22">
-                <label for="start2">to:</label>
-                <input type="date" id="start2" name="date_picker2" value="1995-07-22">
-                <button type="submit" class="btn btn-primary mb-6">Choose</button>
-                <button class="btn btn-success float-end" data-bs-target="#mymodal"
-                        data-bs-toggle="modal" type="button">Add New Employee
-                </button>
+                    <label for="start1">Date from:</label>
+                    <input type="date" id="start1" name="date_picker1" value="1987-07-22">
+                    <label for="start2">to:</label>
+                    <input type="date" id="start2" name="date_picker2" value="1995-07-22">
+                    <button type="submit" class="btn btn-primary mb-6">Choose</button>
+                    <button class="btn btn-success float-end" data-bs-target="#mymodal"
+                            data-bs-toggle="modal" type="button">Add New Employee
+                    </button>
                 </form>
 
             </h6>
 
             {% with messages = get_flashed_messages(with_categories=True) %}
-                 {% if messages %}
-                 {% for category, message in messages %}
-                 <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
-                     <button type="button" class="btn-close" data-bs-dismiss="alert">
-                         <span aria-hidden="true"></span>
-                     </button>
-                 {{message}}
-                 </div>
-                 {% endfor %}
-                 {% endif %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert">
+                    <span aria-hidden="true"></span>
+                </button>
+                {{message}}
+            </div>
+            {% endfor %}
+            {% endif %}
             {% endwith %}
 
             <br>
@@ -58,52 +58,59 @@
                     <td>{{ row['department_name'] }}</td>
 
                     <td>
-                        <a href="/update/{{row.id}}" class="btn btn-warning vtn-xs" data-bs-toggle="modal" data-bs-target="#modaledit{{row.id}}">Edit</a>
-                        <a href="/delete/{{row.id}}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete?')">Delete</a>
+                        <a href="/update/{{row.id}}" class="btn btn-warning vtn-xs" data-bs-toggle="modal"
+                           data-bs-target="#modaledit{{row.id}}">Edit</a>
+                        <a href="/delete/{{row.id}}" class="btn btn-danger btn-xs"
+                           onclick="return confirm('Are You Sure To Delete?')">Delete</a>
                     </td>
                 </tr>
 
-                    <!-- Modal Edit Employee-->
-<div id="modaledit{{row.id}}" class="modal fade" role="dialog">
-   <div class="modal-dialog">
-       <div class="modal-content">
-          <div class="modal-header">
-             <h4 class="modal-title">Update Information</h4>
-          </div>
-          <div class="modal-body">
-             <form action="{{url_for('update', id=row.id)}}" method="POST">
-                <div class="form-group">
-                   <label>Name:</label>
-                   <input type="hidden"  name="id" value="{{row.id}}">
-                   <input type="text" class="form-control" name="name" value="{{row.name}}" required="1">
+                <!-- Modal Edit Employee-->
+                <div id="modaledit{{row.id}}" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Update Information</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{url_for('update', id=row.id)}}" method="POST">
+                                    <div class="form-group">
+                                        <label>Name:</label>
+                                        <input type="hidden" name="id" value="{{row.id}}">
+                                        <input type="text" class="form-control" name="name" value="{{row.name}}"
+                                               required="1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Birthday:</label>
+                                        <input type="date" class="form-control" name="birthday"
+                                               value="{{row.birthday}}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Salary:</label>
+                                        <input type="number" pattern="^[0-9]+$" min="0"
+                                               placeholder="Please enter positive number" class="form-control"
+                                               name="salary" value="{{row.salary}}" required="1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Department:</label>
+                                        <input type="hidden" name="department_id" value="{{row.department_id}}">
+                                        <input type="text" class="form-control" name="department_name"
+                                               value="{{row.department_name}}" required="1">
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" type="submit">Update</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                 <div class="form-group">
-                   <label>Birthday:</label>
-                   <input type="date" class="form-control" name="birthday" value="{{row.birthday}}">
-                </div>
-                <div class="form-group">
-                   <label>Salary:</label>
-                   <input type="number" pattern="^[0-9]+$" min="0" placeholder="Please enter positive number" class="form-control" name="salary" value="{{row.salary}}" required="1">
-                </div>
-                <div class="form-group">
-                   <label>Department:</label>
-                    <input type="hidden"  name="department_id" value="{{row.department_id}}">
-                  <input type="text" class="form-control" name="department_name" value="{{row.department_name}}" required="1">
-                </div>
-                <div class="form-group">
-                   <button class="btn btn-primary" type="submit">Update</button>
-                </div>
-             </form>
-          </div>
-           <div class="modal-footer">
-             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          </div>
-       </div>
-    </div>
-</div>
                 {% endfor %}
-                </table>
-             </div>
+            </table>
+        </div>
 
         <div id="mymodal" class="modal fade" role="dialog">
             <div class="modal-dialog">
@@ -128,7 +135,9 @@
                             <div class="form-group">
 
                                 <label>Salary:</label>
-                                <input type="number" value="0" pattern="^[0-9]+$" min="0" placeholder="Please enter positive number" class="form-control" name="salary" required="1">
+                                <input type="number" value="0" pattern="^[0-9]+$" min="0"
+                                       placeholder="Please enter positive number" class="form-control" name="salary"
+                                       required="1">
 
                             </div>
                             <div class="form-group">
@@ -159,6 +168,20 @@
 
     </div>
 </div>
-
+<div align="center">
+    <div align="center"><span class="badge bg-success">{{n_rows}} records on PAGE</span></div>
+    <form action="{{url_for('index')}}" method="GET">
+        <div align="center">
+            {% for arg in request.args %}
+            {% if arg not in ['rows', 'less', 'more']%}
+            <input type="hidden" name="{{arg}}" value="{{request.args[arg]}}">
+            {% endif%}
+            {% endfor %}
+            <input type="hidden" name="rows" value="{{n_rows}}">
+            <button type="submit" class="btn btn-outline-info btn-sm" name="less" value="true">LESS records -10</button>
+            <button type="submit" class="btn btn-outline-info btn-sm" name="more" value="true">MORE records +10</button>
+        </div>
+    </form>
+</div>
 
 {% endblock %}

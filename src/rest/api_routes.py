@@ -142,7 +142,9 @@ class DepartmentListApi(Resource):
         and return json data, and if answer to request to db not empty json will have fields 'department_id',
         'name', 'avg'. It is not json with list of all departments, only departments which binded with employees"""
         if not id:
-            departments = DepartmentService.fetch_all_departments_with_avg_salary(db.session).all()
+            field = request.args.get('field', 'id')
+            ordr = request.args.get('ordr', 'asc')
+            departments = DepartmentService.fetch_all_departments_with_avg_salary_sort_by(db.session, field, ordr).all()
             return self.department_schema_with_avg.dump(departments, many=True), 200
 
         department = DepartmentService.fetch_department_by_id(db.session, id)
