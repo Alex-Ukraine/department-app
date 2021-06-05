@@ -3,12 +3,14 @@ import random
 from datetime import datetime
 from faker import Faker
 
+from requests.exceptions import Timeout
+
 from flask_swagger import swagger
 from flask_swagger_ui import get_swaggerui_blueprint
 
 import requests
 
-from flask import render_template, request, flash, url_for, redirect, jsonify
+from flask import render_template, request, flash, url_for, redirect, make_response, jsonify
 from requests.adapters import HTTPAdapter
 from urllib3 import Retry
 
@@ -48,19 +50,24 @@ def index():
         # logger.debug(url)
         # logger.debug(request.__dict__)
         # logger.debug(os.environ.__dict__)
-        all_employees = requests.get(url, params=my_data, verify=False, allow_redirects=True)
+        all_employees = requests.get(url, params=my_data, verify=False, allow_redirects=True).json()
         if all_employees.status_code == 200:
             flash(f"Employees successfully searched between dates {date1} and {date2}", "success")
     elif request.args.get('department_id'):
         department_id = request.args.get('department_id')
         my_data = dict(department_id=department_id)
         url = request.host_url + 'json/employees'
-        all_employees = requests.get(url, params=my_data, verify=False, allow_redirects=True)
+        all_employees = requests.get(url, params=my_data, verify=False, allow_redirects=True).json()
         if all_employees.status_code == 200:
             flash(f"Employees successfully selected by department", "success")
     else:
         requests.Session().mount("http://", HTTPAdapter(max_retries=Retry(total=10)))
-        all_employees = requests.get(request.host_url + 'json/employees', verify=False, allow_redirects=True)
+        try:
+            all_employees = requests.get(request.host_url + 'json/employees', verify=False, allow_redirects=True,
+                                         timeout=2).json()
+        except Timeout as e:
+            all_employees = make_response(jsonify([{"message": "Request Timeout"}, ]), 408).json
+            flash(str(e) + ' Usually it occurs in case DB warming up, please wait and REFRESH', 'danger')
 
     n_rows = request.args.get('rows') or 10
     if request.args.get('less'):
@@ -69,7 +76,7 @@ def index():
         n_rows = int(n_rows) + 10
     n_rows = max(int(n_rows), 10)
 
-    return render_template("index.html", employee=all_employees.json()[:n_rows], n_rows=n_rows)
+    return render_template("index.html", employee=all_employees[:n_rows], n_rows=n_rows)
 
 
 @app.route('/insert', methods=['POST'])

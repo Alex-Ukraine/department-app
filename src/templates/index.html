@@ -50,33 +50,33 @@
                 </tr>
                 {% for row in employee %}
                 <tr>
-                    <td>{{row['id']}}</td>
-                    <td>{{row['name']}}</td>
-                    <td>{{row['birthday']}}</td>
-                    <td>{{row['salary']}}</td>
+                    <td>{{row.get('id', '')}}</td>
+                    <td>{{row.get('name', '')}}</td>
+                    <td>{{row.get('birthday', '')}}</td>
+                    <td>{{row.get('salary', '')}}</td>
 
-                    <td>{{ row['department_name'] }}</td>
+                    <td>{{ row.get('department_name', '') }}</td>
 
                     <td>
-                        <a href="/update/{{row.id}}" class="btn btn-warning vtn-xs" data-bs-toggle="modal"
+                        <a href="/update/{{row.get('id', 0)}}" class="btn btn-warning vtn-xs" data-bs-toggle="modal"
                            data-bs-target="#modaledit{{row.id}}">Edit</a>
-                        <a href="/delete/{{row.id}}" class="btn btn-danger btn-xs"
+                        <a href="/delete/{{row.get('id', 0)}}" class="btn btn-danger btn-xs"
                            onclick="return confirm('Are You Sure To Delete?')">Delete</a>
                     </td>
                 </tr>
 
                 <!-- Modal Edit Employee-->
-                <div id="modaledit{{row.id}}" class="modal fade" role="dialog">
+                <div id="modaledit{{row.get('id')}}" class="modal fade" role="dialog">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h4 class="modal-title">Update Information</h4>
                             </div>
                             <div class="modal-body">
-                                <form action="{{url_for('update', id=row.id)}}" method="POST">
+                                <form action="{{url_for('update', id=row.get('id', 0))}}" method="POST">
                                     <div class="form-group">
                                         <label>Name:</label>
-                                        <input type="hidden" name="id" value="{{row.id}}">
+                                        <input type="hidden" name="id" value="{{row.get('id', 0)}}">
                                         <input type="text" class="form-control" name="name" value="{{row.name}}"
                                                required="1">
                                     </div>
@@ -174,7 +174,7 @@
         <div align="center">
             {% for arg in request.args %}
             {% if arg not in ['rows', 'less', 'more']%}
-            <input type="hidden" name="{{arg}}" value="{{request.args[arg]}}">
+            <input type="hidden" name="{{arg}}" value="{{request.args.get('arg')}}">
             {% endif%}
             {% endfor %}
             <input type="hidden" name="rows" value="{{n_rows}}">
