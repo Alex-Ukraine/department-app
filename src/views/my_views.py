@@ -50,16 +50,18 @@ def index():
         # logger.debug(url)
         # logger.debug(request.__dict__)
         # logger.debug(os.environ.__dict__)
-        all_employees = requests.get(url, params=my_data, verify=False, allow_redirects=True).json()
+        all_employees = requests.get(url, params=my_data, verify=False, allow_redirects=True)
         if all_employees.status_code == 200:
             flash(f"Employees successfully searched between dates {date1} and {date2}", "success")
+        all_employees = all_employees.json()
     elif request.args.get('department_id'):
         department_id = request.args.get('department_id')
         my_data = dict(department_id=department_id)
         url = request.host_url + 'json/employees'
-        all_employees = requests.get(url, params=my_data, verify=False, allow_redirects=True).json()
+        all_employees = requests.get(url, params=my_data, verify=False, allow_redirects=True)
         if all_employees.status_code == 200:
             flash(f"Employees successfully selected by department", "success")
+        all_employees = all_employees.json()
     else:
         requests.Session().mount("http://", HTTPAdapter(max_retries=Retry(total=10)))
         try:
