@@ -83,15 +83,12 @@ class DepartmentService:
         """make a query to db table 'department' and fetch all records"""
         return session.query(Department)
 
-    @staticmethod
+    """@staticmethod
     def fetch_all_departments_with_avg_salary(session):
-        """SELECT department.name, AVG(employee.salary), COUNT(employee.id) FROM employee
-        RIGHT JOIN department on employee.department_id = department.id
-        GROUP BY department.id;"""
         return session.query(Department.id, Department.name,
                              func.coalesce(func.avg(Employee.salary), 0).label('avg'),
                              func.count(Employee.id).label('count')).group_by(Department.id).join(Employee,
-                                                                                                  isouter=True)
+                                                                                                  isouter=True)"""
 
     @staticmethod
     def fetch_all_departments_with_avg_salary_sort_by(session, field='name', ordr='desc'):

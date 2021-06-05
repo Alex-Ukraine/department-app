@@ -68,7 +68,8 @@ def index():
             all_employees = requests.get(request.host_url + 'json/employees', verify=False, allow_redirects=True,
                                          timeout=2).json()
         except Timeout as e:
-            all_employees = make_response(jsonify([{"message": "Request Timeout"}, ]), 408).json
+            # all_employees = make_response(jsonify([{"message": "Request Timeout"}, ]), 408).json
+            all_employees = []
             flash(str(e) + ' Usually it occurs in case DB warming up, please wait and REFRESH', 'danger')
 
     n_rows = request.args.get('rows') or 10

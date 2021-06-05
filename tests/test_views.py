@@ -115,6 +115,24 @@ class TestViews:
 
         assert resp.status_code == http.HTTPStatus.OK
 
+    def test_get_view_employees_with_db_param_less(self):
+        with app.test_request_context('/'), \
+                app.test_client() as client:
+            params = '?less=True'
+            url = request.host_url[:-1] + f'{TestViews.port}/' + params
+            resp = client.get(url, follow_redirects=True)
+
+        assert resp.status_code == http.HTTPStatus.OK
+
+    def test_get_view_employees_with_db_param_more(self):
+        with app.test_request_context('/'), \
+                app.test_client() as client:
+            params = '?more=True'
+            url = request.host_url[:-1] + f'{TestViews.port}/' + params
+            resp = client.get(url, follow_redirects=True)
+
+        assert resp.status_code == http.HTTPStatus.OK
+
     def test_get_view_employees_with_db_between_dates_date1_bigger_date2(self):
         with app.test_request_context('/'), \
                 app.test_client() as client:

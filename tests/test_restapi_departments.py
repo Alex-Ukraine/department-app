@@ -47,7 +47,7 @@ class TestRestDepartments:
         assert resp.status_code == http.HTTPStatus.NOT_FOUND
 
     def test_get_departments_mock_db(self):
-        with patch('src.service.service.DepartmentService.fetch_all_departments_with_avg_salary', autospec=True) \
+        with patch('src.service.service.DepartmentService.fetch_all_departments_with_avg_salary_sort_by', autospec=True) \
                 as mock_db_call:
             client = app.test_client()
             resp = client.get(f'/json/departments')
