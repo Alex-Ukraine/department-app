@@ -5,12 +5,9 @@ from faker import Faker
 
 from requests.exceptions import Timeout
 
-from flask_swagger import swagger
-from flask_swagger_ui import get_swaggerui_blueprint
-
 import requests
 
-from flask import render_template, request, flash, url_for, redirect, make_response, jsonify
+from flask import render_template, request, flash, url_for, redirect
 from requests.adapters import HTTPAdapter
 from urllib3 import Retry
 
@@ -18,14 +15,6 @@ from src import app, db, logger
 
 from src.models.my_models import Department, Employee
 from src.service.service import DepartmentService
-
-"""@app.route("/json/docs")
-def spec():
-    swag = static(app, prefix='/json')
-    swag['info']['base'] = "http://localhost:5000"
-    swag['info']['version'] = "1.0"
-    swag['info']['title'] = "Department-app flask restful api"
-    return jsonify(swag)"""
 
 
 @app.route('/', methods=['GET'])

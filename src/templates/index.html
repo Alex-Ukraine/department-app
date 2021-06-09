@@ -174,7 +174,7 @@
         <div align="center">
             {% for arg in request.args %}
             {% if arg not in ['rows', 'less', 'more']%}
-            <input type="hidden" name="{{arg}}" value="{{request.args.get('arg')}}">
+            <input type="hidden" name="{{arg}}" value="{{request.args.get(arg)}}">
             {% endif%}
             {% endfor %}
             <input type="hidden" name="rows" value="{{n_rows}}">
