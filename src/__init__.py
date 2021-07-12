@@ -14,12 +14,12 @@ app = Flask(__name__)
 app.secret_key = "Secret Key"
 
 if os.environ.get('IMONHEROKU') == 'TRUE':
-    # app.config[
-    #    'SQLALCHEMY_DATABASE_URI'] = 'mysql://b28bfef9567dc7:4956928b@eu-cdbr-west-01.cleardb.com/heroku_380d0cff17aa9f2'
+    app.config[
+       'SQLALCHEMY_DATABASE_URI'] = 'mysql://b28bfef9567dc7:4956928b@eu-cdbr-west-01.cleardb.com/heroku_380d0cff17aa9f2'
     # app.config[
     #    'SQLALCHEMY_DATABASE_URI'] = "mysql://sql11416587:hiVSf2GwPt@sql11.freemysqlhosting.net/sql11416587"
-    app.config[
-        'SQLALCHEMY_DATABASE_URI'] = "mysql://WEervXQ4cy:3ExKIOdJrT@remotemysql.com/WEervXQ4cy"
+    #app.config[
+    #    'SQLALCHEMY_DATABASE_URI'] = "mysql://WEervXQ4cy:3ExKIOdJrT@remotemysql.com/WEervXQ4cy"
 else:
     app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:@localhost/finalproject"
 

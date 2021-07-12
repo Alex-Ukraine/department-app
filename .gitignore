@@ -1,4 +1,6 @@
 .coverage
+.idea
+.pytest_cash
 debug.log
 Dockerfile
 venv
