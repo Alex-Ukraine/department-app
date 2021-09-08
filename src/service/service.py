@@ -48,11 +48,11 @@ class EmployeeService:
 
     @classmethod
     def update_department_id(cls, session, id, name):
-        department_id = DepartmentService.fetch_department_by_name(session=session, name=name)
-        if department_id:
-            department_id = department_id.id
-        return session.query(Employee).filter(Employee.department_id == id).update(
-            {Employee.department_id: department_id})
+        department = DepartmentService.fetch_department_by_name(session=session, name=name)
+        if department:
+            department_id = department.id
+            session.query(Employee).filter(Employee.department_id == id).update(
+                {Employee.department_id: department_id})
 
     @classmethod
     def create(cls, self, session):
