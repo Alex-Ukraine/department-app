@@ -15,11 +15,7 @@ app.secret_key = "Secret Key"
 
 if os.environ.get('IMONHEROKU') == 'TRUE':
     app.config[
-       'SQLALCHEMY_DATABASE_URI'] = 'mysql://b28bfef9567dc7:4956928b@eu-cdbr-west-01.cleardb.com/heroku_380d0cff17aa9f2'
-    # app.config[
-    #    'SQLALCHEMY_DATABASE_URI'] = "mysql://sql11416587:hiVSf2GwPt@sql11.freemysqlhosting.net/sql11416587"
-    #app.config[
-    #    'SQLALCHEMY_DATABASE_URI'] = "mysql://WEervXQ4cy:3ExKIOdJrT@remotemysql.com/WEervXQ4cy"
+       'SQLALCHEMY_DATABASE_URI'] = os.environ['SQLALCHEMY_DATABASE_URI']
 else:
     app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:@localhost/finalproject"
 
@@ -72,5 +68,3 @@ from src.views import my_views
 from src.rest import api_routes, schemas
 
 db.create_all()
-
-# MySQLdb._exceptions.OperationalError: (2013, 'Lost connection to MySQL server during query')

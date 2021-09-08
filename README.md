@@ -19,7 +19,7 @@ departments;
 employee and a search field to search for employees born on a certain date or in the
 period between dates;
 
-Web version of a part of this project available on [Heroku](https://alex-app-flask.herokuapp.com/)
+Web version of a part of this project available on Heroku [alex-app-flask.herokuapp.com](https://alex-app-flask.herokuapp.com/)
 >> Web application will be available after launch on address(uri) '/'
 > 
 >> Web services will be available after launch on address(uri) '/json'
@@ -29,21 +29,27 @@ If you want test this project on your local machine run the following commands:
 > git init
 > git clone https://github.com/Alex-Ukraine/department-app.git
 > 
-Then create virtual enviroment:
+Then create virtual environment:
 
-> virtualenv env
+> virtualenv venv
 
-Activate this enviroment:
+Activate this environment:
 
 >On Linux/Mac
->> env/bin/activate
+>> venv/bin/activate
 >>
 >On Windows
->> env/Scripts/activate
+>> venv/Scripts/activate
 
 Install all dependencies:
 > for ubuntu: sudo apt-get install python3-dev default-libmysqlclient-dev build-essential
 > pip install -r requirements.txt
+> 
+> sudo apt update
+> sudo apt install mysql-server
+> sudo mysql
+> ALTER USER 'root'@'localhost' IDENTIFIED WITH caching_sha2_password BY '';
+> CREATE DATABASE finalproject
 
 Then you need set your app to Flask with command:
 

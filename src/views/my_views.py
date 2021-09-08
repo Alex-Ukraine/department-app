@@ -52,14 +52,7 @@ def index():
             flash(f"Employees successfully selected by department", "success")
         all_employees = all_employees.json()
     else:
-        requests.Session().mount("http://", HTTPAdapter(max_retries=Retry(total=10)))
-        try:
-            all_employees = requests.get(request.host_url + 'json/employees', verify=False, allow_redirects=True,
-                                         timeout=2).json()
-        except Timeout as e:
-            # all_employees = make_response(jsonify([{"message": "Request Timeout"}, ]), 408).json
-            all_employees = []
-            flash(str(e) + ' Usually it occurs in case DB warming up, please wait and REFRESH', 'danger')
+        all_employees = requests.get(request.host_url + 'json/employees', verify=False, allow_redirects=True).json()
 
     n_rows = request.args.get('rows') or 10
     if request.args.get('less'):
